@@ -21,7 +21,6 @@ class Solution(object):
         dummy = ListNode(-1)
         dummy.next = head
         node = dummy
-        
         while node.next and node.next.next:
             if node.next.val == node.next.next.val:
                 val = node.next.val
@@ -30,4 +29,3 @@ class Solution(object):
             else:
                 node = node.next
         return dummy.next
-    
