@@ -1,0 +1,30 @@
+'''
+Created on Jan 22, 2017
+
+@author: MT
+'''
+
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        start, end = 1, x
+        while start+1 < end:
+            mid = (start+end)/2
+            if mid*mid == x:
+                return mid
+            elif mid*mid < x:
+                start = mid
+            else:
+                end = mid
+        if end*end <= x:
+            return end
+        return start
+    
+    def test(self):
+        pass
+
+if __name__ == '__main__':
+    Solution().test()
