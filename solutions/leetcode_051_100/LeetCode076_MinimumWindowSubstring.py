@@ -11,14 +11,45 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
+        hashmap0 = {}
+        for c in t:
+            hashmap0[c] = hashmap0.get(c, 0)+1
+        left = 0
+        res = ''
+        minLen = float('inf')
+        hashmap = {}
+        count = 0
+        for i, c in enumerate(s):
+            hashmap[c] = hashmap.get(c, 0)+1
+            if c in hashmap0 and hashmap[c] == hashmap0[c]:
+                count += 1
+            while left <= i and hashmap[s[left]] > hashmap0.get(s[left], 0):
+                hashmap[s[left]] -= 1
+                left += 1
+            if count == len(hashmap0):
+                if minLen > i-left+1:
+                    minLen = i-left+1
+                    res = s[left:i+1]
+                if hashmap0.get(s[left], 0) == hashmap[s[left]]:
+                    count -= 1
+                hashmap[s[left]] -= 1
+                left += 1
+        return res
+    
+    def minWindow_old(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
         hashmap = {}
         for c in t:
             hashmap[c] = hashmap.get(c, 0)+1
-        res = ''
-        minLen = float('inf')
         left = 0
         hashmapAll = {}
         hashset = set()
+        res = ''
+        minLen = float('inf')
         for i, c in enumerate(s):
             if c in hashmap and hashmapAll.get(c, 0)+1 >= hashmap[c]:
                 hashset.add(c)
@@ -36,47 +67,11 @@ class Solution(object):
                     res = s[left:i+1]
         return res
     
-    def minWindow_orig(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-        if len(t) > len(s): return ''
-        result = ''
-        target = {}
-        for c in t:
-            if c in target:
-                target[c]+=1
-            else:
-                target[c]=1
-        hashmap = {}
-        left, count, minLen = 0, 0, len(s)+1
-        for i, c in enumerate(s):
-            if c in target:
-                if c in hashmap:
-                    if hashmap[c] < target[c]:
-                        count+=1
-                    hashmap[c] += 1
-                else:
-                    hashmap[c] = 1
-                    count += 1
-            if count == len(t):
-                sc = s[left]
-                while sc not in hashmap or hashmap[sc] > target[sc]:
-                    if sc in hashmap and hashmap[sc] > target[sc]:
-                        hashmap[sc] -= 1
-                    left += 1
-                    sc = s[left]
-                if i-left+1 < minLen:
-                    result = s[left:i+1]
-                    minLen = i-left+1 
-        
-        return result
-    
     def test(self):
         testCases = [
             ('ADOBECODEBANC', 'ABC'),
+            ['a', 'b'],
+            ['aa', 'aa'],
         ]
         for s, t in testCases:
             print('s: %s' % (s))
