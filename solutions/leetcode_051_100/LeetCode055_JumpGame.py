@@ -10,13 +10,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        if not nums:
-            return False
-        farthest = nums[0]
+        furthest = 0
         for i, num in enumerate(nums):
-            if i<=farthest and num+i>farthest:
-                farthest = num+i
-        return farthest >= len(nums)-1
+            if furthest >= i:
+                furthest = max(furthest, i+num)
+            if furthest >= len(nums)-1:
+                return True
+        return False
     
     def test(self):
         testCases = [

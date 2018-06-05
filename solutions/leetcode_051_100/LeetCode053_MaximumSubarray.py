@@ -10,13 +10,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # DP Solution
-        length = len(nums)
-        dp = [0]*length
+        n = len(nums)
+        dp = [0]*n
         dp[0] = nums[0]
         maxVal = dp[0]
-        for i in range(1, length):
-            dp[i] = max(nums[i], dp[i-1] + nums[i])
+        for i in range(1, n):
+            dp[i] = max(nums[i], dp[i-1]+nums[i])
             maxVal = max(maxVal, dp[i])
         return maxVal
     

@@ -3,7 +3,6 @@ Created on Jan 22, 2017
 
 @author: MT
 '''
-
 class Solution(object):
     def getPermutation(self, n, k):
         """
@@ -11,16 +10,16 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        numberList = [i+1 for i in range(n)]
+        nums = list(range(1, n+1))
         k -= 1
         mod = 1
         for i in range(n):
             mod = mod*(i+1)
-        result = ''
+        res = ''
         for i in range(n):
-            mod = int(mod)/(n-i)
-            curInd = int(k)/mod
+            mod = mod//(n-i)
+            curInd = k//mod
             k = k % mod
-            result += str(numberList[curInd])
-            numberList.pop(curInd)
-        return result
+            res += str(nums[curInd])
+            nums.pop(curInd)
+        return res
