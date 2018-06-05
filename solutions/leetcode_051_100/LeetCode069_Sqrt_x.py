@@ -11,17 +11,15 @@ class Solution(object):
         :rtype: int
         """
         start, end = 1, x
-        while start+1 < end:
+        while start <= end:
             mid = (start+end)/2
             if mid*mid == x:
                 return mid
             elif mid*mid < x:
-                start = mid
+                start = mid+1
             else:
-                end = mid
-        if end*end <= x:
-            return end
-        return start
+                end = mid-1
+        return start if start == 0 else start-1
     
     def test(self):
         pass
