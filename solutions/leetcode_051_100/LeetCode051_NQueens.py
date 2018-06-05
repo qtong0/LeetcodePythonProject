@@ -11,48 +11,56 @@ class Solution(object):
         :rtype: List[List[str]]
         """
         if n <= 0: return []
-        result = []
-        row = [0]*n
-        self.helper(row, result, n, 0)
-        return result
+        res = []
+        self.helper(n, res, [], 0)
+        res = self.convert(res)
+        return res
     
-    def helper(self, row, result, n, ind):
+    def helper(self, n, res, cur, ind):
         if ind == n:
-            elem = self.translateString(row)
-            result.append(list(elem))
+            res.append(list(cur))
             return
-        for i in range(n):
-            if self.isValid(row, ind, i):
-                row[ind] = i
-                self.helper(row, result, n, ind+1)
-                row[ind] = 0
+        for val in range(n):
+            if self.isValid(cur, ind, val):
+                cur.append(val)
+                self.helper(n, res, cur, ind+1)
+                cur.pop()
     
-    def translateString(self, row):
-        result = []
-        for i in range(len(row)):
-            s = ''
-            for j in range(len(row)):
-                if j == row[i]:
-                    s += 'Q'
-                else:
-                    s += '.'
-            result.append(s)
-        return result
+    def convert(self, nums):
+        if not nums: return []
+        res = []
+        for row in nums:
+            n = len(row)
+            curr = []
+            for val in row:
+                curr.append('.'*val+'Q'+'.'*(n-val-1))
+            res.append(curr)
+        return res
     
-    def isValid(self, row, rowNum, colNum):
-        for i in range(rowNum):
-            if row[i] == colNum:
+    def isValid(self, cur, ind, val):
+        for i in range(ind):
+            if cur[i] == val:
                 return False
-            if abs(row[i] - colNum) == abs(i-rowNum):
+            if abs(i-ind) == abs(cur[i]-val):
                 return False
         return True
     
     def test(self):
-        result = self.solveNQueens(4)
-        print(result)
-        print()
-        result = self.solveNQueens(5)
-        print(result)
+        testCases = [
+            1,
+            2,
+            3,
+            4,
+            5,
+        ]
+        for n in testCases:
+            print('n: %s' % n)
+            results = self.solveNQueens(n)
+            print('results')
+            for res in results:
+                print('\n'.join(res))
+                print('-'*20)
+            print('-='*30+'-')
 
 if __name__ == '__main__':
     Solution().test()
