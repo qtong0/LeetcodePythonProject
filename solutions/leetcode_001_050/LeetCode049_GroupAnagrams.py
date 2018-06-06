@@ -10,21 +10,21 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        myMap = {}
+        hashmap = {}
         for s in strs:
             arr = [0]*26
             for c in s:
                 arr[ord(c)-ord('a')]+=1
             arr = [str(num) for num in arr]
             key = ''.join(arr)
-            if key in myMap:
-                myMap[key].append(s)
+            if key in hashmap:
+                hashmap[key].append(s)
             else:
-                myMap[key] = [s]
-        result = []
-        for value in myMap.values():
-            result.append(value)
-        return result
+                hashmap[key] = [s]
+        res = []
+        for value in hashmap.values():
+            res.append(value)
+        return res
     
     def test(self):
         pass
