@@ -24,4 +24,4 @@ class Solution(object):
                     dp[i][j] = dp[i+1][j+1]
                 elif p[j] == '*':
                     dp[i][j] = dp[i][j+1] or dp[i+1][j]
-        dp[0][0]
+        return dp[0][0]
