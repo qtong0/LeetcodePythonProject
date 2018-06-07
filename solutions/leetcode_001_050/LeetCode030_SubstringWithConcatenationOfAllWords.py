@@ -10,14 +10,6 @@ class Solution(object):
         :type words: List[str]
         :rtype: List[int]
         """
-        pass
-    
-    def findSubstring_orig(self, s, words):
-        """
-        :type s: str
-        :type words: List[str]
-        :rtype: List[int]
-        """
         res = []
         if not words or not s: return res
         hashmap0 = {}

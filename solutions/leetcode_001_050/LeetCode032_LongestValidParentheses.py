@@ -6,25 +6,26 @@ Created on Mar 14, 2017
 
 class Solution(object):
     def longestValidParentheses(self, s):
-        stack = []
         left = -1
-        maxLen = 0
+        stack = []
+        res = 0
         for i, c in enumerate(s):
             if c == '(':
                 stack.append(i)
             else:
                 if stack:
                     stack.pop()
-                    if not stack:
-                        maxLen = max(maxLen, i-left)
+                    if stack:
+                        res = max(res, i-stack[-1])
                     else:
-                        maxLen = max(maxLen, i-stack[-1])
+                        res = max(res, i-left)
                 else:
                     left = i
-        return maxLen
+        return res
     
     def test(self):
         testCases = [
+            '()',
             '(()',
             ')()())',
         ]

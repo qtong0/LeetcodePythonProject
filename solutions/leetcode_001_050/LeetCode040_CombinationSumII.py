@@ -10,6 +10,31 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
+        if not candidates: return[]
+        candidates.sort()
+        res = []
+        self.helper2(candidates, 0, [], res, target)
+        return res
+    
+    def helper2(self, nums, ind, curr, res, target):
+        if target == 0:
+            res.append(list(curr))
+            return
+        for i in range(ind, len(nums)):
+            if target < nums[i]:
+                return
+            if i > ind and nums[i] == nums[i-1]:
+                continue
+            curr.append(nums[i])
+            self.helper2(nums, i+1, curr, res, target-nums[i])
+            curr.pop()
+    
+    def combinationSum2_origin(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
         if not candidates: return []
         candidates.sort()
         res = []
