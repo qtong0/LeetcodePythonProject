@@ -14,7 +14,7 @@ class Solution(object):
         while True:
             same = True
             for i, s in enumerate(strs):
-                if ind >= len(s):
+                if ind == len(s):
                     same = False
                     break
                 if i == 0:
@@ -22,15 +22,14 @@ class Solution(object):
                 elif c != s[ind]:
                     same = False
                     break
-                if i == len(strs)-1:
-                    ind += 1
             if not same:
                 break
+            ind += 1
         return strs[0][:ind]
     
     def test(self):
         testCases = [
-#             ['a', 'b'],
+            ['a', 'b'],
             ['aa', 'aa'],
         ]
         for strs in testCases:
