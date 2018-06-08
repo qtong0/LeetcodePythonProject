@@ -14,12 +14,12 @@ class Solution(object):
         while x//div >= 10:
             div *= 10
         while x > 0:
-            lastDigit = x%10
-            firstDigit = x//div
-            if lastDigit != firstDigit:
+            first = x//div
+            last  = x%10
+            if first != last:
                 return False
-            x -= div*firstDigit
-            x = (x-lastDigit)//10
+            x -= first*div
+            x = (x-last)//10
             div //= 100
         return True
     

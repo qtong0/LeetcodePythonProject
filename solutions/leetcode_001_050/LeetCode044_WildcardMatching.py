@@ -13,11 +13,11 @@ class Solution(object):
         if not s and not p: return True
         m, n = len(s), len(p)
         dp = [[False]*(n+1) for _ in range(m+1)]
+        dp[-1][-1] = True
         j = n-1
         while j >= 0 and p[j] == '*':
             dp[-1][j] = True
             j -= 1
-        dp[-1][-1] = True
         for i in range(m-1, -1, -1):
             for j in range(n-1, -1, -1):
                 if s[i] == p[j] or p[j] == '?':

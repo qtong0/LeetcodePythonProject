@@ -21,7 +21,7 @@ class Solution(object):
                 if s[i] == p[j] or p[j] == '.':
                     dp[i+1][j+1] = dp[i][j]
                 elif p[j] == '*':
-                    if p[j-1] == '.' or p[j-1] == s[i]:
+                    if p[j-1] == '.' or s[i] == p[j-1]:
                         dp[i+1][j+1] = dp[i][j+1] or dp[i+1][j-1]
                     else:
                         dp[i+1][j+1] = dp[i+1][j-1]
