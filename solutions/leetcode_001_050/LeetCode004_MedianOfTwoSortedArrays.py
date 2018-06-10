@@ -16,7 +16,7 @@ class Solution(object):
         imin, imax, half_len = 0, m, (m+n+1)//2
         while imin <= imax:
             i = (imin+imax)//2
-            j = half_len-i
+            j = half_len - i
             if i < m and nums2[j-1] > nums1[i]:
                 imin = i+1
             elif i > 0 and nums1[i-1] > nums2[j]:
