@@ -30,7 +30,7 @@ class Solution(object):
         arr = A
         res, up, down = 0, 0, 0
         for i in range(1, len(arr)):
-            if down and arr[i-1] < arr[i] or arr[i-1] == arr[i]:
+            if (down and arr[i-1] < arr[i]) or (arr[i-1] == arr[i]):
                 up, down = 0, 0
             if arr[i-1] < arr[i]:
                 up += 1
