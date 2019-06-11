@@ -14,7 +14,7 @@ class Solution(object):
         n = len(shifts)
         for i in range(n-2, -1, -1):
             shifts[i] += shifts[i+1]
-        return ''.join(chr((ord(c)-97+s0) % 26 + 97) for c, s0 in zip(s, shifts))
+        return ''.join(chr((ord(c)-97+num) % 26 + 97) for c, num in zip(s, shifts))
     
     def test(self):
         testCases = [
