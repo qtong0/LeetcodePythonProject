@@ -16,6 +16,24 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
+        return self.deep(root)[1]
+    
+    def deep(self, root):
+        if not root:
+            return 0, None
+        l, r = self.deep(root.left), self.deep(root.right)
+        if l[0] > r[0]:
+            return l[0]+1, l[1]
+        elif l[0] < r[0]:
+            return r[0]+1, r[1]
+        else:
+            return l[0]+1, root
+    
+    def subtreeWithAllDeepest_own_twoPass(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
         hashmap = {}
         self.gatherDepths(root, 0, hashmap)
         maxDepth = max(hashmap.keys())
