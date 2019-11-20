@@ -15,25 +15,6 @@ class Solution(object):
             prevSet = currSet
         return len(uniqSet)
 
-    def subarrayBitwiseORs_own_DFS_TLE(self, A):
-        """
-        :type A: List[int]
-        :rtype: int
-        """
-        hashset = set()
-        self.dfs(hashset, 0, len(A)-1, A)
-        return len(hashset)
-
-    def dfs(self, hashset, start, end, A):
-        if A[start:end+1]:
-            tmp = 0
-            for i in range(start, end+1):
-                tmp |= A[i]
-            hashset.add(tmp)
-        for i in range(start, end+1):
-            self.dfs(hashset, start, i-1, A)
-            self.dfs(hashset, i+1, end, A)
-
     def test(self):
         testCases = [
             # [0],
