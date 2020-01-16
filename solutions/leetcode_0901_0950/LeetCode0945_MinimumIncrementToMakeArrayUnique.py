@@ -1,22 +1,16 @@
-import collections
-
 class Solution(object):
     def minIncrementForUnique(self, A):
         """
         :type A: List[int]
         :rtype: int
         """
+        if not A:
+            return 0
         A.sort()
-        A.append(100000)
-        res = taken = 0
-        for i in range(1, len(A)):
-            if A[i] == A[i-1]:
-                taken += 1
-                res -= A[i]
-            else:
-                give = min(taken, A[i]-A[i-1]-1)
-                res += give*(give+1)//2 + give*A[i-1]
-                taken -= give
+        s, res = A[0], 0
+        for num in A:
+            res += max(0, s-num)
+            s = max(s+1, num+1)
         return res
 
     def test(self):
