@@ -5,6 +5,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 class Solution:
     def delNodes(self, root: TreeNode, to_delete):
         if not root: return []
