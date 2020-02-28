@@ -10,7 +10,7 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        res = None
+        res = ''
         arr = [max(s, s[::-1]) for s in strs]
         for i, s in enumerate(arr):
             for start in (s, s[::-1]):
