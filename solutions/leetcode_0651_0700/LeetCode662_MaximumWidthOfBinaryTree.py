@@ -10,26 +10,43 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+
 class Solution(object):
-    def widthOfBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        return self.dfs(root, 0, 1, [], [])
-        
-    def dfs(self, root, level, order, start, end):
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
         if not root: return 0
-        if len(start) == level:
-            start.append(order)
-            end.append(order)
-        else:
-            end[level] = order
-        cur = end[level]-start[level]+1
-        left = self.dfs(root.left, level+1, 2*order, start, end)
-        right = self.dfs(root.right, level+1, 2*order+1, start, end)
-        return max(cur, max(left, right))
-    
+        queue = [(root, 0, 0)]
+        cur_dept = 0
+        left = 0
+        res = 0
+        while queue:
+            node, depth, pos = queue.pop(0)
+            if node.left:
+                queue.append((node.left, depth+1, pos*2))
+            if node.right:
+                queue.append((node.right, depth+1, pos*2+1))
+            if cur_dept != depth:
+                cur_dept = depth
+                left = pos
+            res = max(res, pos-left+1)
+        return res
+
+
+    def widthOfBinaryTree_DFS(self, root: TreeNode) -> int:
+        if not root: return 0
+        self.res = 0
+        self.dfs(root, 0, 0, {})
+        return self.res
+
+    def dfs(self, node, depth, pos, leftMap):
+        if depth not in leftMap:
+            leftMap[depth] = pos
+        self.res = max(self.res, pos-leftMap[depth]+1)
+        if node.left:
+            self.dfs(node.left, depth+1, pos*2, leftMap)
+        if node.right:
+            self.dfs(node.right, depth+1, pos*2+1, leftMap)
+
+
     def test(self):
         testCases = [
             TreeNode(1, TreeNode(3, TreeNode(5), TreeNode(3)), TreeNode(2, None, TreeNode(9))),
@@ -41,6 +58,7 @@ class Solution(object):
             result = self.widthOfBinaryTree(root)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
