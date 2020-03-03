@@ -25,7 +25,54 @@ class Solution(object):
                 left = i
                 right = k+1+i
         return res if res != float('inf') else -1
-    
+
+
+# Another Solution, min queue
+
+from collections import deque
+
+
+class MinQueue(deque):
+    def __init__(self):
+        deque.__init__(self)
+        self.mins = deque()
+
+    def append(self, x):
+        deque.append(self, x)
+        while self.mins and x < self.mins[-1]:
+            self.mins.pop()
+        self.mins.append(x)
+
+    def popleft(self):
+        x = deque.popleft(self)
+        if self.mins[0] == x:
+            self.mins.popleft()
+        return x
+
+    def min(self):
+        return self.mins[0]
+
+
+class Solution:
+    def kEmptySlots(self, bulbs, K: int) -> int:
+        days = [0] * len(bulbs)
+        for day, position in enumerate(bulbs, 1):
+            days[position - 1] = day
+
+        window = MinQueue()
+        ans = len(days)
+
+        for i, day in enumerate(days):
+            window.append(day)
+            if K <= i < len(days) - 1:
+                window.popleft()
+                if K == 0 or days[i-K] < window.min() > days[i+1]:
+                    ans = min(ans, max(days[i-K], days[i+1]))
+
+        return ans if ans < len(days) else -1
+
+
+
     def test(self):
         testCases = [
             [
