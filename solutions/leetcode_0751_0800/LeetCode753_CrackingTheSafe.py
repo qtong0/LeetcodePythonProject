@@ -4,7 +4,23 @@ Created on Mar 28, 2018
 @author: tongq
 '''
 class Solution(object):
-    def crackSafe(self, n, k):
+    def crackSafe(self, n: int, k: int) -> str:
+        seen = set()
+        ans = []
+        def dfs(node):
+            for x in map(str, range(k)):
+                nei = node + x
+                if nei not in seen:
+                    seen.add(nei)
+                    dfs(nei[1:])
+                    ans.append(x)
+
+        dfs("0" * (n-1))
+        return "".join(ans) + "0" * (n-1)
+
+
+
+    def crackSafe_DFS(self, n, k):
         """
         :type n: int
         :type k: int
