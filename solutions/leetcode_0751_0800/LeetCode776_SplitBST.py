@@ -10,8 +10,21 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+
 class Solution(object):
-    def splitBST(self, root, V):
+    def splitBST(self, root: TreeNode, V: int):
+        if not root:
+            return None, None
+        elif root.val <= V:
+            bns = self.splitBST(root.right, V)
+            root.right = bns[0]
+            return root, bns[1]
+        else:
+            bns = self.splitBST(root.left, V)
+            root.left = bns[1]
+            return bns[0], root
+
+    def splitBST_own(self, root, V):
         """
         :type root: TreeNode
         :type V: int
