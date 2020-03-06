@@ -1,24 +1,30 @@
-'''
-Created on Apr 8, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def reachingPoints(self, sx, sy, tx, ty):
-        """
-        :type sx: int
-        :type sy: int
-        :type tx: int
-        :type ty: int
-        :rtype: bool
-        """
-        while sx < tx and sy < ty:
-            tx, ty = tx%ty, ty%tx
-        if sx == tx and (ty-sy) % sx == 0 or\
-            sy == ty and (tx-sx) % sy == 0:
-            return True
-        else:
-            return False
+    def reachingPoints(self, sx: int, sy: int, tx: int, ty: int) -> bool:
+        while tx >= sx and ty >= sy:
+            if tx == ty:
+                break
+            elif tx > ty:
+                if ty > sy:
+                    tx %= ty
+                else:
+                    return (tx - sx) % ty == 0
+            else:
+                if tx > sx:
+                    ty %= tx
+                else:
+                    return (ty - sy) % tx == 0
+        return tx == sx and ty == sy
+
+
+    def reachingPoints_another_TLE(self, sx, sy, tx, ty):
+        while tx >= sx and ty >= sy:
+            if sx == tx and sy == ty:
+                return True
+            if tx > ty:
+                tx -= ty
+            else:
+                ty -= tx
+        return False
     
     # RuntimeError: maximum recursion depth exceeded
     def reachingPoints_own(self, sx, sy, tx, ty):
@@ -48,6 +54,7 @@ class Solution(object):
     
     def test(self):
         testCases = [
+            [1, 1, 1000000000, 1],
             [1, 1, 3, 5], # True
             [1, 1, 2, 2], # False
             [1, 1, 1, 1], # True
@@ -58,6 +65,7 @@ class Solution(object):
             result = self.reachingPoints(sx, sy, tx, ty)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
