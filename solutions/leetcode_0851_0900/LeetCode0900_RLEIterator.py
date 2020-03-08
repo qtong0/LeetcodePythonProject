@@ -8,25 +8,23 @@ class RLEIterator(object):
         :type A: List[int]
         """
         self.arr = A
-        self.countIdx = 0
-        self.numIdx = 1
+        self.idx = 0
+        self.quantity = 0
 
     def next(self, n):
         """
         :type n: int
         :rtype: int
         """
-        val = -1
-        for _ in range(n):
-            while self.countIdx < len(self.arr) and \
-                    self.arr[self.countIdx] == 0:
-                self.countIdx += 2
-                self.numIdx += 2
-            if self.countIdx >= len(self.arr):
-                return -1
-            val = self.arr[self.numIdx]
-            self.arr[self.countIdx] -= 1
-        return val
+        while self.idx < len(self.arr):
+            if self.quantity + n > self.arr[self.idx]:
+                n -= self.arr[self.idx] - self.quantity
+                self.quantity = 0
+                self.idx += 2
+            else:
+                self.quantity += n
+                return self.arr[self.idx+1]
+        return -1
 
 
 # Your RLEIterator object will be instantiated and called as such:
