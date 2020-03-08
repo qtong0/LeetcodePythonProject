@@ -1,6 +1,3 @@
-# Showing Memory Limit Exceeded only
-# I hope it's OK
-
 class RLEIterator(object):
 
     def __init__(self, A):
