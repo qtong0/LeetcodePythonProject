@@ -1,9 +1,3 @@
-'''
-Created on Apr 20, 2017
-
-@author: MT
-'''
-
 class Solution(object):
     def deleteNode(self, root, key):
         if not root: return None
