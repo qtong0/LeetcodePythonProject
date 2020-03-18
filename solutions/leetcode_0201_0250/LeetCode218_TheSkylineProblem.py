@@ -1,8 +1,3 @@
-'''
-Created on Feb 20, 2017
-
-@author: MT
-'''
 class Solution(object):
     def getSkyline(self, buildings):
         """
@@ -15,8 +10,8 @@ class Solution(object):
             heights.append([b[0], -b[2]])
             heights.append([b[1], b[2]])
         heights.sort()
-        heap = [0]
         res = []
+        heap = [0]
         prev = 0
         for h in heights:
             if h[1] < 0:
@@ -39,6 +34,7 @@ class Solution(object):
             result = self.getSkyline(buildings)
             print('result: %s' % (result))
             print('-='*20+'-')
-    
+
+
 if __name__ == '__main__':
     Solution().test()
