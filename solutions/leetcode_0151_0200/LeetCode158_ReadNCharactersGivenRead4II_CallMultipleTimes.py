@@ -1,13 +1,9 @@
-'''
-Created on May 23, 2018
-
-@author: tongq
-'''
 # The read4 API is already defined for you.
 # @param buf, a list of characters
 # @return an integer
 def read4(buf):
     pass
+
 
 class Solution(object):
     def __init__(self):
