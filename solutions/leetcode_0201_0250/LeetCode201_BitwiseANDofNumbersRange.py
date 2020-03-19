@@ -13,12 +13,12 @@ class Solution(object):
         """
         if m == 0:
             return 0
-        moveFactor = 1
+        moveFactor = 0
         while m != n:
             m >>= 1
             n >>= 1
-            moveFactor <<= 1
-        return moveFactor*m
+            moveFactor += 1
+        return m << moveFactor
     
     def test(self):
         testCases = [
