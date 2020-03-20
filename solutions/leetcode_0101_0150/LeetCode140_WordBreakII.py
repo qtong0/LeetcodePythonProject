@@ -1,38 +1,27 @@
-'''
-Created on Feb 9, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def wordBreak(self, s, wordDict):
-        """
-        :type s: str
-        :type wordDict: List[str]
-        :rtype: List[str]
-        """
+    def wordBreak(self, s: str, wordDict):
         if not s: return []
-        dp = [[] for _ in range(len(s)+1)]
+        n = len(s)
+        dp = [[] for _ in range(n+1)]
         dp[0] = True
-        for i in range(len(s)+1):
-            if dp[i]:
-                for word in wordDict:
-                    if s[i:i+len(word)] == word:
-                        dp[i+len(word)].append(word)
+        for i in range(n):
+            for w in wordDict:
+                if dp[i] and i+len(w) < n+1 and s[i:i+len(w)] == w:
+                    dp[i+len(w)].append(w)
+        print('dp: %s' % dp)
         res = []
-        self.helper(dp, len(s), res, [])
+        self.helper(n, res, [], dp)
         return res
-    
-    def helper(self, dp, i, res, curr):
+
+    def helper(self, i, res, curr, dp):
         if i <= 0:
             if i == 0:
                 res.append(' '.join(curr))
             return
-        for word in dp[i]:
-            if i >= len(word):
-                curr.insert(0, word)
-                self.helper(dp, i-len(word), res, curr)
-                curr.pop(0)
+        for w in dp[i]:
+            curr.insert(0, w)
+            self.helper(i-len(w), res, curr, dp)
+            curr.pop(0)
     
     def test(self):
         testCases = [
@@ -44,6 +33,7 @@ class Solution(object):
             result = self.wordBreak(s, wordDict)
             print('result: %s' % (result))
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
