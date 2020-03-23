@@ -1,8 +1,3 @@
-'''
-Created on May 31, 2018
-
-@author: tongq
-'''
 class Solution(object):
     def subsetsWithDup(self, nums):
         """
