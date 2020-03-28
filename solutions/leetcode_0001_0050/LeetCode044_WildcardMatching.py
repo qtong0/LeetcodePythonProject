@@ -1,15 +1,5 @@
-'''
-Created on Jun 5, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def isMatch(self, s, p):
-        """
-        :type s: str
-        :type p: str
-        :rtype: bool
-        """
+    def isMatch(self, s: str, p: str) -> bool:
         if not s and not p: return True
         m, n = len(s), len(p)
         dp = [[False]*(n+1) for _ in range(m+1)]
