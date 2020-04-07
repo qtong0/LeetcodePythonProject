@@ -23,9 +23,7 @@ class Solution:
         dfs(0, None)
         return self.diameter
 
-
-
-
+    # Down solution is TLE
     def treeDiameter_own_TLE(self, edges) -> int:
         graph = {}
         degree = {}
