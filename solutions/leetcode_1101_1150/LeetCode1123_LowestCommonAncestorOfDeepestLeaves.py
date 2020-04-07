@@ -11,6 +11,7 @@ class Solution:
         if not root: return None
         return self.helper(root)
 
+    # returning dept, node
     def helper(self, root):
         if not root: return 0, None
         left = self.helper(root.left)
