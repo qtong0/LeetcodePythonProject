@@ -17,7 +17,7 @@ class Solution:
         return res
 
     # own solution - should be also fine
-    def arraysIntersection(self, arr1, arr2, arr3):
+    def arraysIntersection_own(self, arr1, arr2, arr3):
         tmp = self.helper(arr1, arr2)
         return self.helper(tmp, arr3)
 
