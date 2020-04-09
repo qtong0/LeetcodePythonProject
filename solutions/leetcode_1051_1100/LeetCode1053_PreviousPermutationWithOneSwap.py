@@ -1,3 +1,5 @@
+# this question might have an issue
+# because some argues 1133 < 1313 < 3113
 class Solution:
     def prevPermOpt1(self, A):
         left = len(A)-2
@@ -17,7 +19,7 @@ class Solution:
         A[left], A[right] = A[right], A[left]
         return A
 
-
+    # My WRONG solution
     def prevPermOpt1_own_wrong(self, A):
         n = len(A)
         i = n-1
