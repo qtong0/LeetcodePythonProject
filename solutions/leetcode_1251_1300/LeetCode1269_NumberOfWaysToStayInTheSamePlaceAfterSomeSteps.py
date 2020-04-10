@@ -1,5 +1,5 @@
 class Solution:
-    # improved way
+    # improved way, finally passing LC
     def numWays(self, steps: int, arrLen: int) -> int:
         MOD = 10**9+7
         last = [0]*(min(steps, arrLen)+1)
@@ -16,7 +16,10 @@ class Solution:
             last = curr
         return last[0]
 
+
+
     # DP solution first with extra space
+    # It’s also TLE in LC
     def numWays_own(self, steps: int, arrLen: int) -> int:
         MOD = 10**9+7
         dp = [[0]*arrLen for _ in range(steps+1)]
