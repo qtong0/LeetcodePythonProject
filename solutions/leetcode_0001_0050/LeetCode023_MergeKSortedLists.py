@@ -1,13 +1,12 @@
-'''
-Created on Nov 6, 2017
+import heapq
 
-@author: MT
-'''
+
 # Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, val, nextNode=None):
         self.val = val
         self.next = nextNode
+
 
 class Solution(object):
     def mergeKLists(self, lists):
@@ -15,18 +14,18 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        import heapq
         heap = []
-        for l in lists:
-            while l:
-                heapq.heappush(heap, l.val)
-                l = l.next
+        for node in lists:
+            if node:
+                heapq.heappush(heap, (node.val, id(node), node))
         dummy = ListNode(-1)
         prev = dummy
         while heap:
-            val = heapq.heappop(heap)
-            prev.next = ListNode(val)
-            prev = prev.next
+            _, _, node = heapq.heappop(heap)
+            if node.next:
+                heapq.heappush(heap, (node.next.val, id(node.next), node.next))
+            prev.next = node
+            prev = node
         return dummy.next
     
     def test(self):
@@ -43,6 +42,7 @@ class Solution(object):
                 node = node.next
             print('')
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
