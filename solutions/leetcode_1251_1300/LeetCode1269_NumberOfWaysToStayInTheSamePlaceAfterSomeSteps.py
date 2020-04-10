@@ -18,6 +18,7 @@ class Solution:
             [2,4],
             [4,2],
             [3,3],
+            [430,148488],
         ]
         for steps, arrLen in testCases:
             res = self.numWays(steps, arrLen)
