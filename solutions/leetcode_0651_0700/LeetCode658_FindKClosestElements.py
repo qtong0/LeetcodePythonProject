@@ -1,10 +1,18 @@
-'''
-Created on Oct 7, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def findClosestElements(self, arr, k, x):
+    # O(log(N-K) + K)
+    def findClosestElements(self, arr, k: int, x: int):
+        l, r = 0, len(arr)-k
+        while l < r:
+            mid = (l+r)//2
+            if x-arr[mid] > arr[mid+k]-x:
+                l = mid+1
+            else:
+                r = mid
+        return arr[l:l+k]
+
+
+
+    def findClosestElements_own(self, arr, k, x):
         """
         :type arr: List[int]
         :type k: int
