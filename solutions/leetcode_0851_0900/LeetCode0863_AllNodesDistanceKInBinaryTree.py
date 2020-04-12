@@ -1,27 +1,17 @@
-'''
-Created on Sep 18, 2019
-
-@author: tongq
-'''
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, x):
+    def __init__(self, x, left=None, right=None):
         self.val = x
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
+
 
 class Solution(object):
-    def distanceK(self, root, target, K):
-        """
-        :type root: TreeNode
-        :type target: TreeNode
-        :type K: int
-        :rtype: List[int]
-        """
+    def distanceK(self, root: TreeNode, target: TreeNode, K: int):
         hashmap = {}
         self.find(root, target, hashmap)
         res = []
-        self.dfs(root, target, K, hashmap[root], res, hashmap)
+        self.dfs(root, K, hashmap[root], res, hashmap)
         return res
     
     def find(self, root, target, hashmap):
@@ -39,20 +29,20 @@ class Solution(object):
             return right+1
         return -1
     
-    def dfs(self, root, target, k, length, res, hashmap):
+    def dfs(self, root, k, length, res, hashmap):
         if not root: return
         if root in hashmap:
             length = hashmap[root]
         if length == k:
             res.append(root.val)
-        self.dfs(root.left, target, k, length+1, res, hashmap)
-        self.dfs(root.right, target, k, length+1, res, hashmap)
+        self.dfs(root.left, k, length+1, res, hashmap)
+        self.dfs(root.right, k, length+1, res, hashmap)
+
 
 if __name__ == '__main__':
-    root = TreeNode(0)
-    root.left = TreeNode(1)
-    root.left.left = TreeNode(3)
-    root.left.right = TreeNode(2)
-    
-    res = Solution().distanceK(root, root.left.right, 1)
+    root = TreeNode(3, None, TreeNode(1, TreeNode(0), TreeNode(8)))
+    target = TreeNode(5, TreeNode(6), TreeNode(2, TreeNode(7), TreeNode(4)))
+    root.left = target
+
+    res = Solution().distanceK(root, target, 2)
     print('res: %s' % res)
