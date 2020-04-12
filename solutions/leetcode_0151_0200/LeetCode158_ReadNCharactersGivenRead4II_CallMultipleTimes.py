@@ -7,7 +7,9 @@ def read4(buf):
 
 class Solution(object):
     def __init__(self):
-        self.queue = []
+        self.ptr = 0
+        self.cnt = 0
+        self.buff = ['']*4
     
     def read(self, buf, n):
         """
@@ -16,14 +18,15 @@ class Solution(object):
         :rtype: The number of characters read (int)
         """
         idx = 0
-        while True:
-            buf4 = ['']*4
-            read4(buf4)
-            self.queue.extend(buf4)
-            curr = min(len(self.queue), n-idx)
-            for _ in range(curr):
-                buf[idx] = self.queue.pop(0)
-                idx += 1
-            if curr == 0:
+        while idx < n:
+            if self.ptr == 0:
+                self.cnt = read4(self.buff)
+            if self.cnt == 0:
                 break
+            while idx < n and self.ptr < self.cnt:
+                buf[idx] = self.buff[self.ptr]
+                idx += 1
+                self.ptr += 1
+            if self.ptr >= self.cnt:
+                self.ptr = 0
         return idx
