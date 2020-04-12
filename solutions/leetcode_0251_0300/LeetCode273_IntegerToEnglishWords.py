@@ -1,14 +1,5 @@
-'''
-Created on Mar 5, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def numberToWords_own(self, num):
-        """
-        :type num: int
-        :rtype: str
-        """
+    def numberToWords(self, num: int) -> str:
         res = self.helper(num)
         return res if res else 'Zero'
     
@@ -30,7 +21,7 @@ class Solution(object):
         elif num < 1000:
             first = num/100
             res += ' ' + tokens20[first-1] + ' Hundred'
-            remaining = num-first*100
+            remaining = num - first*100
             res += ' ' + self.helper(remaining)
         elif num < 1000000:
             first = num/1000
@@ -48,8 +39,10 @@ class Solution(object):
             remaining = num - first*1000000000
             res += ' ' + self.helper(remaining)
         return res.strip()
-    
-    def numberToWords(self, num):
+
+
+
+    def numberToWords_orig(self, num):
         token20 = 'One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve ' \
             'Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen Nineteen'.split()
         tens = 'Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety'.split()
