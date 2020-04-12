@@ -30,7 +30,7 @@ class Solution(object):
         for i in range(k, n-2*k+1):
             l = posLeft[i-1]
             r = posRight[i+k]
-            total = (sumVals[i+k]-sumVals[i]) + (sumVals[l+k]-sumVals[l]) + (sumVals[r+k]-sumVals[r])
+            total = (sumVals[l+k]-sumVals[l]) + (sumVals[i+k]-sumVals[i]) + (sumVals[r+k]-sumVals[r])
             if total > maxSum:
                 maxSum = total
                 res = [l, i, r]
