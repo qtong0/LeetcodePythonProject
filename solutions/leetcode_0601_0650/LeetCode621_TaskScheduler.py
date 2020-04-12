@@ -1,15 +1,5 @@
-'''
-Created on Sep 9, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def leastInterval(self, tasks, n):
-        """
-        :type tasks: List[str]
-        :type n: int
-        :rtype: int
-        """
+    def leastInterval_another(self, tasks, n: int) -> int:
         arr = [0]*26
         for t in tasks:
             arr[ord(t)-ord('A')] += 1
@@ -18,13 +8,8 @@ class Solution(object):
         while i >= 0 and arr[i]==arr[-1]:
             i -= 1
         return max(len(tasks), (arr[-1]-1)*(n+1)+25-i)
-    
-    def leastInterval_own(self, tasks, n):
-        """
-        :type tasks: List[str]
-        :type n: int
-        :rtype: int
-        """
+
+    def leastInterval_another(self, tasks, n: int) -> int:
         import heapq
         hashmap = {}
         for task in tasks:
@@ -76,6 +61,7 @@ class Solution(object):
             print('result: %s' % result)
             print('result2: %s' % result2)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
