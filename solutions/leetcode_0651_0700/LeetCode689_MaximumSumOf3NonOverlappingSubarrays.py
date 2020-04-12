@@ -1,36 +1,39 @@
-'''
-Created on Oct 23, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def maxSumOfThreeSubarrays(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
+    def maxSumOfThreeSubarrays(self, nums, k: int):
         n = len(nums)
-        dp = [[0]*(n+1) for _ in range(4)]
-        sumVal = 0
-        accu = [0]*(n+1)
+        sumVals = [0]*(n+1)
+        posLeft = [0]*n
+        posRight = [0]*n
         for i in range(n):
-            sumVal += nums[i]
-            accu[i] = sumVal
-        ids = [[0]*(n+1) for _ in range(4)]
-        for i in range(1, 4):
-            for j in range(k-1, n):
-                tmpMax = accu[j] if j-k<0 else accu[j]-accu[j-k]+dp[i-1][j-k]
-                if j >= k:
-                    dp[i][j] = dp[i][j-1]
-                    ids[i][j] = ids[i][j-1]
-                if j > 0 and tmpMax > dp[i][j-1]:
-                    dp[i][j] = tmpMax
-                    ids[i][j] = j-k+1
+            sumVals[i+1] = sumVals[i] + nums[i]
+        total = sumVals[k]-sumVals[0]
+        # DP for starting index of the left max sum interval
+        for i in range(k, n):
+            if sumVals[i+1]-sumVals[i+1-k] > total:
+                posLeft[i] = i+1-k
+                total = sumVals[i+1]-sumVals[i+1-k]
+            else:
+                posLeft[i] = posLeft[i-1]
+        # DP for starting index of the right max sum interval
+        # caution: the condition is ">= tot" for right interval, and "> tot" for left interval
+        posRight[n-k] = n-k
+        total = sumVals[n]-sumVals[n-k]
+        for i in range(n-k-1, -1, -1):
+            if sumVals[i+k]-sumVals[i] >= total:
+                posRight[i] = i
+                total = sumVals[i+k]-sumVals[i]
+            else:
+                posRight[i] = posRight[i+1]
+        # test all possible middle intervals
+        maxSum = 0
         res = [0]*3
-        res[2] = ids[3][n-1]
-        res[1] = ids[2][res[2]-1]
-        res[0] = ids[1][res[1]-1]
+        for i in range(k, n-2*k+1):
+            l = posLeft[i-1]
+            r = posRight[i+k]
+            total = (sumVals[i+k]-sumVals[i]) + (sumVals[l+k]-sumVals[l]) + (sumVals[r+k]-sumVals[r])
+            if total > maxSum:
+                maxSum = total
+                res = [l, i, r]
         return res
     
     def test(self):
