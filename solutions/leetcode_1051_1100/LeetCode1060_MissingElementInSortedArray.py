@@ -12,7 +12,7 @@ class Solution:
         left, right = 0, n-1
         # find left = right index such that
         # missing(left-1) < k <= missing(left)
-        while left != right:
+        while left < right:
             mid = (left+right)//2
             if missing(mid) < k:
                 left = mid+1
