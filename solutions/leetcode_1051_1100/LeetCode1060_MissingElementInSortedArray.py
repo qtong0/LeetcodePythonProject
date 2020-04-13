@@ -7,7 +7,7 @@ class Solution:
         # if Kth missing number is larger than
         # the last element of the array
         if k > missing(n-1):
-            return nums[-1]+k - missing(n-1)
+            return nums[-1] + k - missing(n-1)
 
         left, right = 0, n-1
         # find left = right index such that
