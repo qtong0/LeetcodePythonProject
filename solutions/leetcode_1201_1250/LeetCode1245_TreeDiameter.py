@@ -1,17 +1,6 @@
 class Solution:
     def treeDiameter(self, edges) -> int:
         self.diameter = 0
-        def dfs(node, pre):
-            d1 = d2 = 0
-            for neighbor in graph[node]:
-                if neighbor != pre:
-                    d = dfs(neighbor, node)
-                    if d > d1:
-                        d1, d2 = d, d1
-                    elif d > d2:
-                        d2 = d
-            self.diameter = max(self.diameter, d1+d2)
-            return d1+1
         graph = {}
         for e in edges:
             if e[0] not in graph:
@@ -20,10 +9,25 @@ class Solution:
             if e[1] not in graph:
                 graph[e[1]] = []
             graph[e[1]].append(e[0])
-        dfs(0, None)
+        self.dfs(graph, 0, None)
         return self.diameter
 
-    # Down solution is TLE
+    def dfs(self, graph, node, pre):
+        d1, d2 = 0, 0
+        for nei in graph[node]:
+            if nei != pre:
+                d = self.dfs(graph, nei, node)
+                if d > d1:
+                    d1, d2 = d, d1
+                elif d > d2:
+                    d2 = d
+        self.diameter = max(self.diameter, d1+d2)
+        return d1+1
+
+
+
+
+    # My own solution is TLE, use the above instead!
     def treeDiameter_own_TLE(self, edges) -> int:
         graph = {}
         degree = {}
@@ -43,15 +47,15 @@ class Solution:
         self.maxLen = 0
         for node in nodes:
             visited = set([node])
-            self.dfs(node, 0, visited, graph)
+            self.dfs2(node, 0, visited, graph)
         return self.maxLen
 
-    def dfs(self, node, length, visited, graph):
+    def dfs2(self, node, length, visited, graph):
         self.maxLen = max(self.maxLen, length)
         for neighbor in graph[node]:
             if neighbor not in visited:
                 visited.add(neighbor)
-                self.dfs(neighbor, length+1, visited, graph)
+                self.dfs2(neighbor, length+1, visited, graph)
 
     def test(self):
         testCases = [
