@@ -1,10 +1,5 @@
-'''
-Created on Feb 19, 2017
-
-@author: MT
-'''
-
 class Solution(object):
+    # O(n**2)
     def shortestPalindrome(self, s):
         """
         :type s: str
@@ -20,6 +15,29 @@ class Solution(object):
         mid = s[:i]
         suffix = s[i:]
         return suffix[::-1]+self.shortestPalindrome(mid)+suffix
+
+    # KMP <=> O(n)
+    def shortestPalindrome_kmp(self, s):
+        tmp = s + '#' + s[::-1]
+        tbl = self.getTable(tmp)
+        return s[tbl[-1]:][::-1] + s
+
+    def getTable(self, s):
+        tbl = [0]*len(s)
+        idx = 0
+        for i in range(1, len(s)):
+            if s[idx] == s[i]:
+                tbl[i] = tbl[i-1]+1
+                idx += 1
+            else:
+                idx = tbl[i-1]
+                while idx > 0 and s[idx] != s[i]:
+                    idx = tbl[idx-1]
+                if s[idx] == s[i]:
+                    idx += 1
+                tbl[i] = idx
+        return tbl
+
     
     def test(self):
         testCases = [
@@ -30,8 +48,11 @@ class Solution(object):
         for s in testCases:
             print('s: %s' % (s))
             result = self.shortestPalindrome(s)
-            print('result: %s' % (result))
+            res = self.shortestPalindrome_kmp(s)
+            print('result: %s' % result)
+            print('res: %s' % res)
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
