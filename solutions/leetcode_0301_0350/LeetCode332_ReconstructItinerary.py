@@ -1,10 +1,5 @@
-'''
-Created on Mar 19, 2017
-
-@author: MT
-'''
-
 import heapq
+
 
 class Solution(object):
     def findItinerary_orig(self, tickets):
@@ -21,7 +16,8 @@ class Solution(object):
         
     def dfs(self, result, hashmap, elem):
         while hashmap.get(elem):
-            self.dfs(result, hashmap, heapq.heappop(hashmap[elem]))
+            nextElem = heapq.heappop(hashmap[elem])
+            self.dfs(result, hashmap, nextElem)
         result.insert(0, elem)
     
     def test(self):
@@ -35,6 +31,7 @@ class Solution(object):
             result = self.findItinerary(tickets)
             print('result: %s' % result)
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
