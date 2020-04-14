@@ -2,7 +2,7 @@ import heapq
 
 
 class Solution(object):
-    def findItinerary_orig(self, tickets):
+    def findItinerary(self, tickets):
         if not tickets:
             return []
         hashmap = {}
