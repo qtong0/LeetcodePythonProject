@@ -1,12 +1,31 @@
+"""
+Explanation
+Find the index i of the next maximum number x.
+Reverse i + 1 numbers, so that the x will be at A[0]
+Reverse x numbers, so that x will be at A[x - 1].
+Repeat this process N times.
+"""
+
+
 class Solution:
     def pancakeSort(self, A):
         res = []
-        n = len(A)
-        nums = sorted(range(1, n+1), key = lambda i: -A[i-1])
-        for i in nums:
-            for f in res:
-                if i <= f:
-                    i = f+1-i
-            res += [i, n]
-            n -= 1
+        for x in range(len(A), 1, -1):
+            i = A.index(x)
+            res.extend([i + 1, x])
+            A = A[:i:-1] + A[:i]
         return res
+
+    def test(self):
+        testCases = [
+            [3,2,4,1],
+            [1,2,3],
+        ]
+        for arr in testCases:
+            res = self.pancakeSort(arr)
+            print('res: %s' % res)
+            print('-='*30 + '-')
+
+
+if __name__ == '__main__':
+    Solution().test()
