@@ -9,24 +9,16 @@ class TreeNode:
 class Solution:
     # O(N) solution
     def bstFromPreorder(self, preorder) -> TreeNode:
-        if not preorder: return None
-        root = TreeNode(preorder[0])
-        stack = [root]
-        n = len(preorder)
-        for i in range(1, n):
-            # take the last element of the stack as a parent
-            # and create a child from the next preorder element
-            node, child = stack[-1], TreeNode(preorder[i])
-            # adjust the parent
-            while stack and stack[-1].val < child.val:
-                node = stack.pop()
-            # follow BST logic to create a parent-child link
-            if node.val < child.val:
-                node.right = child
-            else:
-                node.left = child
-                # add the child into stack
-            stack.append(child)
+        idx = [0]
+        return self.helper(preorder, float('inf'), idx)
+
+    def helper(self, preorder, upper, idx):
+        if idx[0] == len(preorder) or preorder[idx[0]] > upper:
+            return None
+        root = TreeNode(preorder[idx[0]])
+        idx[0] += 1
+        root.left = self.helper(preorder, root.val, idx)
+        root.right = self.helper(preorder, upper, idx)
         return root
 
     # My own O(N*Log(N)) solution, passing LC, should be fine too???
