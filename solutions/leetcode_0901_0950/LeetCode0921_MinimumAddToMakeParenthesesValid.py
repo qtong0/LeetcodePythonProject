@@ -1,9 +1,21 @@
 class Solution(object):
-    def minAddToMakeValid(self, S):
-        """
-        :type S: str
-        :rtype: int
-        """
+    def minAddToMakeValid(self, S: str) -> int:
+        res, bal = 0, 0
+        for c in S:
+            if c == '(':
+                bal += 1
+            else:
+                bal -= 1
+            # it is guaranteed bal >= -1
+            if bal == -1:
+                res += 1
+                bal += 1
+        return res + bal
+
+
+
+    # My own solution
+    def minAddToMakeValid_SPACE(self, S: str) -> int:
         stack = []
         res = 0
         for i, c in enumerate(S):
