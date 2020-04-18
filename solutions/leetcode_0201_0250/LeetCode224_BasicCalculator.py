@@ -1,8 +1,3 @@
-'''
-Created on Feb 22, 2017
-
-@author: MT
-'''
 class Solution(object):
     def calculate(self, s):
         """
@@ -13,12 +8,12 @@ class Solution(object):
         res = 0
         stack = []
         sign = 1
-        preVal = 0
+        curVal = 0
         while i < len(s):
             if s[i].isdigit():
-                preVal = 0
+                curVal = 0
                 while i < len(s) and s[i].isdigit():
-                    preVal = preVal*10 + int(s[i])
+                    curVal = curVal*10 + int(s[i])
                     i += 1
                 i -= 1
             elif s[i] == '(':
@@ -27,17 +22,17 @@ class Solution(object):
                 res = 0
                 sign = 1
             elif s[i] == ')':
-                res += sign*preVal
+                res += sign*curVal
                 res = stack.pop()*res + stack.pop()
-                preVal = 0
+                curVal = 0
             elif s[i] == '+':
-                res += preVal*sign
+                res += curVal*sign
                 sign = 1
             elif s[i] == '-':
-                res += preVal*sign
+                res += curVal*sign
                 sign = -1
             i += 1
-        res += preVal*sign
+        res += curVal*sign
         return res
     
     def test(self):
