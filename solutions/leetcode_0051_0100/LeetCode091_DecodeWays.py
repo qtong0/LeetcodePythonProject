@@ -48,7 +48,7 @@ class Solution(object):
     
     def test(self):
         testCases = [
-            '111',
+            '123',
         ]
         for s in testCases:
             print('s: %s' % (s))
