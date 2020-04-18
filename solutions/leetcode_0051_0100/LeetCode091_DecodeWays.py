@@ -1,15 +1,5 @@
-'''
-Created on Jan 28, 2017
-
-@author: MT
-'''
-
 class Solution(object):
     def numDecodings(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
         if not s: return 0
         n = len(s)
         dp = [0]*(n+1)
