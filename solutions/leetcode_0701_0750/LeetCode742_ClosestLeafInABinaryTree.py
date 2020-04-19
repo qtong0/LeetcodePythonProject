@@ -8,11 +8,6 @@ class TreeNode(object):
 
 class Solution(object):
     def findClosestLeaf(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
-        """
         backMap = {}
         kNode = self.dfs(root, k, backMap)
         queue = [kNode]
@@ -55,6 +50,7 @@ class Solution(object):
             result = self.findClosestLeaf(root, k)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
