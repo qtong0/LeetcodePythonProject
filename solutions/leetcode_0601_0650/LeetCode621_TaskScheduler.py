@@ -9,7 +9,33 @@ class Solution(object):
             i -= 1
         return max(len(tasks), (arr[-1]-1)*(n+1)+25-i)
 
-    def leastInterval_another(self, tasks, n: int) -> int:
+
+    def leastInterval(self, tasks, n: int) -> int:
+        import heapq
+        hashmap = {}
+        for task in tasks:
+            hashmap[task] = hashmap.get(task, 0)+1
+        heap = []
+        for count in hashmap.values():
+            heapq.heappush(heap, -count)
+        res = 0
+        cycle = n+1
+        while heap:
+            worktime = 0
+            queue = []
+            for i in range(cycle):
+                if heap:
+                    queue.append(heapq.heappop(heap))
+                    worktime += 1
+            for cnt in queue:
+                cnt = -cnt
+                if cnt - 1 > 0:
+                    heapq.heappush(heap, -(cnt-1))
+            res += cycle if heap else worktime
+        return res
+
+
+    def leastInterval_OWN(self, tasks, n: int) -> int:
         import heapq
         hashmap = {}
         for task in tasks:
@@ -57,7 +83,7 @@ class Solution(object):
             print('tasks: %s' % tasks)
             print('n: %s' % n)
             result = self.leastInterval(tasks, n)
-            result2 = self.leastInterval_own(tasks, n)
+            result2 = self.leastInterval_OWN(tasks, n)
             print('result: %s' % result)
             print('result2: %s' % result2)
             print('-='*30+'-')
