@@ -1,23 +1,20 @@
-'''
-Created on May 5, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def numFriendRequests(self, ages):
-        """
-        :type ages: List[int]
-        :rtype: int
-        """
-        count = [0]*121
-        for x in ages:
-            count[x] += 1
+    def numFriendRequests(self, ages) -> int:
+        hashmap = {}
+        for age in ages:
+            hashmap[age] = hashmap.get(age, 0)+1
         res = 0
-        for i in range(1, 121):
-            if i > 14:
-                res += count[i]*(count[i]-1+count[i-1]-count[i//2+7])
-            count[i] += count[i-1]
+        for age1 in hashmap.keys():
+            for age2 in hashmap.keys():
+                if self.request(age1, age2):
+                    if age1 == age2:
+                        res += hashmap[age1] * (hashmap[age2]-1)
+                    else:
+                        res += hashmap[age1] * hashmap[age2]
         return res
+
+    def request(self, age1, age2):
+        return not (age2 <= 0.5*age1+7 or age2 > age1 or (age2 > 100 and age1 < 100))
     
     def test(self):
         testCases = [
@@ -31,6 +28,7 @@ class Solution(object):
             result = self.numFriendRequests(ages)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
