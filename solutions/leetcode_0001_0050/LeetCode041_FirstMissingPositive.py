@@ -7,11 +7,11 @@ class Solution(object):
             if nums[i] <= 0 or nums[i] > n:
                 nums[i] = n+1
         for i in range(n):
-            num = abs(nums[i])
-            if num <= n:
-                num -= 1
-                if nums[num] > 0:
-                    nums[num] = -1 * nums[num]
+            idx = abs(nums[i])
+            if idx <= n:
+                idx -= 1
+                if nums[idx] > 0:
+                    nums[idx] = -1 * nums[idx]
         for i in range(1, n):
             if nums[i] >= 0:
                 return i+1
