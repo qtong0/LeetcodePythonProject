@@ -1,24 +1,21 @@
-'''
-Created on Mar 16, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def removeDuplicateLetters(self, s):
-        if not s: return ''
-        cnt = [0]*26
-        pos = 0
-        for c in s:
-            cnt[ord(c)-ord('a')] += 1
+    def removeDuplicateLetters(self, s: str) -> str:
+        stack = []
+        seen = set()
+        lastPosMap = {}
         for i, c in enumerate(s):
-            if s[i] < s[pos]:
-                pos = i
-            cnt[ord(c)-ord('a')] -= 1
-            if cnt[ord(c)-ord('a')] == 0:
-                break
-        return s[pos]+self.removeDuplicateLetters(s[pos+1:].replace(s[pos], ''))
-    
+            lastPosMap[c] = i
+        for i, c in enumerate(s):
+            if c not in seen:
+                while stack and c < stack[-1] and lastPosMap[stack[-1]] > i:
+                    seen.discard(stack.pop())
+                seen.add(c)
+                stack.append(c)
+        return ''.join(stack)
+
+
+
+
     def removeDuplicateLetters_another(self, s):
         if not s: return ''
         lastPosMap = {}
@@ -39,7 +36,7 @@ class Solution(object):
             del lastPosMap[minChar]
             end = min(lastPosMap.values())
         return ''.join(res)
-    
+
     def test(self):
         testCases = [
             'bcabc',
