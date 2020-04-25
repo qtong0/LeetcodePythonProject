@@ -5,18 +5,16 @@ class Solution(object):
         n = len(nums)
         for i in range(n):
             if nums[i] <= 0 or nums[i] > n:
-                nums[i] = 1
+                nums[i] = n+1
         for i in range(n):
             num = abs(nums[i])
-            if num == n:
-                nums[0] = -abs(nums[0])
-            else:
-                nums[num] = -abs(nums[num])
+            if num <= n:
+                num -= 1
+                if nums[num] > 0:
+                    nums[num] = -1 * nums[num]
         for i in range(1, n):
-            if nums[i] > 0:
-                return i
-        if nums[0] > 0:
-            return n
+            if nums[i] >= 0:
+                return i+1
         return n+1
 
     def test(self):
