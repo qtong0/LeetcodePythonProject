@@ -1,11 +1,24 @@
-'''
-Created on Feb 16, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def rotate(self, nums, k):
+    def rotate(self, nums, k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        k %= n
+
+        self.reverse(nums, 0, n-1)
+        self.reverse(nums, 0, k-1)
+        self.reverse(nums, k, n-1)
+
+    def reverse(self, nums, l, r):
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
+
+
+
+    def rotate_SPACE(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
