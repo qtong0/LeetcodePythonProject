@@ -48,5 +48,6 @@ class Solution(object):
             print('result: %s' % (result))
             print('-='*20+'-')
 
+
 if __name__ == '__main__':
     Solution().test()
