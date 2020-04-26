@@ -1,15 +1,22 @@
 class Solution:
     def pancakeSort(self, A):
         res = []
-        n = len(A)
-        arr = sorted(range(1, n+1), key = lambda i: -A[i-1])
-        for i in arr:
-            for j in res:
-                if i <= j:
-                    i = j+1 - i
-            res.extend([i, n])
-            n -= 1
+        for x in range(len(A), 0, -1):
+            i = 0
+            while A[i] != x:
+                i += 1
+            self.reverse(A, i+1)
+            res.append(i+1)
+            self.reverse(A, x)
+            res.append(x)
         return res
+
+    def reverse(self, nums, k):
+        i, j = 0, k-1
+        while i < j:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            j -= 1
 
     def test(self):
         testCases = [
