@@ -1,3 +1,12 @@
+"""
+Explanation
+Find the index i of the next maximum number x.
+Reverse i + 1 numbers, so that the x will be at A[0]
+Reverse x numbers, so that x will be at A[x - 1].
+Repeat this process N times.
+"""
+
+
 class Solution:
     def pancakeSort(self, A):
         res = []
