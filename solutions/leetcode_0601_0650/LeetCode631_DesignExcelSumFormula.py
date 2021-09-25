@@ -1,82 +1,39 @@
-'''
-Created on Sep 13, 2017
+import collections
 
-@author: MT
-'''
-class Excel(object):
+class Excel:
 
-    def __init__(self, H, W):
-        """
-        :type H: int
-        :type W: str
-        """
-        m = H
-        n = ord(W)-ord('A')+1
-        self.matrix = [[0]*n for _ in range(m)]
-        self.hashmap = {}
+    def __init__(self, H: int, W: str):
+        self.M = [[{'v': 0, 'sum': None} for i in range(H)] for j in range(ord(W) - 64)]
 
-    def set(self, r, c, v):
-        """
-        :type r: int
-        :type c: str
-        :type v: int
-        :rtype: void
-        """
-        i = r-1
-        j = ord(c)-ord('A')
-        diff = v-self.matrix[i][j]
-        self.matrix[i][j] = v
-        for (i0, j0), vals in self.hashmap.items():
-            self.matrix[i0][j0] += diff*(vals.count((i, j)))
-        if (i, j) in self.hashmap:
-            del self.hashmap[(i, j)]
+    def set(self, r: int, c: str, v: int) -> None:
+        self.M[r - 1][ord(c) - 65] = {'v': v, 'sum': None}
 
-    def get(self, r, c):
-        """
-        :type r: int
-        :type c: str
-        :rtype: int
-        """
-        i, j = r-1, ord(c)-ord('A')
-        return self.matrix[i][j]
+    def get(self, r: int, c: str) -> int:
+        cell = self.M[r - 1][ord(c) - 65]
+        if not cell['sum']:
+            return cell['v']
+        return sum(self.get(pos[0], pos[1]) * cell['sum'][pos] for pos in cell['sum'])
 
-    def sum(self, r, c, strs):
-        """
-        :type r: int
-        :type c: str
-        :type strs: List[str]
-        :rtype: int
-        """
-        i, j = r-1, ord(c)-ord('A')
-        for (i0, j0), vals in self.hashmap.items():
-            if i0 == i and j0 == j:
-                del self.hashmap[(i, j)]
-                break
-            for i1, j1 in vals:
-                if i1 == i and j1 == j and (i, j) in self.hashmap:
-                    del self.hashmap[(i, j)]
-                    break
-        vals = []
-        sumVal = 0
+    def sum(self, r: int, c: str, strs: list[str]) -> int:
+        self.M[r - 1][ord(c) - 65]['sum'] = self.parse(strs)
+        return self.get(r, c)
+
+    def parse(self, strs):
+        c = collections.Counter()
         for s in strs:
-            arr = s.split(':')
-            if len(arr) == 1:
-                x = int(arr[0][1:])-1
-                y = ord(arr[0][0])-ord('A')
-                vals.append((x, y))
-                sumVal += self.matrix[x][y]
-            else:
-                x0 = int(arr[0][1:])-1
-                y0 = ord(arr[0][0])-ord('A')
-                x1 = int(arr[1][1:])-1
-                y1 = ord(arr[1][0])-ord('A')
-                for i0 in range(x0, x1+1):
-                    for j0 in range(y0, y1+1):
-                        vals.append((i0, j0))
-                        sumVal += self.matrix[i0][j0]
-        self.hashmap[(i, j)] = vals
-        self.matrix[i][j] = sumVal
-        return sumVal
+            s, e = s.split(':')[0], s.split(':')[1] if ':' in s else s
+            for i in range(int(s[1:]), int(e[1:]) + 1):
+                for j in range(ord(s[0]) - 64, ord(e[0]) - 64 + 1):
+                    c[(i, chr(j+64))] += 1
+        return c
+
+
+# Your Excel object will be instantiated and called as such:
+# obj = Excel(H, W)
+# obj.set(r,c,v)
+# param_2 = obj.get(r,c)
+# param_3 = obj.sum(r,c,strs)
+
 
 if __name__ == '__main__':
     excel = Excel(3, 'C')
