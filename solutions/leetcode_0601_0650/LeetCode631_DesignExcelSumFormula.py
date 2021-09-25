@@ -1,5 +1,6 @@
 import collections
 
+
 class Excel:
 
     def __init__(self, H: int, W: str):
@@ -24,7 +25,7 @@ class Excel:
             s, e = s.split(':')[0], s.split(':')[1] if ':' in s else s
             for i in range(int(s[1:]), int(e[1:]) + 1):
                 for j in range(ord(s[0]) - 64, ord(e[0]) - 64 + 1):
-                    c[(i, chr(j+64))] += 1
+                    c[(i, chr(j + 64))] += 1
         return c
 
 
@@ -41,8 +42,8 @@ if __name__ == '__main__':
     print(excel.sum(3, 'C', ['A1', 'A1:B2']))
     excel.set(2, 'B', 2)
     print(excel.get(3, 'C'))
-    print('-='*10+'-')
- 
+    print('-=' * 10 + '-')
+
     excel = Excel(5, 'E')
     print(excel.get(1, 'A'))
     print(excel.set(1, 'A', 1))
@@ -50,8 +51,8 @@ if __name__ == '__main__':
     print(excel.sum(2, 'B', ['A1', 'A1']))
     print(excel.set(1, 'A', 2))
     print(excel.get(2, 'B'))
-    print('-='*10+'-')
- 
+    print('-=' * 10 + '-')
+
     excel = Excel(5, 'E')
     print(excel.set(1, 'A', 1))
     print(excel.sum(2, 'B', ['A1']))
@@ -59,10 +60,10 @@ if __name__ == '__main__':
     print(excel.get(1, 'B'))
     print(excel.set(1, 'A', 5))
     print(excel.get(2, 'B'))
-    print('-='*10+'-')
+    print('-=' * 10 + '-')
 
     excel = Excel(3, 'C')
     print(excel.sum(1, 'A', ['A2']))
     print(excel.set(2, 'A', 1))
     print(excel.get(1, 'A'))
-    print('-='*10+'-')
+    print('-=' * 10 + '-')
