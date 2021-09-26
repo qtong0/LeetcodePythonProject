@@ -28,6 +28,7 @@ class Solution(object):
             n = master.guess(guess)
             wordlist = [w for w in wordlist if self.match(w, guess) == n]
 
+    # Best solution so far O(n)
     def findSecretWord(self, wordlist: list[str], master: 'Master') -> None:
         n = 0
         best = 0
