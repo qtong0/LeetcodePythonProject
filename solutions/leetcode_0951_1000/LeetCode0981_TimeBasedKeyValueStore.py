@@ -30,7 +30,7 @@ class TimeMap:
             return ''
 
     def find(self, arr, timestamp):
-        return bisect.bisect_left(arr, (timestamp, ))
+        return bisect.bisect_left(arr, (timestamp, ''))
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
