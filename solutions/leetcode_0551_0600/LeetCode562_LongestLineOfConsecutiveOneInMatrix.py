@@ -1,14 +1,30 @@
-'''
-Created on Aug 29, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def longestLine(self, M):
-        """
-        :type M: List[List[int]]
-        :rtype: int
-        """
+    def longestLine(self, M: List[List[int]]) -> int:
+        if not M:
+            return 0
+        res = 0
+        m, n = len(M), len(M[0])
+        dp = [[0]*4 for _ in range(n)]
+        for i in range(m):
+            old = 0
+            for j in range(n):
+                if M[i][j] == 1:
+                    dp[j][0] = dp[j-1][0] + 1 if j > 0 else 1
+                    dp[j][1] = dp[j][1] + 1 if i > 0 else 1
+                    prev = dp[j][2]
+                    dp[j][2] = old + 1 if i > 0 and j > 0 else 1
+                    old = prev
+                    dp[j][3] = dp[j+1][3] + 1 if i > 0 and j+1 < n else 1
+                    res = max(res, max(dp[j]))
+                else:
+                    old = dp[j][2]
+                    dp[j][0] = dp[j][1] = dp[j][2] = dp[j][3] = 0
+        return res
+
+    def longestLine_space(self, M: List[List[int]]) -> int:
         matrix = M
         if not matrix or not matrix[0]: return 0
         maxLen = 0
@@ -39,6 +55,8 @@ class Solution(object):
                 [0,1,1,0],
                 [0,0,0,1],
             ],
+            [[0,1,1,0,0],[0,1,1,0,0],[0,1,0,0,1],[1,1,1,1,0],[1,0,0,1,0]],
+            [[0],[1]],
         ]
         for matrix in testCases:
             print('\n'.join([str(row) for row in matrix]))
