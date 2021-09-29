@@ -1,22 +1,23 @@
 import collections
+from typing import List
 
 
 class Excel:
 
     def __init__(self, H: int, W: str):
-        self.M = [[{'v': 0, 'sum': None} for i in range(H)] for j in range(ord(W) - 64)]
+        self.M = [[{'v': 0, 'sum': None} for i in range(H)] for j in range(ord(W) - ord('A') + 1)]
 
     def set(self, r: int, c: str, v: int) -> None:
-        self.M[r - 1][ord(c) - 65] = {'v': v, 'sum': None}
+        self.M[r - 1][ord(c) - ord('A')] = {'v': v, 'sum': None}
 
     def get(self, r: int, c: str) -> int:
-        cell = self.M[r - 1][ord(c) - 65]
+        cell = self.M[r - 1][ord(c) - ord('A')]
         if not cell['sum']:
             return cell['v']
         return sum(self.get(pos[0], pos[1]) * cell['sum'][pos] for pos in cell['sum'])
 
-    def sum(self, r: int, c: str, strs: list[str]) -> int:
-        self.M[r - 1][ord(c) - 65]['sum'] = self.parse(strs)
+    def sum(self, r: int, c: str, strs: List[str]) -> int:
+        self.M[r - 1][ord(c) - ord('A')]['sum'] = self.parse(strs)
         return self.get(r, c)
 
     def parse(self, strs):
@@ -24,8 +25,8 @@ class Excel:
         for s in strs:
             s, e = s.split(':')[0], s.split(':')[1] if ':' in s else s
             for i in range(int(s[1:]), int(e[1:]) + 1):
-                for j in range(ord(s[0]) - 64, ord(e[0]) - 64 + 1):
-                    c[(i, chr(j + 64))] += 1
+                for j in range(ord(s[0]) - ord('A') + 1, ord(e[0]) - ord('A') + 2):
+                    c[(i, chr(j + ord('A') - 1))] += 1
         return c
 
 
