@@ -1,11 +1,8 @@
-'''
-Created on Apr 23, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def minTransfers(self, transactions):
+    def minTransfers(self, transactions: List[List[int]]) -> int:
         bal = {}
         for tran in transactions:
             bal[tran[0]] = bal.get(tran[0], 0)+tran[2]
@@ -14,7 +11,7 @@ class Solution(object):
         for count in bal.values():
             self.debt.append(count)
         return self.dfs(0, 0)
-        
+
     def dfs(self, s, cnt):
         while s < len(self.debt) and self.debt[s] == 0:
             s += 1
@@ -38,6 +35,7 @@ class Solution(object):
             result = self.minTransfers(transactions)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
