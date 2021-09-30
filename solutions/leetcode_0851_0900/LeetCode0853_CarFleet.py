@@ -1,16 +1,8 @@
-'''
-Created on Sep 10, 2019
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def carFleet(self, target, position, speed):
-        """
-        :type target: int
-        :type position: List[int]
-        :type speed: List[int]
-        :rtype: int
-        """
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
         time = [float(target-p)/s for p, s in sorted(zip(position, speed))]
         res = cur = 0
         for t in time[::-1]:
@@ -31,6 +23,7 @@ class Solution(object):
             res = self.carFleet(target, position, speed)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
