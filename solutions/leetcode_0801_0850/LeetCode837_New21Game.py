@@ -1,26 +1,17 @@
-'''
-Created on Oct 9, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def new21Game(self, N, K, W):
-        """
-        :type N: int
-        :type K: int
-        :type W: int
-        :rtype: float
-        """
-        n, k, w = N, K, W
-        if k == 0 or n >= k+w: return 1
-        dp = [1.0]+[0.0]*n
-        wSum = 1.0
+    def new21Game(self, n: int, k: int, maxPts: int) -> float:
+        if k == 0 or n >= k+maxPts:
+            return 1
+        dp = [1.0] + [0.0]*n
+        sumPos = 1.0
         for i in range(1, n+1):
-            dp[i] = wSum/w
-            if i < k: wSum += dp[i]
-            if i - w >= 0: wSum -= dp[i-w]
+            dp[i] = sumPos / maxPts
+            if i < k:
+                sumPos += dp[i]
+            if i - maxPts >= 0:
+                sumPos -= dp[i-maxPts]
         return sum(dp[k:])
-    
+
     def test(self):
         testCases = [
             [10, 1, 10],
@@ -31,6 +22,7 @@ class Solution(object):
             result = self.new21Game(n, k, w)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
