@@ -3,22 +3,32 @@ import datetime
 
 class Solution:
     def confusingNumberII(self, N: int) -> int:
-        def generateNum(candidates, num, length, result, cur):
-            if length == 0:
-                if int(cur) <= num:
-                    result.append(int(cur))
-                return
-            for element in candidates:
-                generateNum(candidates, num, length-1, result, cur+element)
+        self.hashmap = {
+            0: 0,
+            1: 1,
+            6: 9,
+            8: 8,
+            9: 6,
+        }
+        self.res = 0
+        self.helper(N, 0)
+        return self.res
 
-        def checkNum(num):
-            newNum = ''.join(reversed(str(num)))
-            newNum = newNum.replace('6', '-').replace('9', '6').replace('-', '0')
-            return int(newNum) != num
+    def helper(self, n, cur):
+        if self.isConfusingNum(cur):
+            self.res += 1
+        for num in self.hashmap.keys():
+            if cur*10+num <= n and cur*10+num != 0:
+                self.helper(n, cur*10+num)
 
-        collection = []
-        generateNum(['0', '1', '6', '8', '9'], N, len(str(N)), collection, '')
-        return sum(checkNum(element) for element in collection)
+    def isConfusingNum(self, n):
+        res = 0
+        num = n
+        while n:
+            digit = n % 10
+            res = res*10 + self.hashmap.get(digit)
+            n = (n-digit)//10
+        return res != num
 
 
 
@@ -65,14 +75,14 @@ class Solution:
         testCases = [
             20, # 6
             100, # 19
-            1000000000,
+            # 1000000000,
         ]
-        now = datetime.datetime.now()
-        for n in testCases:
-            res = self.confusingNumberII_own_TLE(n)
-            print('res: %s' % res)
-            print('-='*30+'-')
-        print('time taken: %s' % (datetime.datetime.now() - now))
+        # now = datetime.datetime.now()
+        # for n in testCases:
+        #     res = self.confusingNumberII_own_TLE(n)
+        #     print('res: %s' % res)
+        #     print('-='*30+'-')
+        # print('time taken: %s' % (datetime.datetime.now() - now))
 
         now = datetime.datetime.now()
         for n in testCases:
