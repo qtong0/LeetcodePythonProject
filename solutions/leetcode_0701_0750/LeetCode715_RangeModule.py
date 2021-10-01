@@ -1,16 +1,12 @@
-'''
-Created on Oct 29, 2017
-
-@author: MT
-'''
 import bisect
+
 
 class RangeModule(object):
 
     def __init__(self):
         self.X = [0, 10**9]
         self.track = [False]*2
-    
+
     def addRangeHelper(self, left, right, track=True):
         def index(x):
             i = bisect.bisect_left(self.X, x)
@@ -49,10 +45,12 @@ class RangeModule(object):
         """
         self.addRangeHelper(left, right, False)
 
+
 class Interval(object):
     def __init__(self, left, right):
         self.left = left
         self.right = right
+
 
 class RangeModule_own(object):
     def __init__(self):
