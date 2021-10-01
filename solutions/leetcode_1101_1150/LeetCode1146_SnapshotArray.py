@@ -1,16 +1,22 @@
+import bisect
+
+
 class SnapshotArray(object):
 
     def __init__(self, length: int):
-        pass
+        self.arr = [[[-1, 0]] for _ in range(length)]
+        self.snap_id = 0
 
     def set(self, index: int, val: int) -> None:
-        pass
+        self.arr[index].append([self.snap_id, val])
 
     def snap(self) -> int:
-        pass
+        self.snap_id += 1
+        return self.snap_id - 1
 
     def get(self, index: int, snap_id: int) -> int:
-        pass
+        i = bisect.bisect_left(self.arr[index], [snap_id+1]) - 1
+        return self.arr[index][i][1]
 
 # use Java TreeMap Instead
 
