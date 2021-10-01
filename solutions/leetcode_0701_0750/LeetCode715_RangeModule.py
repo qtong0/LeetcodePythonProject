@@ -1,7 +1,37 @@
 import bisect
 
 
-class RangeModule:
+class RangeModule(object):
+
+    def __init__(self):
+        self.X = [0, 10**9]
+        self.track = [False]*2
+
+    def addRangeHelper(self, left, right, track=True):
+        def index(x):
+            i = bisect.bisect_left(self.X, x)
+            if self.X[i] != x:
+                self.X.insert(i, x)
+                self.track.insert(i, self.track[i-1])
+            return i
+        i = index(left)
+        j = index(right)
+        self.X[i:j] = [left]
+        self.track[i:j] = [track]
+
+    def addRange(self, left: int, right: int) -> None:
+        self.addRangeHelper(left, right, True)
+
+    def queryRange(self, left: int, right: int) -> bool:
+        i = bisect.bisect(self.X, left)-1
+        j = bisect.bisect_left(self.X, right)
+        return all(self.track[i:j])
+
+    def removeRange(self, left: int, right: int) -> None:
+        self.addRangeHelper(left, right, False)
+
+
+class RangeModule_another(object):
 
     def __init__(self):
         self.track = []
@@ -35,37 +65,6 @@ class RangeModule:
             subtrack.append(right)
 
         self.track[start:end] = subtrack
-
-
-
-class RangeModule_another(object):
-
-    def __init__(self):
-        self.X = [0, 10**9]
-        self.track = [False]*2
-
-    def addRangeHelper(self, left, right, track=True):
-        def index(x):
-            i = bisect.bisect_left(self.X, x)
-            if self.X[i] != x:
-                self.X.insert(i, x)
-                self.track.insert(i, self.track[i-1])
-            return i
-        i = index(left)
-        j = index(right)
-        self.X[i:j] = [left]
-        self.track[i:j] = [track]
-
-    def addRange(self, left: int, right: int) -> None:
-        self.addRangeHelper(left, right, True)
-
-    def queryRange(self, left: int, right: int) -> bool:
-        i = bisect.bisect(self.X, left)-1
-        j = bisect.bisect_left(self.X, right)
-        return all(self.track[i:j])
-
-    def removeRange(self, left: int, right: int) -> None:
-        self.addRangeHelper(left, right, False)
 
 
 if __name__ == '__main__':
