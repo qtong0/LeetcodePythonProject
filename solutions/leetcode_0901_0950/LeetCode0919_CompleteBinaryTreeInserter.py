@@ -5,12 +5,10 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+
 class CBTInserter(object):
 
-    def __init__(self, root):
-        """
-        :type root: TreeNode
-        """
+    def __init__(self, root: TreeNode):
         self.root = root
         queue = [self.root]
         prevQueue = []
@@ -36,11 +34,7 @@ class CBTInserter(object):
         else:
             self.parents = prevQueue
 
-    def insert(self, v):
-        """
-        :type v: int
-        :rtype: int
-        """
+    def insert(self, v: int) -> int:
         parent = None
         nextParents = []
         for node in self.parents:
@@ -62,10 +56,7 @@ class CBTInserter(object):
             self.parents = nextParents
         return parent.val
 
-    def get_root(self):
-        """
-        :rtype: TreeNode
-        """
+    def get_root(self) -> TreeNode:
         return self.root
 
 
