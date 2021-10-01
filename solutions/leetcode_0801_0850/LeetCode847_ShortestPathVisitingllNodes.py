@@ -9,6 +9,10 @@ class Solution(object):
         
         for i in range(n):
             tmp = (1 << i)
+            # (tmp, i, 0) means
+            # tmp - bitMask: all the notes visited
+            # i - current node
+            # 0 - cost
             hashset.add((tmp, i, 0))
             queue.append((tmp, i, 1))
         
