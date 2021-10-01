@@ -1,15 +1,8 @@
-'''
-Created on Apr 10, 2019
+from typing import List
 
-@author: tongq
-'''
 
 class Solution(object):
-    def shortestPathLength(self, graph):
-        """
-        :type graph: List[List[int]]
-        :rtype: int
-        """
+    def shortestPathLength(self, graph: List[List[int]]) -> int:
         n = len(graph)
         queue = []
         hashset = set()
@@ -42,6 +35,7 @@ class Solution(object):
         for graph in testCases:
             result = self.shortestPathLength(graph)
             print('result: %s' % result)
+
 
 if __name__ == '__main__':
     Solution().test()
