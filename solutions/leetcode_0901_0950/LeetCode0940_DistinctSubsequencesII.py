@@ -1,16 +1,30 @@
 class Solution(object):
-    def distinctSubseqII(self, S):
-        """
-        :type S: str
-        :rtype: int
-        """
+    # example:
+    # Input: "aba"
+    # Current parsed: "ab"
+    #
+    # endswith 'a': ["a"]
+    # endswith 'b': ["ab","b"]
+    #
+    # "a" -> "aa"
+    # "ab" -> "aba"
+    # "b" -> "ba"
+    # "" -> "a"
+    def distinctSubseqII(self, s: str) -> int:
+        ends_with = [0] * 26
+        for c in s:
+            ends_with[ord(c) - ord('a')] = sum(ends_with) + 1
+        return sum(ends_with) % (10**9+7)
+
+    # another solution
+    def distinctSubseqII_another(self, s: str) -> int:
         dp = [1]
         last = {}
-        for i, x in enumerate(S):
+        for i, c in enumerate(s):
             dp.append(dp[-1]*2)
-            if x in last:
-                dp[-1] -= dp[last[x]]
-            last[x] = i
+            if c in last:
+                dp[-1] -= dp[last[c]]
+            last[c] = i
         return (dp[-1]-1) % (10**9+7)
 
     def test(self):
