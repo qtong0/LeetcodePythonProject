@@ -1,4 +1,5 @@
 class Solution:
+    # EASY, be careful about corner case 'z'
     def alphabetBoardPath(self, target: str) -> str:
         board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"]
         hashmap = {}
