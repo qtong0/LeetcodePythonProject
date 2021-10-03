@@ -1,15 +1,8 @@
-'''
-Created on Apr 21, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def hitBricks(self, grid, hits):
-        """
-        :type grid: List[List[int]]
-        :type hits: List[List[int]]
-        :rtype: List[int]
-        """
+    def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
         m, n = len(grid), len(grid[0])
         
         def dfs(i, j):
@@ -65,6 +58,7 @@ class Solution(object):
             result = self.hitBricks(grid, hits)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
