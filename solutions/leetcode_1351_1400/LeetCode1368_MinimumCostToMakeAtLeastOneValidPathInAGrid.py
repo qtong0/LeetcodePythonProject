@@ -2,6 +2,14 @@ from typing import List
 
 
 class Solution:
+    #
+    # 1. Find all the reachable nodes without changing anything
+    # 2. Save all new visited nodes to a queue bfs.
+    # 3. Now iterate the queue
+    #       3.1 For each node, try changing it to all 3 other direction
+    #       3.2 Save the new reachable and not visited nodes to the queue
+    #       3.3 repeat step 3
+    #
     def minCost(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
         dp = [[float('inf')]*n for _ in range(m)]
