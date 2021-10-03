@@ -21,7 +21,7 @@ class Solution:
             cost += 1
             for i in range(len(queue)):
                 x, y = queue.pop(0)
-                for i in range(4):
+                for _ in range(4):
                     self.dfs(x+self.DIR[i][0], y+self.DIR[i][1], grid, dp, cost, queue)
         return dp[-1][-1]
 
