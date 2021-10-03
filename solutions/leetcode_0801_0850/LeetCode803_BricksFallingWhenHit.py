@@ -2,6 +2,19 @@ from typing import List
 
 
 class Solution(object):
+    # 1) For each hit (i, j), if grid[i][j]==0, set grid[i][j]=-1 otherwise set grid[i][j]=0.
+    #       Since a hit may happen at an empty position, we need to separate emptys from bricks.
+    #
+    # 2) For i in [0, n], do dfs at grid[i][0] and mark no-dropping bricks. Here we get the grid after all hits.
+    #
+    # 3) Then for each hit (i,j) (reversely), first we check grid[i][j]==-1,
+    #       if yes, it's empty, skip this hit.
+    #       Then we check whether it's connected to any no-dropping bricks or it's at the top,
+    #       if not, it can't add any no-dropping bricks, skip this hit.
+    #       Otherwise we do dfs at grid[i][j], mark new added no-dropping bricks and record amount of them.
+    #
+    # 4) Return the amounts of new added no-dropping bricks at each hits.
+    #
     def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
         m, n = len(grid), len(grid[0])
         
