@@ -26,11 +26,11 @@ class Solution(object):
         # Mark whether there is a brick at the each hit
         for i, j in hits:
             grid[i][j] -= 1
-        
+
         # Get grid after all hits
         for i in range(n):
             self.dfs(grid, 0, i)
-        
+
         # Reversely and the block of each hits and get count of newly add bricks
         res = [0]*len(hits)
         for k in reversed(range(len(hits))):
@@ -67,7 +67,7 @@ class Solution(object):
             ],
         ]
         for grid, hits in testCases:
-            print('grid: %s' % grid)
+            print('grid:\n%s' % '\n'.join(str(row) for row in grid))
             print('hits: %s' % hits)
             result = self.hitBricks(grid, hits)
             print('result: %s' % result)
