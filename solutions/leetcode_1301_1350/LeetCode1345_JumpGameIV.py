@@ -11,8 +11,11 @@ class Solution:
         if n <= 1:
             return 0
         graph = {}
-        for i, node in enumerate(arr):
-            graph[node] = graph.get(node, []) + [i]
+        for i in range(n):
+            if arr[i] in graph:
+                graph[arr[i]].append(i)
+            else:
+                graph[arr[i]] = [i]
 
         # stores layers from start
         curs = set([0])
