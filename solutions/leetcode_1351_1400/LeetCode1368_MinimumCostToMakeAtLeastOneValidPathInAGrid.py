@@ -10,6 +10,9 @@ class Solution:
     #       3.2 Save the new reachable and not visited nodes to the queue
     #       3.3 repeat step 3
     #
+    # Time O(n*m)
+    # Space O(n*m)
+    #
     def minCost(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
         dp = [[float('inf')]*n for _ in range(m)]
