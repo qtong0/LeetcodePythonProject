@@ -19,9 +19,9 @@ class Solution:
         self.dfs(0, 0, grid, dp, cost, queue)
         while queue:
             cost += 1
-            for i in range(len(queue)):
+            for _ in range(len(queue)):
                 x, y = queue.pop(0)
-                for _ in range(4):
+                for i in range(4):
                     self.dfs(x+self.DIR[i][0], y+self.DIR[i][1], grid, dp, cost, queue)
         return dp[-1][-1]
 
