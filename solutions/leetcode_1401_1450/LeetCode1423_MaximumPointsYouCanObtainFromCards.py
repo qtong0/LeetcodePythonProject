@@ -13,6 +13,7 @@ class Solution:
             all_combinations.append(front_sum[i] + back_sum[k-i])
         return max(all_combinations)
 
+
     # another difficult to understand / explain
     def maxScore_another(self, cardPoints: list[int], k: int) -> int:
         size = len(cardPoints) - k
