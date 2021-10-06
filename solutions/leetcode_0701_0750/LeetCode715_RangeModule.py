@@ -7,6 +7,7 @@ class RangeModule(object):
         # self.X is a sorted list of coorditations used by add/remove
         self.X = [0, 10**9]
         # self.track is tracking where it might start / stop
+        # True => added, False => removed
         self.track = [False]*2
 
     def addRangeHelper(self, left, right, track=True):
