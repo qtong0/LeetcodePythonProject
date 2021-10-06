@@ -1,22 +1,21 @@
+from typing import List
+
+
 class Solution:
-    def maxScore(self, cardPoints: list[int], k: int) -> int:
-        size = len(cardPoints) - k
-        minSubArraySum = float('inf')
-        j = curr = 0
-
-        for i, val in enumerate(cardPoints):
-            curr += val
-            if i-j+1 > size:
-                curr -= cardPoints[j]
-                j += 1
-            if i-j+1 == size:
-                minSubArraySum = min(minSubArraySum, curr)
-
-        return sum(cardPoints) - minSubArraySum
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        front_sum, back_sum = [0], [0]
+        for num in cardPoints:
+            front_sum.append(front_sum[-1] + num)
+        for num in cardPoints[::-1]:
+            back_sum.append(back_sum[-1] + num)
+        all_combinations = []
+        for i in range(k+1):
+            all_combinations.append(front_sum[i] + back_sum[k-i])
+        return max(all_combinations)
 
 
     ### Own solution, but DFS + Memorization is not good enough :'(
-    def maxScore_own(self, cardPoints: list[int], k: int) -> int:
+    def maxScore_own(self, cardPoints: List[int], k: int) -> int:
         mem = {}
         return self.dfs(cardPoints, mem, k, 0)
 
