@@ -13,6 +13,22 @@ class Solution:
             all_combinations.append(front_sum[i] + back_sum[k-i])
         return max(all_combinations)
 
+    # another difficult to understand / explain
+    def maxScore_another(self, cardPoints: list[int], k: int) -> int:
+        size = len(cardPoints) - k
+        minSubArraySum = float('inf')
+        j = curr = 0
+
+        for i, val in enumerate(cardPoints):
+            curr += val
+            if i-j+1 > size:
+                curr -= cardPoints[j]
+                j += 1
+            if i-j+1 == size:
+                minSubArraySum = min(minSubArraySum, curr)
+
+        return sum(cardPoints) - minSubArraySum
+
 
     ### Own solution, but DFS + Memorization is not good enough :'(
     def maxScore_own(self, cardPoints: List[int], k: int) -> int:
