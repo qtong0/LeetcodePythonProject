@@ -2,9 +2,10 @@ from typing import List
 
 
 class TreeNode(object):
-    def __init__(self, val, num=1):
+    def __init__(self, val):
+        self.dup = 1
+        self.num = 0
         self.val = val
-        self.num = num
         self.left = None
         self.right = None
 
@@ -60,11 +61,12 @@ class Solution(object):
         ]
         for nums in testCases:
             print('nums: %s' % nums)
-            root = self.countSmaller(nums)
-            print('result: %s' % (root))
+            res_1 = self.countSmaller(nums)
+            res_2 = self.countSmaller_tree_TLE(nums)
+            print('res_1: %s' % res_1)
+            print('res_2: %s' % res_2)
             print('-='*20+'-')
 
 
 if __name__ == '__main__':
     Solution().test()
-
