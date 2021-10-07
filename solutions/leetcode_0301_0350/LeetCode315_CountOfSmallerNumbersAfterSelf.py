@@ -1,8 +1,5 @@
-'''
-Created on Mar 15, 2017
+from typing import List
 
-@author: MT
-'''
 
 class TreeNode(object):
     def __init__(self, val, num=1):
@@ -10,37 +7,50 @@ class TreeNode(object):
         self.num = num
         self.left = None
         self.right = None
-    
-    def __str__(self):
-        return '<val: %s, num: %s>' % (self.val, self.num)
-    
-    def __repr__(self):
-        return self.__str__()
+
 
 class Solution(object):
+    # merge sort solution
     def countSmaller(self, nums):
-        if not nums: return []
-        root = TreeNode(nums[-1])
-        result = [0]
-        for i in range(len(nums)-2, -1, -1):
-            result.insert(0, self.getVal(root, nums[i], 0))
-        return result, root
-    
-    def getVal(self, root, val, num):
-        if root.val >= val:
-            root.num += 1
-            if not root.left:
-                root.left = TreeNode(val)
-                return num
-            else:
-                return self.getVal(root.left, val, num)
+        def sort(indexes):
+            half = len(indexes) // 2
+            if half:
+                left, right = sort(indexes[:half]), sort(indexes[half:])
+                for i in range(len(indexes))[::-1]:
+                    if not right or left and nums[left[-1]] > nums[right[-1]]:
+                        smaller[left[-1]] += len(right)
+                        indexes[i] = left.pop()
+                    else:
+                        indexes[i] = right.pop()
+            return indexes
+        smaller = [0] * len(nums)
+        sort(list(range(len(nums))))
+        return smaller
+
+
+    # Tree solution, TLE
+    def countSmaller_tree_TLE(self, nums: List[int]) -> List[int]:
+        root = None
+        res = []
+        for i in range(len(nums)-1, -1, -1):
+            root, val = self.buildTree(root, nums[i], 0)
+            res.insert(0, val)
+        return res
+
+    def buildTree(self, root, num, val):
+        if not root:
+            root = TreeNode(num)
         else:
-            num += root.num
-            if not root.right:
-                root.right = TreeNode(val)
-                return num
+            if root.val == num:
+                val += root.num
+                root.dup += 1
+            elif root.val > num:
+                root.num += 1
+                root.left, val = self.buildTree(root.left, num, val)
             else:
-                return self.getVal(root.right, val, num)
+                val += root.num + root.dup
+                root.right, val = self.buildTree(root.right, num, val)
+        return root, val
     
     def test(self):
         testCases = [
@@ -50,26 +60,10 @@ class Solution(object):
         ]
         for nums in testCases:
             print('nums: %s' % nums)
-            result, root = self.countSmaller(nums)
-            print('result: %s' % (result))
+            root = self.countSmaller(nums)
+            print('result: %s' % (root))
             print('-='*20+'-')
-            
-            queue= [root]
-            line = []
-            nextQueue = []
-            while queue:
-                node = queue.pop(0)
-                line.append(node)
-                if node.left:
-                    nextQueue.append(node.left)
-                if node.right:
-                    nextQueue.append(node.right)
-                if not queue:
-                    queue = nextQueue
-                    nextQueue = []
-                    print(line)
-                    line = []
-            print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
