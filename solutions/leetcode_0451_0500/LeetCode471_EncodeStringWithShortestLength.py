@@ -1,11 +1,5 @@
-'''
-Created on Apr 25, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def encode_short(self, s):
+    def encode_short(self, s: str) -> str:
         return self.helper(s, {})
     
     def helper(self, s, mem):
@@ -16,12 +10,9 @@ class Solution(object):
             multi = [self.encode(s[:i]) + self.encode(s[i:]) for i in range(1, n)]
             mem[s] = min([s, one] + multi, key=len)
         return mem[s]
-    
-    def encode(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
+
+
+    def encode(self, s: str) -> str:
         n = len(s)
         dp = [['']*n for _ in range(n)]
         for l in range(n):
@@ -58,6 +49,7 @@ class Solution(object):
             result2 = self.encode_short(s)
             print('result: %s' % result2)
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
