@@ -1,15 +1,8 @@
-'''
-Created on Mar 4, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def alienOrder(self, words):
-        """
-        :type words: List[str]
-        :rtype: str
-        """
+    def alienOrder(self, words: List[str]) -> str:
         graph = {}
         degree = {}
         for word in words:
@@ -43,7 +36,7 @@ class Solution(object):
         return res if len(res) == len(degree) else ''
     
     def test(self):
-        testCases = [
+        test_cases = [
             [
                 "wrt",
                 "wrf",
@@ -63,11 +56,12 @@ class Solution(object):
             ["za","zb","ca","cb"],
             ["a","b","ca","cc"],
         ]
-        for words in testCases:
+        for words in test_cases:
             print('words: %s' % (words))
             result = self.alienOrder(words)
             print('result: %s' % (result))
             print('-='*20+'-')
-    
+
+
 if __name__  == '__main__':
     Solution().test()
