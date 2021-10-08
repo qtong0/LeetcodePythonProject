@@ -3,12 +3,14 @@ import heapq
 
 
 class Solution:
+    # Dijkstra's Algorithm, Max Heap!
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
         graph = [[] for _ in range(n)]
         for i, (n1, n2) in enumerate(edges):
             graph[n1].append([n2, succProb[i]])
             graph[n2].append([n1, succProb[i]])
         visited_prob = [0]*n
+        # Max Heap!!!
         heap = [[-1, start]]
         visited_prob[start] = 1
 
