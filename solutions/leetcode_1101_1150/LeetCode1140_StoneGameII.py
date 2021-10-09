@@ -20,6 +20,7 @@ class Solution:
         for i in range(1, 2*m+1):
             # current take
             take = presum[p] - presum[p+i]
+            # take max of current + what's left from other player max take
             res = max(res, take + presum[p+i] - self.dfs(presum, max(i, m), p+i, memo))
         memo[p][m] = res
         return res
