@@ -1,16 +1,19 @@
-'''
-Created on Mar 11, 2017
-
-@author: MT
-'''
 class Solution(object):
+    # TC: O(m×n+L) where L is the number of operations
+    # m is the number of rows and n is the number of columns
+    #
     def numIslands2(self, m, n, positions):
         res = []
-        roots = [-1]*(m*n)
+        # Use list(range(m*n)) instead of [-1]*(m*n)
+        # In this case, it works, but list(range(n)) handles duplicate (a==a) scenario better
+        roots = list(range(m*n))
         grid = [[False]*n for _ in range(m)]
         count = 0
         for pos in positions:
             i, j = pos[0], pos[1]
+            if grid[i][j]:
+                res.append(res[-1])
+                continue
             grid[i][j] = True
             count += 1
             root0 = i*n+j
@@ -22,12 +25,12 @@ class Solution(object):
                         roots[root] = root0
             res.append(count)
         return res
-    
+
     def getRoot(self, roots, ind):
-        while roots[ind] != -1:
+        while roots[ind] != ind:
             ind = roots[ind]
         return ind
-    
+
     def test(self):
         testCases = [
             (3, 3, [[0,0], [0,1], [1,2], [2,1]]),
