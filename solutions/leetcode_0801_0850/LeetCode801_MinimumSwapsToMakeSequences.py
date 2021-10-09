@@ -1,41 +1,45 @@
-'''
-Created on Apr 19, 2018
+from typing import List
 
-@author: tongq
-'''
-class Solution(object):
-    def minSwap(self, A, B):
-        """
-        :type A: List[int]
-        :type B: List[int]
-        :rtype: int
-        """
-        arr1, arr2 = A, B
-        n = len(arr1)
-        dp = [[0]*2 for _ in range(n)]
-        dp[-1][0] = 0
-        dp[-1][1] = 1
-        for i in range(n-2, -1, -1):
-            if arr1[i] < arr1[i+1] and arr2[i] < arr2[i+1]:
-                if arr1[i] < arr2[i+1] and arr2[i] < arr1[i+1]:
-                    dp[i][0] = min(dp[i+1][0], dp[i+1][1])
-                    dp[i][1] = min(dp[i+1][0]+1, dp[i+1][0]+1)
-                else:
-                    dp[i][0] = dp[i+1][0]
-                    dp[i][1] = dp[i+1][1]+1
-            else:
-                dp[i][0] = dp[i+1][1]
-                dp[i][1] = dp[i+1][0]+1
-        return min(dp[0][0], dp[0][1])
-    
+
+class Solution:
+    # Time O(N)
+    # Space O(N)
+    def minSwap_space(self, nums1: List[int], nums2: List[int]) -> int:
+        n = len(nums1)
+        swap, not_swap = [n]*n, [n]*n
+        swap[0] = 1
+        not_swap[0] = 0
+        for i in range(1, n):
+            if nums1[i-1] < nums1[i] and nums2[i-1] < nums2[i]:
+                swap[i] = swap[i-1]+1
+                not_swap[i] = not_swap[i-1]
+            if nums1[i-1] < nums2[i] and nums2[i-1] < nums1[i]:
+                swap[i] = min(swap[i], not_swap[i-1] + 1)
+                not_swap[i] = min(not_swap[i], swap[i-1])
+        return min(swap[-1], not_swap[-1])
+
+
+    # Best
+    # Time O(N)
+    # Space O(1)
+    def minSwap(self, nums1: List[int], nums2: List[int]) -> int:
+        n = len(nums1)
+        not_swap, swap = 0, 1
+        for i in range(1, n):
+            not_swap2 = swap2 = n
+            if nums1[i-1] < nums1[i] and nums2[i-1] < nums2[i]:
+                swap2 = swap+1
+                not_swap2 = not_swap
+            if nums1[i-1] < nums2[i] and nums2[i-1] < nums1[i]:
+                swap2 = min(swap2, not_swap+1)
+                not_swap2 = min(not_swap2, swap)
+            swap, not_swap = swap2, not_swap2
+        return min(swap, not_swap)
+
+
     # My solution DFS is TLE
-    def minSwap_own_slow(self, A, B):
-        """
-        :type A: List[int]
-        :type B: List[int]
-        :rtype: int
-        """
-        arr1, arr2 = A, B
+    def minSwap_own_DFS_TLE(self, nums1: List[int], nums2: List[int]) -> int:
+        arr1, arr2 = nums1, nums2
         self.res = float('inf')
         self.helper(arr1, arr2, 0, 0)
         return self.res
@@ -68,6 +72,7 @@ class Solution(object):
             result = self.minSwap(arr1, arr2)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
