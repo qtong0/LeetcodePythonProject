@@ -2,6 +2,33 @@ from typing import List
 import collections
 
 
+"""
+### Java TreeMap Solution! ###
+
+public boolean isPossibleDivide(int[] nums, int k) {
+    Map<Integer, Integer> counter = new TreeMap<>();
+    for (int num: nums) {
+        counter.put(num, counter.getOrDefault(num, 0) + 1);
+    }
+    Queue<Integer> start = new LinkedList<>();
+    int last_checked = -1, opened = 0;
+    for (int num: counter.keySet()) {
+        if ((opened > 0 && num > last_checked + 1) || opened > counter.get(num)) {
+            return false;
+        }
+        start.add(counter.get(num) - opened);
+        last_checked = num;
+        opened = counter.get(num);
+        if (start.size() == k) {
+            opened -= start.remove();
+        }
+    }
+    return opened == 0;
+}
+
+"""
+
+
 class Solution:
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
         c = collections.Counter(nums)
@@ -16,33 +43,8 @@ class Solution:
                 opened -= start.pop(0)
         return opened == 0
 
-    """
-    ### Java TreeMap Solution! ###
-    
-    public boolean isPossibleDivide(int[] nums, int k) {
-        Map<Integer, Integer> counter = new TreeMap<>();
-        for (int num: nums) {
-            counter.put(num, counter.getOrDefault(num, 0) + 1);
-        }
-        Queue<Integer> start = new LinkedList<>();
-        int last_checked = -1, opened = 0;
-        for (int num: counter.keySet()) {
-            if ((opened > 0 && num > last_checked + 1) || opened > counter.get(num)) {
-                return false;
-            }
-            start.add(counter.get(num) - opened);
-            last_checked = num;
-            opened = counter.get(num);
-            if (start.size() == k) {
-                opened -= start.remove();
-            }
-        }
-        return opened == 0;
-    }
-    
-    """
 
-
+    # My own solution, it's too slow, TLE :(
     def isPossibleDivide_own_TLE(self, nums: List[int], k: int) -> bool:
         n = len(nums)
         if n % k != 0:
