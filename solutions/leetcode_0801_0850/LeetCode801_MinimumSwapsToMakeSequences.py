@@ -21,12 +21,21 @@ class Solution:
         swap[0] = 1
         not_swap[0] = 0
         for i in range(1, n):
+
+            # In this case, if we want to keep A and B increasing before the index i, can only have two choices.
             if nums1[i-1] < nums1[i] and nums2[i-1] < nums2[i]:
+                # -> 1.1 don't swap at (i-1) and don't swap at i, we can get not_swap[i] = not_swap[i-1]
                 swap[i] = swap[i-1]+1
+                # -> 1.2 swap at (i-1) and swap at i, we can get swap[i] = swap[i-1]+1
                 not_swap[i] = not_swap[i-1]
+
+            # In this case, if we want to keep A and B increasing before the index i, can only have two choices.
             if nums1[i-1] < nums2[i] and nums2[i-1] < nums1[i]:
+                # -> 2.1 swap at (i-1) and do not swap at i, we can get notswap[i] = Math.min(swap[i-1], notswap[i] )
                 swap[i] = min(swap[i], not_swap[i-1] + 1)
+                # -> 2.2 do not swap at (i-1) and swap at i, we can get swap[i]=Math.min(notswap[i-1]+1, swap[i])
                 not_swap[i] = min(not_swap[i], swap[i-1])
+
         return min(swap[-1], not_swap[-1])
 
 
