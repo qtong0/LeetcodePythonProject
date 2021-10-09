@@ -42,6 +42,7 @@ class Solution:
     
     """
 
+
     def isPossibleDivide_own_TLE(self, nums: List[int], k: int) -> bool:
         n = len(nums)
         if n % k != 0:
