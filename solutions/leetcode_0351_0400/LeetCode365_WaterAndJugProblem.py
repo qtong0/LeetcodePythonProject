@@ -1,15 +1,11 @@
-'''
-Created on Feb 27, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def canMeasureWater(self, x, y, z):
-        if x+y<z: return False
-        if x == z or y == z or x+y == z:
+    def canMeasureWater(self, jug1Capacity: int, jug2Capacity: int, targetCapacity: int) -> bool:
+        if jug1Capacity + jug2Capacity < targetCapacity:
+            return False
+        if jug1Capacity == targetCapacity or jug2Capacity == targetCapacity or jug1Capacity+jug2Capacity == targetCapacity:
             return True
-        while y != 0:
-            tmp = y
-            y = x%y
-            x = tmp
-        return bool(z%x==0)
+        while jug2Capacity != 0:
+            tmp = jug2Capacity
+            jug2Capacity = jug1Capacity%jug2Capacity
+            jug1Capacity = tmp
+        return bool(targetCapacity % jug1Capacity == 0)
