@@ -42,19 +42,34 @@ class Solution:
                         return False
         return True
 
+
     # In case of K is really big
     def isPossibleDivide_best(self, nums: List[int], k: int) -> bool:
         c = collections.Counter(nums)
-        start = []
-        last_checked, opened = -1, 0
+        # Need to close queue means that: When the queue size exceeds K,
+        # the value poll from the queue tells us how many consecutive sequences we need to close. Example:
+        # if A is [2,2,2,3,3,3,3, (no 3 afterward) ...] and k = 2
+        # freqMap: {
+        #      2: 3
+        #      3: 4 -> Pay attention here
+        #      ...
+        # }
+        # Inside the freqMap, at entry with value 3,
+        # we will add 1 into the queue because 3 has 1 extra frequency count,
+        # and sometimes later on in the future, we will need to close that one sequence.
+        need_to_close = []
+        # to_take_in means that the frequency count that it is ready to take in for the next consecutive number.
+        # If the size of needToClose queue exceeds K,
+        # to_take_in may decrease because it needs to save some of its frequency count for the closing sequence.
+        last_checked, to_take_in = -1, 0
         for i in sorted(c):
-            if opened > c[i] or opened > 0 and i > last_checked + 1:
+            if to_take_in > c[i] or to_take_in > 0 and i > last_checked + 1:
                 return False
-            start.append(c[i] - opened)
-            last_checked, opened = i, c[i]
-            if len(start) == k:
-                opened -= start.pop(0)
-        return opened == 0
+            need_to_close.append(c[i] - to_take_in)
+            last_checked, to_take_in = i, c[i]
+            if len(need_to_close) == k:
+                to_take_in -= need_to_close.pop(0)
+        return to_take_in == 0
 
 
     # My own solution, it's too slow, TLE :(
