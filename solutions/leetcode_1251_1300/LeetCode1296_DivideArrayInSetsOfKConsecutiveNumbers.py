@@ -30,7 +30,20 @@ public boolean isPossibleDivide(int[] nums, int k) {
 
 
 class Solution:
+    # Time O(MlogM + MK), M is the number of different cards
+    # Easier to understand
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
+        c = collections.Counter(nums)
+        for i in sorted(c):
+            if c[i] > 0:
+                for j in range(k-1, -1, -1):
+                    c[i+j] -= c[i]
+                    if c[i+j] < 0:
+                        return False
+        return True
+
+    # In case of K is really big
+    def isPossibleDivide_best(self, nums: List[int], k: int) -> bool:
         c = collections.Counter(nums)
         start = []
         last_checked, opened = -1, 0
