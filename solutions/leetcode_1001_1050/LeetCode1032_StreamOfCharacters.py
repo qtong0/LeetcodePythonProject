@@ -23,7 +23,7 @@ class StreamChecker:
                 node = newNode
 
     def query(self, letter: str) -> bool:
-        node = self.root
+        node = self.rootR
         self.queries += letter
         for i in range(len(self.queries)-1, -1, -1):
             c = self.queries[i]

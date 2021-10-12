@@ -1,8 +1,3 @@
-'''
-Created on Mar 13, 2017
-
-@author: MT
-'''
 class NumMatrix_BinaryIndexTree_TLE(object):
     def __init__(self, matrix):
         m, n = len(matrix), len(matrix[0])
@@ -46,6 +41,7 @@ class NumMatrix_BinaryIndexTree_TLE(object):
                 j -= j&(-j)
             i -= i&(-i)
         return sumVal
+
 
 class NumMatrix(object):
     def __init__(self, matrix):
