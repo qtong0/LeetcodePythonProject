@@ -1,16 +1,14 @@
-'''
-Created on Apr 18, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def champagneTower(self, poured, query_row, query_glass):
-        """
-        :type poured: int
-        :type query_row: int
-        :type query_glass: int
-        :rtype: float
-        """
+    def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
+        res = [poured] + [0] * query_row
+        for row in range(1, query_row+1):
+            for i in range(row, -1,- 1):
+                res[i] = max(res[i] - 1, 0) / 2.0 + max(res[i-1] - 1, 0) / 2.0
+        return min(res[query_glass], 1)
+
+
+    # Space
+    def champagneTower_space(self, poured: int, query_row: int, query_glass: int) -> float:
         result = [[0.0]*101 for _ in range(101)]
         result[0][0] = poured
         for i in range(100):
@@ -38,6 +36,7 @@ class Solution(object):
             result = self.champagneTower(poured, query_row, query_glass)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
