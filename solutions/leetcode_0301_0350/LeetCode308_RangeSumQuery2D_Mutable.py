@@ -1,4 +1,4 @@
-class NumMatrix_BinaryIndexTree_TLE(object):
+class NumMatrix_BinaryIndexTree(object):
     def __init__(self, matrix):
         m, n = len(matrix), len(matrix[0])
         self.m, self.n = m, n
@@ -14,12 +14,12 @@ class NumMatrix_BinaryIndexTree_TLE(object):
         if not m or not n: return
         delta = val-self.nums[row][col]
         self.nums[row][col] = val
-        i = 0
-        while i < m+1:
-            j = 0
-            while j < n+1:
+        i = row + 1
+        while i <= m:
+            j = col + 1
+            while j <= n:
                 self.tree[i][j] += delta
-                j += j&(-1)
+                j += j&(-j)
             i += i&(-i)
     
     def sumRegion(self, row1, col1, row2, col2):
@@ -65,3 +65,10 @@ class NumMatrix(object):
         for j in range(col1, col2+1):
             result += self.colSums[row2+1][j] - self.colSums[row1][j]
         return result
+
+
+if __name__ == '__main__':
+    m = NumMatrix_BinaryIndexTree([[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]])
+    print(m.sumRegion(2,1,4,3))
+    print(m.update(3,2,2))
+    print(m.sumRegion(2,1,4,3))
