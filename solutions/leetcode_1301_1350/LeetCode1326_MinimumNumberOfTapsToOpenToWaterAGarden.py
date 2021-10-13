@@ -24,6 +24,7 @@ class Solution:
             end = max_reach
         return res
 
+
     # prev_end & end solution
     def minTaps_another(self, n: int, ranges: List[int]) -> int:
         arr = []
