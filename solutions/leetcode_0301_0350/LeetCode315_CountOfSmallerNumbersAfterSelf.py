@@ -13,20 +13,22 @@ class TreeNode(object):
 class Solution(object):
     # merge sort solution
     def countSmaller(self, nums):
-        def sort(indexes):
-            half = len(indexes) // 2
-            if half:
-                left, right = sort(indexes[:half]), sort(indexes[half:])
-                for i in range(len(indexes))[::-1]:
-                    if not right or left and nums[left[-1]] > nums[right[-1]]:
-                        smaller[left[-1]] += len(right)
-                        indexes[i] = left.pop()
-                    else:
-                        indexes[i] = right.pop()
-            return indexes
         smaller = [0] * len(nums)
-        sort(list(range(len(nums))))
+        indexes = list(range(len(nums)))
+        self.mergeSort(indexes, nums, smaller)
         return smaller
+
+    def mergeSort(self, indexes, nums, smaller):
+        half = len(indexes) // 2
+        if half:
+            left, right = self.mergeSort(indexes[:half], nums, smaller), self.mergeSort(indexes[half:], nums, smaller)
+            for i in range(len(indexes))[::-1]:
+                if not right or (left and nums[left[-1]] > nums[right[-1]]):
+                    smaller[left[-1]] += len(right)
+                    indexes[i] = left.pop()
+                else:
+                    indexes[i] = right.pop()
+        return indexes
 
 
     # Tree solution, TLE
