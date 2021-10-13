@@ -4,6 +4,10 @@ import bisect
 """
 ### !!! JAVA TreeMap Solution !!! ###
 
+/**
+ * TC: sort O(N*Log(N)) find O(N*Log(N))
+ * SC: O(N)
+ */
 public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
     int n = startTime.length;
     int[][] jobs = new int[n][3];
