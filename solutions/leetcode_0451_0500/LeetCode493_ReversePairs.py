@@ -1,9 +1,3 @@
-'''
-Created on May 9, 2017
-
-@author: MT
-'''
-
 class Node(object):
     def __init__(self, val):
         self.val = val
@@ -12,36 +6,34 @@ class Node(object):
         self.left = None
         self.right = None
 
+
 class Solution(object):
     def reversePairs_mergeSort(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        self.cnt = 0
-        def msort(lst):
-            n = len(lst)
-            if n <= 1:
-                return lst
+        self.res = 0
+        self.mergeSort(nums)
+        return self.res
+
+    def merger(self, left, right):
+        l, r = 0, 0
+        while l < len(left) and r < len(right):
+            if left[l] <= 2*right[r]:
+                l += 1
             else:
-                return merger(msort(lst[:int(n/2)]), msort(lst[int(n/2):]))
-        def merger(left, right):
-            l, r = 0, 0
-            while l < len(left) and r < len(right):
-                if left[l] <= 2*right[r]:
-                    l += 1
-                else:
-                    self.cnt += len(left)-l
-                    r += 1
-            return sorted(left+right)
-        msort(nums)
-        return self.cnt
-    
+                self.res += len(left)-l
+                r += 1
+        return sorted(left + right)
+
+    def mergeSort(self, l):
+        n = len(l)
+        if n <= 1:
+            return l
+        else:
+            return self.merger(self.mergeSort(l[:n//2]), self.mergeSort(l[n//2:]))
+
+
+
+
     def reversePairs(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
         root = None
         cnt = [0]
         for i in range(len(nums)-1, -1, -1):
@@ -83,6 +75,7 @@ class Solution(object):
             result = self.reversePairs_mergeSort(nums)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
