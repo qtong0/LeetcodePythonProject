@@ -3,9 +3,27 @@ from typing import List
 
 class Solution:
     # Sort
-    # checking prev_end and end
+    # Checking max_reach, like Jump Game II
     #
     def videoStitching(self, clips: List[List[int]], T: int) -> int:
+        clips.sort(key=lambda a: [a[0], -a[1]])
+        res, end, max_reach = 0, 0, 0
+        i = 0
+        while end < T:
+            res += 1
+            while i < len(clips) and clips[i][0] <= end:
+                max_reach = max(max_reach, clips[i][1])
+                i += 1
+            if end == max_reach:
+                return -1
+            end = max_reach
+        return res
+
+
+    # Sort
+    # checking prev_end and end
+    #
+    def videoStitching_another(self, clips: List[List[int]], T: int) -> int:
         clips.sort(key=lambda a: [a[0], -a[1]])
         res = 0
         prev_end, end = -1, 0
@@ -19,6 +37,7 @@ class Solution:
                 prev_end = end
             end = max(end, c[1])
         return res if end >= T else -1
+
 
     def test(self):
         test_cases = [
