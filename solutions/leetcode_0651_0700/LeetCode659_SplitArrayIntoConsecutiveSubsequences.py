@@ -1,14 +1,8 @@
-'''
-Created on Oct 7, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def isPossible(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
+    def isPossible(self, nums: List[int]) -> bool:
         freqMap, appendFreqMap = {}, {}
         for num in nums:
             freqMap[num] = freqMap.get(num, 0)+1
@@ -39,6 +33,7 @@ class Solution(object):
             result = self.isPossible(nums)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
