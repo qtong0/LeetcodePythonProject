@@ -1,20 +1,22 @@
-'''
-Created on May 22, 2018
-
-@author: tongq
-'''
 # Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, x, nextNode):
         self.val = x
         self.next = nextNode
 
+
 class Solution(object):
-    def getIntersectionNode(self, headA, headB):
-        """
-        :type head1, head1: ListNode
-        :rtype: ListNode
-        """
+    # two runners
+    # O(N+M)
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        n1, n2 = headA, headB
+        while n1 != n2:
+            n1 = n1.next if n1 else headB
+            n2 = n2.next if n2 else headA
+        return n1
+
+
+    def getIntersectionNode_own(self, headA, headB):
         lenA = self.getLength(headA)
         lenB = self.getLength(headB)
         if not lenA or not lenB: return None
