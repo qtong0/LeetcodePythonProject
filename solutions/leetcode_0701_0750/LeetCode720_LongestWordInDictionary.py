@@ -1,14 +1,21 @@
-'''
-Created on Jan 31, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def longestWord(self, words):
-        """
-        :type words: List[str]
-        :rtype: str
-        """
+    def longestWord(self, words: List[str]) -> str:
+        res = ''
+        words.sort()
+        # visited
+        hashset = set()
+        for w in words:
+            if len(w) == 1 or w[:len(w)-1] in hashset:
+                if len(w) > len(res):
+                    res = w
+                hashset.add(w)
+        return res
+
+
+    def longestWord_another(self, words: List[str]) -> str:
         if not words: return ''
         words.sort(key=len)
         n = len(words[-1])
@@ -20,7 +27,8 @@ class Solution(object):
             if dp[i]:
                 return sorted(list(dp[i])).pop(0)
         return ''
-    
+
+
     def test(self):
         testCases = [
             ["w","wo","wor","worl", "world"],
@@ -31,6 +39,7 @@ class Solution(object):
             result = self.longestWord(words)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
