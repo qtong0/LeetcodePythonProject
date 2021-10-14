@@ -1,38 +1,29 @@
-'''
-Created on Mar 28, 2018
-
-@author: tongq
-'''
 class Solution(object):
     def crackSafe(self, n: int, k: int) -> str:
         seen = set()
-        ans = []
-        def dfs(node):
-            for x in map(str, range(k)):
-                nei = node + x
-                if nei not in seen:
-                    seen.add(nei)
-                    dfs(nei[1:])
-                    ans.append(x)
+        res = []
+        self.dfs("0" * (n-1), k, seen, res)
+        return "".join(res) + "0" * (n-1)
 
-        dfs("0" * (n-1))
-        return "".join(ans) + "0" * (n-1)
+    def dfs(self, node, k, seen, res):
+        for i in range(k):
+            s = str(i)
+            nei = node + s
+            if nei not in seen:
+                seen.add(nei)
+                self.dfs(nei[1:], k, seen, res)
+                res.append(s)
 
 
 
     def crackSafe_DFS(self, n, k):
-        """
-        :type n: int
-        :type k: int
-        :rtype: str
-        """
         total = k**n
         arr = ['0']*n
         visited = set(['0'*n])
-        self.dfs(arr, total, visited, n, k)
+        self.dfs2(arr, total, visited, n, k)
         return ''.join(arr)
     
-    def dfs(self, arr, goal, visited, n, k):
+    def dfs2(self, arr, goal, visited, n, k):
         if len(visited) == goal: return True
         prevArr = arr[len(arr)-n+1:]
         for i in range(k):
@@ -41,7 +32,7 @@ class Solution(object):
             if nextStr not in visited:
                 visited.add(nextStr)
                 arr.append(str(i))
-                if self.dfs(arr, goal, visited, n, k):
+                if self.dfs2(arr, goal, visited, n, k):
                     return True
                 visited.remove(nextStr)
                 arr.pop()
@@ -58,6 +49,7 @@ class Solution(object):
             result = self.crackSafe(n, k)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
