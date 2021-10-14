@@ -15,15 +15,15 @@ class Solution(object):
                 res.append(s)
 
 
-
-    def crackSafe_DFS(self, n, k):
+class Solution_another(object):
+    def crackSafe(self, n, k):
         total = k**n
         arr = ['0']*n
         visited = set(['0'*n])
-        self.dfs2(arr, total, visited, n, k)
+        self.dfs(arr, total, visited, n, k)
         return ''.join(arr)
     
-    def dfs2(self, arr, goal, visited, n, k):
+    def dfs(self, arr, goal, visited, n, k):
         if len(visited) == goal: return True
         prevArr = arr[len(arr)-n+1:]
         for i in range(k):
@@ -32,7 +32,7 @@ class Solution(object):
             if nextStr not in visited:
                 visited.add(nextStr)
                 arr.append(str(i))
-                if self.dfs2(arr, goal, visited, n, k):
+                if self.dfs(arr, goal, visited, n, k):
                     return True
                 visited.remove(nextStr)
                 arr.pop()
