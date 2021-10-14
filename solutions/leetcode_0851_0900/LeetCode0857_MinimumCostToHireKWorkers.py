@@ -1,10 +1,9 @@
 from typing import List
+import heapq
 
 
 class Solution(object):
     def mincostToHireWorkers(self, quality: List[int], wage: List[int], K: int) -> float:
-        import heapq
-        k = K
         workers = sorted([float(w)/q, q] for w, q in zip(wage, quality))
         res = float('inf')
         qsum = 0
@@ -12,9 +11,9 @@ class Solution(object):
         for r, q, in workers:
             heapq.heappush(heap, -q)
             qsum += q
-            if len(heap) > k:
+            if len(heap) > K:
                 qsum += heapq.heappop(heap)
-            if len(heap) == k:
+            if len(heap) == K:
                 res = min(res, qsum*r)
         return res
     
