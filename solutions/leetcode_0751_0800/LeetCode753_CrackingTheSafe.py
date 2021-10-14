@@ -24,7 +24,8 @@ class Solution_another(object):
         return ''.join(arr)
     
     def dfs(self, arr, goal, visited, n, k):
-        if len(visited) == goal: return True
+        if len(visited) == goal:
+            return True
         prevArr = arr[len(arr)-n+1:]
         for i in range(k):
             nextArr = prevArr+[str(i)]
