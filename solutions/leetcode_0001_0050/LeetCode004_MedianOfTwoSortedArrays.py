@@ -1,43 +1,35 @@
-'''
-Created on Nov 8, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def findMedianSortedArrays(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: float
-        """
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         if len(nums1) > len(nums2):
-            return self.findMedianSortedArrays(nums2, nums1)
-        x, y = len(nums1), len(nums2)
-        low, high = 0, x
+            nums1, nums2 = nums2, nums1
+        n1, n2 = len(nums1), len(nums2)
+        low, high = 0, n1
         while low <= high:
-            partitionX = (low+high)//2
-            partitionY = (x+y+1)//2 - partitionX
+            partition1 = (low+high)//2
+            partition2 = (n1+n2+1)//2 - partition1
 
             # if partitioniX is 0 it means nothing is there on left side. Use -INF for maxLeftX
             # if partitionX is length of input then there is nothing on right side. Use +INF for minRightX
-            maxLeftX = float('-inf') if partitionX == 0 else nums1[partitionX-1]
-            minRightX = float('inf') if partitionX == x else nums1[partitionX]
+            maxLeft1 = float('-inf') if partition1 == 0 else nums1[partition1-1]
+            minRight1 = float('inf') if partition1 == n1 else nums1[partition1]
 
-            maxLeftY = float('-inf') if partitionY == 0 else nums2[partitionY-1]
-            minRightY = float('inf') if partitionY == y else nums2[partitionY]
+            maxLeft2 = float('-inf') if partition2 == 0 else nums2[partition2-1]
+            minRight2 = float('inf') if partition2 == n2 else nums2[partition2]
 
-            if maxLeftX <= minRightY and maxLeftY <= minRightX:
+            if maxLeft1 <= minRight2 and maxLeft2 <= minRight1:
                 # bingo!
-                if (x+y) % 2 == 0:
-                    return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2.0
+                if (n1+n2) % 2 == 0:
+                    return (max(maxLeft1, maxLeft2) + min(minRight1, minRight2)) / 2.0
                 else:
-                    return max(maxLeftX, maxLeftY)
-            elif maxLeftX > minRightY:
+                    return max(maxLeft1, maxLeft2)
+            elif maxLeft1 > minRight2:
                 # Far too right on nums1, Need to go left!
-                high = partitionX - 1
+                high = partition1 - 1
             else:
-                low = partitionX + 1
+                low = partition1 + 1
 
     def test(self):
         testCases = [
@@ -57,13 +49,9 @@ class Solution(object):
             print('result: %s' % result)
             print('-='*30+'-')
 
+
 class Solution_lc_orig(object):
     def findMedianSortedArrays(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: float
-        """
         m, n = len(nums1), len(nums2)
         if m > n:
             nums1, nums2, m, n = nums2, nums1, n, m
