@@ -3,6 +3,9 @@ from typing import List
 
 
 class Solution:
+    # TC: O(q(n + e)) w/ sorting O(N(Log(N))
+    # Memory O(n + e)
+    # q - queries, n - nodes, e - edges
     def countPairs(self, n: int, edges: List[List[int]], queries: List[int]) -> List[int]:
         count = [0] * (n+1)
         res = [0] * (len(queries))
