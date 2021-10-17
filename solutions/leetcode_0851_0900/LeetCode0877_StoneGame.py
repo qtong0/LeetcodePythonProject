@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution(object):
     # dp[i][j] means the biggest number of stones you can get more than opponent picking piles in piles[i] ~ piles[j].
     # You can first pick piles[i] or piles[j].
