@@ -1,4 +1,5 @@
 class Solution:
+    # Two pointers from 0, n-1 to middle and then check if middle part is palindrome
     def checkPalindromeFormation(self, a: str, b: str) -> bool:
         if self.isPalidrome(a) or self.isPalidrome(b):
             return True
