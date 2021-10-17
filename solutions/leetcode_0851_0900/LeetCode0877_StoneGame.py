@@ -1,14 +1,13 @@
-'''
-Created on Oct 8, 2019
-
-@author: tongq
-'''
 class Solution(object):
-    def stoneGame(self, piles):
-        """
-        :type piles: List[int]
-        :rtype: bool
-        """
+    # dp[i][j] means the biggest number of stones you can get more than opponent picking piles in piles[i] ~ piles[j].
+    # You can first pick piles[i] or piles[j].
+    #
+    # If you pick piles[i], your result will be piles[i] - dp[i + 1][j]
+    # If you pick piles[j], your result will be piles[j] - dp[i][j - 1]
+    # So we get:
+    # dp[i][j] = max(piles[i] - dp[i + 1][j], piles[j] - dp[i][j - 1])
+    #
+    def stoneGame(self, piles: List[int]) -> bool:
         n = len(piles)
         dp = [[0]*n for _ in range(n)]
         for i in range(n):
@@ -27,6 +26,7 @@ class Solution(object):
             res = self.stoneGame(piles)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
