@@ -1,5 +1,6 @@
 class Solution:
     # Stack solution
+    # The best solution is KMP - but I don't think this might be good enough
     def removeOccurrences(self, s: str, part: str) -> str:
         res = list(s)
         j = 0
