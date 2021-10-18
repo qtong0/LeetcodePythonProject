@@ -1,35 +1,27 @@
-'''
-Created on Mar 30, 2018
+import heapq
 
-@author: tongq
-'''
+
 # Definition for an interval.
 class Interval(object):
     def __init__(self, s=0, e=0):
         self.start = s
         self.end = e
 
+
 class Solution(object):
-    def employeeFreeTime(self, schedule):
-        """
-        :type schedule: List[List[Interval]]
-        :rtype: List[Interval]
-        """
-        import heapq
+    def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
         heap = []
-        for arr in schedule:
-            for inter in arr:
-                heapq.heappush(heap, [inter.start, inter.end])
-        temp = heapq.heappop(heap)
+        for i, arr in enumerate(schedule):
+            heapq.heappush(heap, [arr[0].start, i, 0])
         res = []
+        prev = heap[0][0]
         while heap:
-            if temp[1] < heap[0][0]:
-                res.append(Interval(temp[1], heap[0][0]))
-                temp = heapq.heappop(heap)
-            else:
-                if temp[1] < heap[0][1]:
-                    temp = heap[0]
-                heapq.heappop(heap) 
+            curr, i, j = heapq.heappop(heap)
+            if curr > prev:
+                res.append(Interval(prev, curr))
+            prev = max(prev, schedule[i][j].end)
+            if j + 1 < len(schedule[i]):
+                heapq.heappush(heap, [schedule[i][j+1].start, i, j+1])
         return res
     
     def test(self):
@@ -53,6 +45,7 @@ class Solution(object):
             res = [[inter.start, inter.end] for inter in result]
             print('result: %s' % res)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
