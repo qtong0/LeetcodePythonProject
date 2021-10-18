@@ -3,12 +3,13 @@ class Solution:
     # The best solution is KMP - but I don't think this might be good enough
     def removeOccurrences(self, s: str, part: str) -> str:
         res = list(s)
+        part = list(part)
         j = 0
         n, m = len(s), len(part)
         for i in range(n):
             res[j] = s[i]
             j += 1
-            if j >= m and ''.join(res[j-m:j]) == part:
+            if j >= m and res[j-m:j] == part:
                 j -= m
         return ''.join(res[:j])
 
