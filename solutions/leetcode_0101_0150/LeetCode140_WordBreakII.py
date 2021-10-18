@@ -1,5 +1,8 @@
+from typing import List
+
+
 class Solution(object):
-    def wordBreak(self, s: str, wordDict):
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         wordDict = set(wordDict)
         if not s: return []
         n = len(s)
@@ -17,31 +20,28 @@ class Solution(object):
                 dp[i] = curList
         return dp[-1]
 
+    def wordBreak_DFS_MEMO(self, s: str, wordDict):
+        return self.helper(s, wordDict, {})
 
-    # My own solution, difficult to figure out the time complexity
-    def wordBreak_own(self, s: str, wordDict):
+    def helper(self, s, wordDict, memo):
+        if s in memo: return memo[s]
         if not s: return []
-        n = len(s)
-        dp = [[] for _ in range(n+1)]
-        dp[0] = True
-        for i in range(n):
-            for w in wordDict:
-                if dp[i] and i+len(w) < n+1 and s[i:i+len(w)] == w:
-                    dp[i+len(w)].append(w)
+
         res = []
-        self.helper(n, res, [], dp)
+        for word in wordDict:
+            if not s.startswith(word):
+                continue
+            if len(word) == len(s):
+                res.append(word)
+            else:
+                resultOfTheRest = self.helper(s[len(word):], wordDict, memo)
+                for item in resultOfTheRest:
+                    item = word + ' ' + item
+                    res.append(item)
+        memo[s] = res
         return res
 
-    def helper(self, i, res, curr, dp):
-        if i <= 0:
-            if i == 0:
-                res.append(' '.join(curr))
-            return
-        for w in dp[i]:
-            curr.insert(0, w)
-            self.helper(i-len(w), res, curr, dp)
-            curr.pop(0)
-    
+
     def test(self):
         testCases = [
             ('catsanddog', ["cat", "cats", "and", "sand", "dog"]),
