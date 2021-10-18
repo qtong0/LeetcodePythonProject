@@ -1,8 +1,6 @@
-'''
-Created on Oct 29, 2019
+from typing import List
 
-@author: tongq
-'''
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -10,13 +8,28 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
 class Solution(object):
-    def constructFromPrePost(self, pre, post):
-        """
-        :type pre: List[int]
-        :type post: List[int]
-        :rtype: TreeNode
-        """
+    def __init__(self):
+        self.preIndex = 0
+        self.postIndex = 0
+
+    # One Pass
+    def constructFromPrePost(self, pre: List[int], post: List[int]) -> TreeNode:
+        root = TreeNode(pre[self.preIndex])
+        self.preIndex += 1
+
+        if root.val != post[self.postIndex]:
+            root.left = self.constructFromPrePost(pre, post)
+        if root.val != post[self.postIndex]:
+            root.right = self.constructFromPrePost(pre, post)
+
+        self.postIndex += 1
+        return root
+
+
+
+    def constructFromPrePost_own(self, pre: List[int], post: List[int]) -> TreeNode:
         return self.helper(pre, 0, len(pre)-1, post, 0, len(post)-1)
     
     def helper(self, pre, preStart, preEnd, post, postStart, postEnd):
@@ -57,6 +70,6 @@ class Solution(object):
             node = self.constructFromPrePost(pre, post)
             print(node)
 
+
 if __name__ == '__main__':
     Solution().test()
-
