@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution(object):
+    # TC: O(N^3)
+    # SC: O(N*3)
     def cherryPickup(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
         memo = [[[float('-inf')]*n for _ in range(n)] for _ in range(m)]
