@@ -43,41 +43,30 @@ class Solution:
 # Another solution is using TreeMap:
 
 """
-public class LeetCode0975_OddEvenJump {
-    public int oddEvenJumps(int[] A) {
-        int n = A.length;
-        if (n <= 1) return n;
-        boolean[] odd = new boolean[n];
-        boolean[] even = new boolean[n];
-        odd[n-1] = even[n-1] = true;
-
-        TreeMap<Integer, Integer> vals = new TreeMap();
-        vals.put(A[n-1], n-1);
-        for (int i = n-2; i >= 0; i--) {
-            int v = A[i];
-            if (vals.containsKey(v)) {
-                odd[i] = even[vals.get(v)];
-                even[i] = odd[vals.get(v)];
-            } else {
-                Integer lower = vals.lowerKey(v);
-                Integer higher = vals.higherKey(v);
-                if (lower != null) {
-                    even[i] = odd[vals.get(lower)];
-                }
-                if (higher != null) {
-                    odd[i] = even[vals.get(higher)];
-                }
+    public int oddEvenJumps(int[] arr) {
+        int n = arr.length;
+        int res = 1;
+        boolean higher[] = new boolean[n];
+        boolean lower[] = new boolean[n];
+        higher[n-1] = lower[n-1] = true;
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+        treeMap.put(arr[n-1], n-1);
+        for(int i = n-2; i >= 0; i--) {
+            Map.Entry<Integer, Integer> hi = treeMap.ceilingEntry(arr[i]);
+            Map.Entry<Integer, Integer> lo = treeMap.floorEntry(arr[i]);
+            if (hi != null) {
+                higher[i] = lower[(int)hi.getValue()];
             }
-            vals.put(v, i);
-        }
-        int res = 0;
-        for (boolean b: odd) {
-            if (b) res++;
+            if (lo != null) {
+                lower[i] = higher[(int)lo.getValue()];
+            }
+            if (higher[i]) {
+                res++;
+            }
+            treeMap.put(arr[i], i);
         }
         return res;
     }
-}
-
 """
 
 
