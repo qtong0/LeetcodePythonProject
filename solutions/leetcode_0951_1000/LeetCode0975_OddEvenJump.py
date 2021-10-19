@@ -2,6 +2,7 @@ from typing import List
 
 
 class Solution:
+    # O(N*log(N))
     def oddEvenJumps(self, arr: List[int]) -> int:
         n = len(arr)
         next_higher, next_lower = [0]*n, [0]*n
