@@ -1,14 +1,36 @@
-'''
-Created on Mar 20, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def cherryPickup(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
+    def cherryPickup(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        memo = [[[float('-inf')]*n for _ in range(n)] for _ in range(m)]
+        return max(0, self.dfs(m-1, n-1, n-1, grid, memo))
+
+    def dfs(self, x1, y1, y2, grid, memo):
+        x2 = x1 + y1 - y2
+        if x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0:
+            return -1
+        if grid[x1][y1] < 0 or grid[x2][y2] < 0:
+            return -1
+        if x1 == 0 and y1 == 0:
+            return grid[x1][y1]
+        if memo[x1][y1][y2] != float('-inf'):
+            return memo[x1][y1][y2]
+        memo[x1][y1][y2] = max(
+            self.dfs(x1, y1-1, y2-1, grid, memo),
+            self.dfs(x1-1, y1, y2, grid, memo),
+            self.dfs(x1-1, y1, y2-1, grid, memo),
+            self.dfs(x1, y1-1, y2, grid, memo),
+        )
+        if memo[x1][y1][y2] >= 0:
+            memo[x1][y1][y2] += grid[x1][y1]
+            if y1 != y2:
+                memo[x1][y1][y2] += grid[x2][y2]
+        return memo[x1][y1][y2]
+
+
+    def cherryPickup_DP_only(self, grid: List[List[int]]) -> int:
         N = len(grid)
         M = (N<<1)-1
         dp = [[0]*N for _ in range(N)]
@@ -40,9 +62,12 @@ class Solution(object):
             ],
         ]
         for grid in testCases:
-            result = self.cherryPickup(grid)
-            print('result: %s' % result)
+            res1 = self.cherryPickup(grid)
+            res2 = self.cherryPickup_DP_only(grid)
+            print('res1: %s' % res1)
+            print('res2: %s' % res2)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
