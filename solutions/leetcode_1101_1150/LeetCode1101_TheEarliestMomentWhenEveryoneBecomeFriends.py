@@ -2,6 +2,7 @@ from typing import List
 
 
 class Solution:
+    # Union Find
     def earliestAcq(self, logs: List[List[int]], n: int) -> int:
         logs.sort()
         roots = list(range(n))
