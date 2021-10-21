@@ -1,15 +1,8 @@
-'''
-Created on Feb 16, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def rob(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+    def rob(self, nums: List[int]) -> int:
         if not nums: return 0
         include, exclude = 0, 0
         for num in nums:
