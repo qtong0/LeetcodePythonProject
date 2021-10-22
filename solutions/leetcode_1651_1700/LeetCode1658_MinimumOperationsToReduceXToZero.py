@@ -4,20 +4,19 @@ from typing import List
 class Solution:
     # O(N)
     def minOperations(self, nums: List[int], x: int) -> int:
-        curr_sum = sum(nums)
-        left = 0
-        res = float('inf')
-        n = len(nums)
+        target = sum(nums) - x
+        if target == 0:
+            return len(nums)
+        sum_val = 0
+        hashmap = {0: -1}
+        res = float('-inf')
 
-        for right in range(n):
-            curr_sum -= nums[right]
-            while curr_sum < x and left <= right:
-                curr_sum += nums[left]
-                left += 1
-            if curr_sum == x:
-                res = min(res, (n-1-right)+left)
-
-        return res if res != float('inf') else -1
+        for i, num in enumerate(nums):
+            sum_val += num
+            if sum_val - target in hashmap:
+                res = max(res, i - hashmap[sum_val - target])
+            hashmap[sum_val] = i
+        return len(nums) - res if res != float('-inf') else -1
 
     def test(self):
         test_cases = [
