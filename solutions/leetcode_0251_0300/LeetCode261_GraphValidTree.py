@@ -1,12 +1,10 @@
-'''
-Created on Mar 2, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def validTree(self, n, edges):
-        roots = [-1]*n
+    # O(N*α(N)) a(N) is the Inverse Ackermann Function
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        roots = list(range(n))
         for e in edges:
             root0 = self.findRoot(roots, e[0])
             root1 = self.findRoot(roots, e[1])
@@ -17,16 +15,14 @@ class Solution(object):
         return len(edges) == n-1
     
     def findRoot(self, roots, ind):
-        while roots[ind] != -1:
+        while roots[ind] != ind:
             ind = roots[ind]
         return ind
-    
+
+
+
+
     def validTreeBFS(self, n, edges):
-        """
-        :type n: int
-        :type edges: List[List[int]]
-        :rtype: bool
-        """
         hashmap = {}
         for i in range(n):
             hashmap[i] = []
@@ -49,7 +45,9 @@ class Solution(object):
             if not b:
                 return False
         return True
-    
+
+
+
     def validTreeDFS(self, n, edges):
         hashmap = {}
         for i in range(n):
@@ -71,7 +69,10 @@ class Solution(object):
             if i != parent and not self.helper(i, curr, hashmap, visited):
                 return False
         return True
-    
+
+
+
+
     def test(self):
         testCases = [
             (
@@ -93,6 +94,7 @@ class Solution(object):
             result = self.validTree(n, edges)
             print('result: %s' % (result))
             print('-='*20+'-')
-        
+
+
 if __name__ == '__main__':
     Solution().test()
