@@ -1,15 +1,8 @@
-'''
-Created on Jan 25, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def largestRectangleArea(self, heights):
-        """
-        :type heights: List[int]
-        :rtype: int
-        """
+    def largestRectangleArea(self, heights: List[int]) -> int:
         stack = []
         if not heights:
             return 0
@@ -28,10 +21,14 @@ class Solution(object):
             w = i if not stack else (i-stack[-1]-1)
             area = max(area, w*h)
         return area
-    
+
+
     def test(self):
         testCases = [
-#             [2,1,5,6,2,3],
+            [0, 2, 0],
+            [9, 0],
+            [2,1,5,6,2,3],
+            [2, 4],
             [10, 11, 12, 15],
         ]
         for heights in testCases:
@@ -39,6 +36,7 @@ class Solution(object):
             result = self.largestRectangleArea(heights)
             print('result: %s' % (result))
             print('-='*15+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
