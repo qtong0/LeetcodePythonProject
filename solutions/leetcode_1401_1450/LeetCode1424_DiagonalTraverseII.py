@@ -16,7 +16,7 @@ class Solution:
         return res
 
 
-    def findDiagonalOrder_own_slow(self, nums: List[List[int]]) -> List[int]:
+    def findDiagonalOrder_own_TLE(self, nums: List[List[int]]) -> List[int]:
         res = []
         l = 0
         while True:
