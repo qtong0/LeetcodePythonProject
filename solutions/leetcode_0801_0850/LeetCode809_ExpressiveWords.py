@@ -1,44 +1,33 @@
-'''
-Created on Apr 25, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def expressiveWords(self, S, words):
-        """
-        :type S: str
-        :type words: List[str]
-        :rtype: int
-        """
-        s = S
+    def expressiveWords(self, S: str, words: List[str]) -> int:
         res = 0
-        for s0 in words:
-            if self.isstretchy(s0, s):
+        for w in words:
+            if self.isStretchy(S, w):
                 res += 1
         return res
     
-    def isstretchy(self, s0, s):
-        m, n = len(s0), len(s)
-        if m > n: return False
-        if m == n and s0 != s: return False
+    def isStretchy(self, s0, s1):
+        m, n = len(s0), len(s1)
         i, j = 0, 0
-        flag = True
         while i < m and j < n:
-            if s0[i] == s[j]:
-                i0, j0 = i, j
-                while i0 < m and s0[i0] == s0[i]:
-                    i0 += 1
-                while j0 < n and s[j0] == s[j]:
-                    j0 += 1
-                if j0-j < 3 and s0[i:i0] != s[j:j0]:
-                    flag = False
-                    break
-                i, j = i0, j0
-            else:
-                break
-        if i == m and j == n and flag:
-            return True
-        return False
+            if s0[i] != s1[j]:
+                return False
+            s0BlockSize = 1
+            i += 1
+            while i < m and s0[i-1] == s0[i]:
+                s0BlockSize += 1
+                i += 1
+            s1BlockSize = 1
+            j += 1
+            while j < n and s1[j-1] == s1[j]:
+                s1BlockSize += 1
+                j += 1
+            if s0BlockSize < s1BlockSize or (s1BlockSize < s0BlockSize < 3):
+                return False
+        return i == len(s0) and j == len(s1)
     
     def test(self):
         testCases = [
@@ -53,7 +42,6 @@ class Solution(object):
             [
                 "dddiiiinnssssssoooo",
                 ["dinnssoo","ddinso","ddiinnso","ddiinnssoo","ddiinso","dinsoo","ddiinsso","dinssoo","dinso"],
-#                 ["dinnssoo"],
             ],
         ]
         for s, words in testCases:
@@ -62,6 +50,7 @@ class Solution(object):
             result = self.expressiveWords(s, words)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
