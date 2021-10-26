@@ -1,4 +1,8 @@
 class Solution:
+    # dp[a, b] means minimum distance between a and b
+    # TC: O(N)
+    # SC: O(1)
+    #
     def minimumDistance(self, word: str) -> int:
         dp, dp2 = {(0, 0): 0}, {}
         for c in (ord(c)+1 for c in word):
