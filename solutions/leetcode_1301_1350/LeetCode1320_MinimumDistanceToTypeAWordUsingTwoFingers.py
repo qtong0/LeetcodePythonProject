@@ -1,11 +1,11 @@
 class Solution:
     def minimumDistance(self, word: str) -> int:
-        dp, prev_dp = {(0, 0): 0}, {}
+        dp, dp2 = {(0, 0): 0}, {}
         for c in (ord(c)+1 for c in word):
             for a, b in dp:
-                prev_dp[c, b] = min(prev_dp.get((c, b), 3000), dp[a, b] + self.d(a, c))
-                prev_dp[a, c] = min(prev_dp.get((a, c), 3000), dp[a, b] + self.d(b, c))
-            dp, prev_dp = prev_dp, {}
+                dp2[c, b] = min(dp2.get((c, b), 3000), dp[a, b] + self.d(a, c))
+                dp2[a, c] = min(dp2.get((a, c), 3000), dp[a, b] + self.d(b, c))
+            dp, dp2 = dp2, {}
         return min(dp.values())
 
     def d(self, a, b):
