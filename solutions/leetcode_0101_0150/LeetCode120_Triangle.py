@@ -1,14 +1,8 @@
-'''
-Created on May 29, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def minimumTotal(self, triangle):
-        """
-        :type triangle: List[List[int]]
-        :rtype: int
-        """
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
         dp = list(triangle[-1])
         n = len(triangle)
         for i in range(n-2, -1, -1):
