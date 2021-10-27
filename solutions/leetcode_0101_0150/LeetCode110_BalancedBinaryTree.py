@@ -1,9 +1,3 @@
-'''
-Created on Feb 1, 2017
-
-@author: MT
-'''
-
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -11,12 +5,26 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
 class Solution(object):
-    def isBalanced(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
+    def isBalanced(self, root: TreeNode) -> bool:
+        return self.helper(root)[0]
+
+    def helper(self, root):
+        if not root:
+            return True, -1
+        leftIsBalance, leftHeight = self.helper(root.left)
+        if not leftIsBalance:
+            return False, 0
+        rightIsBalance, rightHeight = self.helper(root.right)
+        if not rightIsBalance:
+            return False, 0
+        return (abs(leftHeight - rightHeight) < 2), 1 + max(leftHeight, rightHeight)
+
+
+
+
+    def isBalanced_slow(self, root: TreeNode) -> bool:
         if not root:
             return True
         elif not root.left and not root.right:
@@ -31,6 +39,3 @@ class Solution(object):
         leftHeight = self.getHeight(root.left)
         rightHeight = self.getHeight(root.right)
         return max(leftHeight, rightHeight) + 1
-    
-    def test(self):
-        pass
