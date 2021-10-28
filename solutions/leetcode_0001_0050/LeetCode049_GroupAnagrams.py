@@ -1,22 +1,15 @@
-'''
-Created on Jan 21, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def groupAnagrams(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: List[List[str]]
-        """
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         hashmap = {}
         for s in strs:
             arr = [0]*26
             for c in s:
-                arr[ord(c)-ord('a')]+=1
+                arr[ord(c)-ord('a')] += 1
             arr = [str(num) for num in arr]
-            key = ''.join(arr)
+            key = '|'.join(arr)
             if key in hashmap:
                 hashmap[key].append(s)
             else:
@@ -27,8 +20,17 @@ class Solution(object):
         return res
     
     def test(self):
-        pass
+        test_cases = [
+            ["eat","tea","tan","ate","nat","bat"],
+            [''],
+            ['a'],
+            ["bdddddddddd","bbbbbbbbbbc"],
+        ]
+        for strs in test_cases:
+            res =  self.groupAnagrams(strs)
+            print('res: %s' % res)
+            print('-='*30 + '-')
+
 
 if __name__ == '__main__':
     Solution().test()
-    
