@@ -51,10 +51,10 @@ class Solution:
 
     def test(self):
         test_cases = [
-            # [
-            #     ["java","nodejs","reactjs"],
-            #     [["java"],["nodejs"],["nodejs","reactjs"]],
-            # ],
+            [
+                ["java","nodejs","reactjs"],
+                [["java"],["nodejs"],["nodejs","reactjs"]],
+            ],
             [
                 ["algorithms","math","java","reactjs","csharp","aws"],
                 [["algorithms","math","java"],["algorithms","math","reactjs"],["java","csharp","aws"],["reactjs","csharp"],["csharp","math"],["aws","java"]],
