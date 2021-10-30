@@ -7,7 +7,7 @@ class Solution:
         return self.helper(slices, 0, len(slices)-1, len(slices) // 3, 1, memo)
 
     def helper(self, slices, start, end, n, cycle, memo):
-        serializaed = '%s#%s#%s#%s' % (start, end, n ,cycle)
+        serializaed = '%s#%s#%s#%s' % (start, end, n, cycle)
         if serializaed in memo:
             return memo[serializaed]
         if n == 1:
