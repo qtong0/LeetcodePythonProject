@@ -1,5 +1,8 @@
+from typing import List
+
+
 class Solution:
-    def mostSimilar(self, n: int, roads: list[list[int]], names: list[str], targetPath: list[str]) -> list[int]:
+    def mostSimilar(self, n: int, roads: List[List[int]], names: List[str], targetPath: List[str]) -> List[int]:
         graph = [[] for _ in range(n)]
         for i, j in roads:
             graph[i].append(j)
@@ -36,7 +39,7 @@ class Solution:
 
 
     # my own solution, DFS, brute force, TLE :(
-    def mostSimilar_own_bruteforce_TLE(self, n: int, roads: list[list[int]], names: list[str], targetPath: list[str]) -> list[int]:
+    def mostSimilar_own_bruteforce_TLE(self, n: int, roads: List[List[int]], names: List[str], targetPath: List[str]) -> List[int]:
         name_map = {}
         for i, name in enumerate(names):
             name_map[name] = i
