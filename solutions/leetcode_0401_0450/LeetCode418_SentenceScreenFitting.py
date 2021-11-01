@@ -1,21 +1,12 @@
-'''
-Created on Apr 12, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def wordsTyping(self, sentence, rows, cols):
-        """
-        :type sentence: List[str]
-        :type rows: int
-        :type cols: int
-        :rtype: int
-        """
-        length = len(sentence)
-        times = [0]*length
-        nextInd = [0]*length
-        for i in range(length):
+    def wordsTyping(self, sentence: List[str], rows: int, cols: int) -> int:
+        n = len(sentence)
+        times = [0]*n
+        nextInd = [0]*n
+        for i in range(n):
             ind = i
             curLen = 0
             time = 0
@@ -47,6 +38,7 @@ class Solution(object):
             result = self.wordsTyping(sentence, rows, cols)
             print('result: %s' % result)
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
