@@ -1,11 +1,9 @@
 import collections
+from typing import List
+
 
 class Solution(object):
-    def shortestBridge(self, A):
-        """
-        :type A: List[List[int]]
-        :rtype: int
-        """
+    def shortestBridge(self, A: List[List[int]]) -> int:
         m, n = len(A), len(A[0])
 
         def neighbors(r, c):
@@ -42,8 +40,11 @@ class Solution(object):
                     queue.append((nei, d+1))
                     done.add(nei)
 
-    ########## Own TLE Solution :S ##########
 
+
+
+
+    ########## Own TLE Solution :S ##########
     def shortestBridge_own_TLE(self, A):
         """
         :type A: List[List[int]]
@@ -87,6 +88,8 @@ class Solution(object):
                     visited.add((i1, j1))
                     queue.append((i1, j1, d+1))
         return res
+
+
 
     def test(self):
         testCases = [
