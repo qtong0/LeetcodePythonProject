@@ -1,47 +1,41 @@
-import collections
 from typing import List
 
 
 class Solution(object):
     def shortestBridge(self, A: List[List[int]]) -> int:
-        m, n = len(A), len(A[0])
+        queue = []
+        i, j = self.findFirst(A)
+        self.dfs(A, i, j, queue)
 
-        def neighbors(r, c):
-            for nr, nc in (r-1, c), (r, c-1), (r+1, c), (r, c+1):
-                if 0 <= nr < m and 0 <= nc < n:
-                    yield nr, nc
-
-        def get_components():
-            done = set()
-            components = []
-            for r, row in enumerate(A):
-                for c, val in enumerate(row):
-                    if val and (r, c) not in done:
-                        stack = [(r, c)]
-                        seen = {(r, c)}
-                        while stack:
-                            node = stack.pop()
-                            for nei in neighbors(*node):
-                                if A[nei[0]][nei[1]] and nei not in seen:
-                                    stack.append(nei)
-                                    seen.add(nei)
-                        done |= seen
-                        components.append(seen)
-            return components
-
-        source, target = get_components()
-        queue = collections.deque([(node, 0) for node in source])
-        done = set(source)
+        n = len(A)
+        step = 0
         while queue:
-            node, d = queue.popleft()
-            if node in target: return d-1
-            for nei in neighbors(*node):
-                if nei not in done:
-                    queue.append((nei, d+1))
-                    done.add(nei)
+            queue1 = []
+            for i, j in queue:
+                for x, y in (i+1, j), (i, j+1), (i-1, j), (i, j-1):
+                    if 0 <= x < n and 0 <= y < n:
+                        if A[x][y] == 1:
+                            return step
+                        elif not A[x][y]:
+                            A[x][y] = -1
+                            queue1.append((x, y))
+            queue = queue1
+            step += 1
 
+    def findFirst(self, grid):
+        n = len(grid)
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j]:
+                    return i, j
 
-
+    def dfs(self, grid, i, j, queue):
+        n = len(grid)
+        grid[i][j] = -1
+        queue.append((i, j))
+        for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+            if 0 <= x < n and 0 <= y < n and grid[x][y] == 1:
+                self.dfs(grid, x, y, queue)
 
 
     ########## Own TLE Solution :S ##########
