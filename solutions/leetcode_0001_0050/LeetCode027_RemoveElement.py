@@ -1,15 +1,8 @@
-'''
-Created on Nov 2, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def removeElement(self, nums, val):
-        """
-        :type nums: List[int]
-        :type val: int
-        :rtype: int
-        """
+    def removeElement(self, nums: List[int], val: int) -> int:
         j = 0
         for num in nums:
             if num != val:
