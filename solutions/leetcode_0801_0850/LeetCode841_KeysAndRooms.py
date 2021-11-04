@@ -1,21 +1,15 @@
-'''
-Created on Jan 30, 2019
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def canVisitAllRooms(self, rooms):
-        """
-        :type rooms: List[List[int]]
-        :rtype: bool
-        """
-        dfs = [0]
-        seen = set(dfs)
-        while dfs:
-            i = dfs.pop()
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        queue = [0]
+        seen = set(queue)
+        while queue:
+            i = queue.pop()
             for j in rooms[i]:
                 if j not in seen:
-                    dfs.append(j)
+                    queue.append(j)
                     seen.add(j)
                     if len(seen) == len(rooms):
                         return True
@@ -33,6 +27,7 @@ class Solution(object):
             res = self.canVisitAllRooms(rooms)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
