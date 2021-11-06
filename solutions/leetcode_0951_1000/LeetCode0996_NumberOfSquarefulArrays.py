@@ -3,17 +3,23 @@ import math, collections
 
 class Solution:
     def numSquarefulPerms(self, A) -> int:
-        c = collections.Counter(A)
-        cand = {i: {j for j in c if int((i + j)**0.5) ** 2 == i + j} for i in c}
+        counter = {}
+        for num in A:
+            counter[num] = counter.get(num, 0) + 1
+        cand = {i: {j for j in counter if int((i + j)**0.5) ** 2 == i + j} for i in counter}
         self.res = 0
-        def dfs(x, left=len(A) - 1):
-            c[x] -= 1
-            if left == 0: self.res += 1
-            for y in cand[x]:
-                if c[y]: dfs(y, left - 1)
-            c[x] += 1
-        for x in c: dfs(x)
+        for x in counter:
+            self.dfs(counter, cand, x, len(A)-1)
         return self.res
+
+    def dfs(self, counter, cand, x, left):
+        counter[x] -= 1
+        if left == 0:
+            self.res += 1
+        for y in cand[x]:
+            if counter[y]:
+                self.dfs(counter, cand, y, left-1)
+        counter[x] += 1
 
 
     # this solution is TLE only
@@ -37,7 +43,7 @@ class Solution:
     def test(self):
         testCases = [
             [1,17,8],
-            # [2,2,2],
+            [2,2,2],
             [2,2,2,2,2,2,2,2,2,2],
         ]
         for arr in testCases:
