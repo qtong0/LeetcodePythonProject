@@ -1,15 +1,27 @@
-'''
-Created on Mar 26, 2019
+from typing import List
+from sortedcontainers import SortedDict
 
-@author: tongq
-'''
+
 class Solution(object):
-    def isNStraightHand(self, hand, W):
-        """
-        :type hand: List[int]
-        :type W: int
-        :rtype: bool
-        """
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        counter = SortedDict()
+        for num in hand:
+            counter[num] = counter.get(num, 0) + 1
+        queue = []
+        opened, prev = 0, -1
+        for num in counter:
+            if (opened > 0 and num > prev + 1) or (opened > counter[num]):
+                return False
+            queue.append(counter[num] - opened)
+            prev = num
+            opened = counter.get(num)
+            if len(queue) == groupSize:
+                opened -= queue.pop(0)
+        return opened == 0
+
+
+
+    def isNStraightHand_own(self, hand, W):
         w = W
         if len(hand) % w != 0:
             return False
