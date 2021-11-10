@@ -3,24 +3,16 @@ from typing import List
 
 class Solution(object):
     def largestRectangleArea(self, heights: List[int]) -> int:
-        stack = []
-        if not heights:
-            return 0
-        area = heights[0]
-        i = 0
-        while i < len(heights):
-            if not stack or heights[i] >= heights[stack[-1]]:
-                stack.append(i)
-                i+=1
-            else:
+        heights.append(0)
+        stack = [-1]
+        res = 0
+        for i in range(len(heights)):
+            while heights[i] < heights[stack[-1]]:
                 h = heights[stack.pop()]
-                w = i if not stack else (i-stack[-1]-1)
-                area = max(w*h, area)
-        while stack:
-            h = heights[stack.pop()]
-            w = i if not stack else (i-stack[-1]-1)
-            area = max(area, w*h)
-        return area
+                w = i - stack[-1] - 1
+                res = max(res, h*w)
+            stack.append(i)
+        return res
 
 
     def test(self):
