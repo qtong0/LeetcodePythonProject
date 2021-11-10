@@ -1,24 +1,16 @@
-'''
-Created on Mar 5, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def hIndex(self, citations):
-        """
-        :type citations: List[int]
-        :rtype: int
-        """
+    def hIndex(self, citations: List[int]) -> int:
         length = len(citations)
         count = [0]*(length+1)
         for c in citations:
             if c > length:
-                count[length]+=1
+                count[length] += 1
             else:
-                count[c]+=1
+                count[c] += 1
         total = 0
-        print('count: %s' % (count))
         for i in range(length, -1, -1):
             total += count[i]
             if total >= i:
@@ -34,6 +26,7 @@ class Solution(object):
             result = self.hIndex(citations)
             print('result: %s' % (result))
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
