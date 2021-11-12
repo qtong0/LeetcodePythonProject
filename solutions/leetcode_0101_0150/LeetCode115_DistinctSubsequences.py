@@ -1,16 +1,5 @@
-'''
-Created on Feb 3, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def numDistinct(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: int
-        """
+    def numDistinct(self, s: str, t: str) -> int:
         m, n = len(s), len(t)
         dp = [[0]*(n+1) for _ in range(m+1)]
         for i in range(m):
@@ -22,7 +11,8 @@ class Solution(object):
                 else:
                     dp[i+1][j+1] = dp[i][j+1]
         return dp[-1][-1]
-    
+
+
     def test(self):
         testCases= [
             ('rabbbit', 'rabbit'),
@@ -36,4 +26,6 @@ class Solution(object):
             print('result: %s' % (result))
             print('-='*20+'-')
 
-Solution().test()
+
+if __name__ == '__main__':
+    Solution().test()
