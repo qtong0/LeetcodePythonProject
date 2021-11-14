@@ -42,7 +42,7 @@ class Solution(object):
 
     def dfs(self, grid, i, j):
         m, n = len(grid), len(grid[0])
-        if not (0<=i<m and 0<=j<n) or grid[i][j] != 1:
+        if not (0 <= i < m and 0 <= j < n) or grid[i][j] != 1:
             return 0
         res = 1
         grid[i][j] = 2
@@ -67,7 +67,7 @@ class Solution(object):
             ],
         ]
         for grid, hits in testCases:
-            print('grid:\n%s' % '\n'.join(str(row) for row in grid))
+            # print('grid:\n%s' % '\n'.join(str(row) for row in grid))
             print('hits: %s' % hits)
             result = self.hitBricks(grid, hits)
             print('result: %s' % result)
