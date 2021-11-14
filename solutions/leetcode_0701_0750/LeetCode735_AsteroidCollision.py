@@ -1,25 +1,16 @@
-'''
-Created on Mar 7, 2018
-
-@author: tongq
-'''
-
-
 class Solution:
     def asteroidCollision(self, asteroids):
         res = []
-        for asteroid in asteroids:
-            while len(res) and asteroid < 0 and res[-1] > 0:
-                if res[-1] == -asteroid:
-                    res.pop()
-                    break
-                elif res[-1] < -asteroid:
-                    res.pop()
-                    continue
-                elif res[-1] > -asteroid:
-                    break
+        for a in asteroids:
+            if a > 0:
+                res.append(a)
             else:
-                res.append(asteroid)
+                while res and 0 < res[-1] < -a:
+                    res.pop()
+                if res and res[-1] == -a:
+                    res.pop()
+                elif not res or res[-1] < 0:
+                    res.append(a)
         return res
 
     def test(self):
