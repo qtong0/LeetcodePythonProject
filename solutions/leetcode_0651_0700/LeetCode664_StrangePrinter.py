@@ -1,14 +1,5 @@
-'''
-Created on Oct 9, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def strangePrinter(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+    def strangePrinter(self, s: str) -> int:
         if not s: return 0
         n = len(s)
         dp = [[0]*n for _ in range(n)]
@@ -24,6 +15,7 @@ class Solution(object):
                     dp[j][j+i] = min(dp[j][j+i], tmp)
         return dp[0][n-1]
     
+
     def test(self):
         testCases = [
             'aaabbb',
@@ -35,6 +27,7 @@ class Solution(object):
             result = self.strangePrinter(s)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
