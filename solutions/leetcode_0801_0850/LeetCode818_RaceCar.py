@@ -1,28 +1,20 @@
-'''
-Created on May 1, 2018
-
-@author: tongq
-'''
 class Solution(object):
     def __init__(self):
-        self.hashmap = {0:0}
-    
-    def racecar(self, target):
-        """
-        :type target: int
-        :rtype: int
-        """
-        if target in self.hashmap: return self.hashmap[target]
+        self.dp = {0:0}
+
+    def racecar(self, target: int) -> int:
+        if target in self.dp:
+            return self.dp[target]
         # Number of bits necessary to represent self in binary.
         n = target.bit_length()
         if 2**n-1 == target:
-            self.hashmap[target] = n
+            self.dp[target] = n
         else:
-            self.hashmap[target] = self.racecar(2**n-1-target)+n+1
+            self.dp[target] = self.racecar(2**n-1-target)+n+1
             for m in range(n-1):
-                self.hashmap[target] = min(self.hashmap[target],\
+                self.dp[target] = min(self.dp[target],\
                             self.racecar(target-2**(n-1)+2**m)+n+m+1)
-        return self.hashmap[target]
+        return self.dp[target]
     
     def test(self):
         testCases = [
