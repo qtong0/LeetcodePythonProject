@@ -1,15 +1,8 @@
-'''
-Created on Feb 12, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def findPeakElement(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+    def findPeakElement(self, nums: List[int]) -> int:
         if len(nums) == 1: return 0
         start, end = 0, len(nums)-1
         while start < end:
@@ -24,7 +17,8 @@ class Solution(object):
                 else:
                     end = mid-1
         return start
-    
+
+
     def test(self):
         testCases = [
             [1, 2, 3, 1],
@@ -36,6 +30,7 @@ class Solution(object):
             result = self.findPeakElement(nums)
             print('result: %s' % (result))
             print('-='*20 + '-')
+
 
 if __name__ == '__main__':
     Solution().test()
