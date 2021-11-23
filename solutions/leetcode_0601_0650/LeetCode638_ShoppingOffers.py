@@ -1,39 +1,27 @@
-'''
-Created on Sep 25, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def shoppingOffers(self, price, special, needs):
-        """
-        :type price: List[int]
-        :type special: List[List[int]]
-        :type needs: List[int]
-        :rtype: int
-        """
-        self.minPrice = sum([p*n for p, n in zip(price, needs)])
-        self.helper(price, special, needs, 0)
-        return self.minPrice
-    
-    def helper(self, price, special, needs, curPrice):
-        n = len(price)
-        added = False
-        for arr in special:
-            overflow = False
-            for i in range(n):
-                if needs[i] < arr[i]:
-                    overflow = True
-                needs[i] -= arr[i]
-            if not overflow:
-                added = True
-                self.helper(price, special, needs, curPrice+arr[-1])
-            for i in range(n):
-                needs[i] += arr[i]
-        if not added:
-            for i in range(n):
-                curPrice += needs[i]*price[i]
-            self.minPrice = min(self.minPrice, curPrice)
-    
+    def shoppingOffers(self, price: List[int], special: List[List[int]], needs: List[int]) -> int:
+        return self.helper(price, special, needs, 0)
+
+    def helper(self, price, special, needs, pos):
+        # direct purchase
+        local_min = sum([price[i]*needs[i] for i in range(len(needs))])
+
+        for i in range(pos, len(special)):
+            offer = special[i]
+            tmp = []
+            for j in range(len(needs)):
+                if needs[j] < offer[j]:
+                    tmp = None
+                    break
+                tmp.append(needs[j] - offer[j])
+            if tmp:
+                local_min = min(local_min, offer[-1] + self.helper(price, special, tmp, i))
+        return local_min
+
+
     def test(self):
         testCases = [
             [
@@ -64,6 +52,7 @@ class Solution(object):
             result = self.shoppingOffers(price, special, needs)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
