@@ -32,6 +32,7 @@ class Solution:
                     count += 1
         return count == n
 
+
     def test(self):
         testCases = [
             # [4, [1,-1,3,-1], [2,-1,-1,-1]],
