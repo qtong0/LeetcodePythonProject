@@ -5,6 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def minCameraCover(self, root: TreeNode) -> int:
         def solve(node):
