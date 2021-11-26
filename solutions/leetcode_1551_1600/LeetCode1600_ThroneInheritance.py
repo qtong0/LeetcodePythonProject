@@ -4,7 +4,6 @@ from typing import List
 class Person:
     def __init__(self, name):
         self.name = name
-        self.children = {}
         self.childrenList = []
         self.isDead = False
 
@@ -19,7 +18,6 @@ class ThroneInheritance:
     def birth(self, parentName: str, childName: str) -> None:
         parent = self.hashmap[parentName]
         child = Person(childName)
-        parent.children[childName] = child
         parent.childrenList.append(child)
         self.hashmap[childName] = child
 
