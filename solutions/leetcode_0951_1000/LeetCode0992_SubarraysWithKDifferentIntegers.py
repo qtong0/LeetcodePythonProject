@@ -1,34 +1,26 @@
 import collections
+from typing import List
 
 
 class Solution:
-    def subarraysWithKDistinct(self, A, K: int) -> int:
-        c1 = collections.Counter()
-        c2 = collections.Counter()
-        d1, d2 = 0, 0
-        res = 0
-        l1, l2 = 0, 0
-        for i, num in enumerate(A):
-            c1[num] += 1
-            c2[num] += 1
-            if c1[num] == 1:
-                d1 += 1
-            if c2[num] == 1:
-                d2 += 1
-            while d1 > K:
-                n = A[l1]
-                c1[n] -= 1
-                if c1[n] == 0:
-                    d1 -= 1
-                l1 += 1
-            while d2 >= K:
-                n = A[l2]
-                c2[n] -= 1
-                if c2[n] == 0:
-                    d2 -= 1
-                l2 += 1
-            res += l2 - l1
+    def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
+        return self.atMost(nums, k) - self.atMost(nums, k-1)
+
+    def atMost(self, nums, k):
+        counter = collections.Counter()
+        res, j = 0, 0
+        for i, num in enumerate(nums):
+            if counter[num] == 0:
+                k -= 1
+            counter[num] += 1
+            while k < 0:
+                counter[nums[j]] -= 1
+                if counter[nums[j]] == 0:
+                    k += 1
+                j += 1
+            res += i - j + 1
         return res
+
 
     def test(self):
         testCases = [
