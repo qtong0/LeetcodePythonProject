@@ -1,14 +1,8 @@
-'''
-Created on Feb 8, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def partition(self, s):
-        """
-        :type s: str
-        :rtype: List[List[str]]
-        """
+    def partition(self, s: str) -> List[List[str]]:
         result = []
         if not s: return result
         self.helper(s, 0, [], result)
@@ -33,7 +27,8 @@ class Solution(object):
             start += 1
             end -= 1
         return True
-    
+
+
     def test(self):
         testCases = [
             'aab',
@@ -45,6 +40,7 @@ class Solution(object):
             result = self.partition(s)
             print('result: %s' % (result))
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
