@@ -1,11 +1,5 @@
-'''
-Created on Apr 13, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def characterReplacement(self, s, k):
+    def characterReplacement(self, s: str, k: int) -> int:
         arr = [0]*26
         maxCount = 0
         left = 0
@@ -19,7 +13,8 @@ class Solution(object):
                 left += 1
             res = max(res, i-left+1)
         return res
-    
+
+
     def test(self):
         testCases = [
             ('ABAB', 2),
@@ -31,6 +26,7 @@ class Solution(object):
             result = self.characterReplacement(s, k)
             print('result: %s' % result)
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
