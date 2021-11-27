@@ -1,8 +1,5 @@
-'''
-Created on Jan 24, 2017
+from typing import Optional
 
-@author: MT
-'''
 
 # Definition for singly-linked list.
 class ListNode(object):
@@ -10,12 +7,9 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
 class Solution(object):
-    def deleteDuplicates(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
         dummy = ListNode(-1)
