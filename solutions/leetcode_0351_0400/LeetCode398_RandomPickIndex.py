@@ -1,4 +1,5 @@
 from typing import List
+import random
 
 
 class Solution:
@@ -8,7 +9,6 @@ class Solution:
 
 
     def pick(self, target: int) -> int:
-        import random
         count = 0
         res = -1
         for i, num in enumerate(self.nums):
