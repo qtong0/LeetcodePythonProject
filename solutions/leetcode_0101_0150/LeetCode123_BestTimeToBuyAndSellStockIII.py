@@ -1,15 +1,8 @@
-'''
-Created on Feb 6, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
+    def maxProfit(self, prices: List[int]) -> int:
         if not prices or len(prices) <= 1: return 0
         left = [0]*len(prices)
         right = [0]*len(prices)
@@ -25,7 +18,8 @@ class Solution(object):
         for i in range(len(prices)):
             profit = max(left[i]+right[i], profit)
         return profit
-    
+
+
     def test(self):
         testCases = [
             [1, 9, 2, 1, 3, 7, 2],
@@ -39,6 +33,7 @@ class Solution(object):
             result = self.maxProfit(prices)
             print('result: %s' % (result))
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
