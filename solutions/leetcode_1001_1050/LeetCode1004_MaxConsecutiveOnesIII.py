@@ -1,28 +1,32 @@
+from typing import List
+
+
 class Solution:
-    def longestOnes(self, A, K: int) -> int:
+    def longestOnes(self, nums: List[int], k: int) -> int:
         i = 0
-        for j in range(len(A)):
-            if A[j] == 0:
-                K -= 1
-            if K < 0:
-                if A[i] == 0:
-                    K += 1
+        for j in range(len(nums)):
+            if nums[j] == 0:
+                k -= 1
+            if k < 0:
+                if nums[i] == 0:
+                    k += 1
                 i += 1
-        return j-i+1
+        return j - i + 1
 
 
-    def longestOnes_Space(self, A, K: int) -> int:
+    def longestOnes_Space(self, nums: List[int], k: int) -> int:
         queue = []
         res = 0
         left = -1
-        for i, num in enumerate(A):
+        for i, num in enumerate(nums):
             if num == 0:
                 queue.append(i)
                 res = max(res, i-left-1)  # Check this first
-                if len(queue) > K:
+                if len(queue) > k:
                     left = queue.pop(0)
-        res = max(res, len(A)-left-1)
+        res = max(res, len(nums)-left-1)
         return res
+
 
     def test(self):
         testCases = [
