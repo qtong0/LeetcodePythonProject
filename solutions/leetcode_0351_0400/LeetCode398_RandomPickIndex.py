@@ -1,23 +1,13 @@
-'''
-Created on Apr 5, 2017
+from typing import List
 
-@author: MT
-'''
 
-class Solution(object):
-    def __init__(self, nums):
-        """
-        
-        :type nums: List[int]
-        :type numsSize: int
-        """
+class Solution:
+
+    def __init__(self, nums: List[int]):
         self.nums = nums
 
-    def pick(self, target):
-        """
-        :type target: int
-        :rtype: int
-        """
+
+    def pick(self, target: int) -> int:
         import random
         count = 0
         res = -1
