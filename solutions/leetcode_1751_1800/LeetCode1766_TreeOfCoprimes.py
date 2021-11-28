@@ -2,6 +2,9 @@ from typing import List
 
 
 class Solution:
+    # TC: O(50 ^ N)
+    # SC: O(N)
+    #
     def getCoprimes(self, nums: List[int], edges: List[List[int]]) -> List[int]:
         n = len(nums)
         graph = [[] for _ in range(n)]
