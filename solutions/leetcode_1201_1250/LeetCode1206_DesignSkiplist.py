@@ -21,6 +21,7 @@ class Skiplist:
                 curr = curr.right
             if curr.right and curr.right.val == target:
                 return True
+            curr = curr.down
         return False
 
 
@@ -61,3 +62,16 @@ class Skiplist:
 # param_1 = obj.search(target)
 # obj.add(num)
 # param_3 = obj.erase(num)
+
+
+if __name__ == '__main__':
+    sl = Skiplist()
+    sl.add(1)
+    sl.add(2)
+    sl.add(3)
+    print(sl.search(0))
+    sl.add(4)
+    print(sl.search(1))
+    sl.erase(0)
+    sl.erase(1)
+    print(sl.search(1))
