@@ -1,8 +1,3 @@
-'''
-Created on Oct 5, 2017
-
-@author: MT
-'''
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x, left=None, right=None):
@@ -10,12 +5,9 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+
 class Solution(object):
-    def printTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[str]]
-        """
+    def printTree(self, root: TreeNode) -> List[List[str]]:
         if not root: return []
         h = self.getHeight(root)
         n = 2**h-1
@@ -35,7 +27,8 @@ class Solution(object):
         if not root: return 0
         return max(self.getHeight(root.left),\
                    self.getHeight(root.right))+1
-    
+
+
     def test(self):
         testCases = [
             TreeNode(1, TreeNode(2)),
@@ -46,6 +39,7 @@ class Solution(object):
             result = self.printTree(root)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
