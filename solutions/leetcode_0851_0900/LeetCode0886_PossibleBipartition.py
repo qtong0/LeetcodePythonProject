@@ -23,6 +23,7 @@ class Solution(object):
                     return False
         return True
 
+
     def test(self):
         testCases = [
             [
@@ -42,6 +43,7 @@ class Solution(object):
             res = self.possibleBipartition(N, dislikes)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
