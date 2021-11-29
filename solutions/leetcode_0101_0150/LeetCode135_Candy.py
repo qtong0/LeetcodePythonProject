@@ -1,15 +1,8 @@
-'''
-Created on Feb 9, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def candy(self, ratings):
-        """
-        :type ratings: List[int]
-        :rtype: int
-        """
+    def candy(self, ratings: List[int]) -> int:
         n = len(ratings)
         left = [0]*n
         left[0] = 1
@@ -29,7 +22,8 @@ class Solution(object):
         for i in range(n):
             res += max(left[i], right[i])
         return res
-    
+
+
     def test(self):
         testCases = [
             [1, 0, 2],
@@ -42,6 +36,7 @@ class Solution(object):
             result = self.candy(ratings)
             print('result: %s' % (result))
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
