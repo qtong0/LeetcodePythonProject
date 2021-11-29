@@ -1,15 +1,20 @@
-'''
-Created on Sep 12, 2019
-
-@author: tongq
-'''
 class Solution(object):
-    def scoreOfParentheses(self, S):
-        """
-        :type S: str
-        :rtype: int
-        """
-        s = S
+    # SC O(1)
+    def scoreOfParentheses(self, s: str) -> int:
+        bal = 0
+        res = 0
+        for i, c in enumerate(s):
+            if c == '(':
+                bal += 1
+            else:
+                bal -= 1
+                if s[i-1] == '(':
+                    res += 1 << bal
+        return res
+
+
+    # SC O(N)
+    def scoreOfParentheses_SPACE(self, s: str) -> int:
         stack, cur = [], 0
         for c in s:
             if c == '(':
@@ -18,7 +23,8 @@ class Solution(object):
             else:
                 cur += stack.pop() + max(cur, 1)
         return cur
-    
+
+
     def test(self):
         testCases = [
             '()',
@@ -31,6 +37,7 @@ class Solution(object):
             res = self.scoreOfParentheses(s)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
