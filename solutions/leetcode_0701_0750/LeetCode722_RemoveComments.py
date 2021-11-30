@@ -1,17 +1,10 @@
-'''
-Created on Feb 19, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def removeComments(self, source):
-        """
-        :type source: List[str]
-        :rtype: List[str]
-        """
+    def removeComments(self, source: List[str]) -> List[str]:
         res = []
         isComment = False
-        isLineComment = False
         line = ''
         for src in source:
             j = 0
@@ -37,7 +30,8 @@ class Solution(object):
                     line = ''
                 j += 1
         return res
-    
+
+
     def test(self):
         testCases = [
             [
@@ -93,6 +87,7 @@ class Solution(object):
             result = self.removeComments(source)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
