@@ -27,6 +27,7 @@ class Solution:
                 j += 1
         return True
 
+
     def test(self):
         testCases = [
             # ["a","b","ba","bca","bda","bdca"],
