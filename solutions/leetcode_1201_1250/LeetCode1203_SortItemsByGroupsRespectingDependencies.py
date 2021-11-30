@@ -48,6 +48,7 @@ class Solution:
                     sources.append(u)
         return order if len(order) == len(points) else []
 
+
     def test(self):
         test_cases = [
             [8, 2, [-1,-1,1,0,0,1,0,-1], [[],[6],[5],[6],[3,6],[],[],[]]],
