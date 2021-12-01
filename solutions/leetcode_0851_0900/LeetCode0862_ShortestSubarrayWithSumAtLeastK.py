@@ -16,6 +16,7 @@ class Solution(object):
                 deque.pop()
             deque.append(i)
         return res if res <= n else -1
+
     
     def test(self):
         testCase = [
