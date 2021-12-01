@@ -1,15 +1,5 @@
-'''
-Created on May 21, 2018
-
-@author: tongq
-'''
 class Solution(object):
-    def compareVersion(self, version1, version2):
-        """
-        :type version1: str
-        :type version2: str
-        :rtype: int
-        """
+    def compareVersion(self, version1: str, version2: str) -> int:
         if version1 == version2: return 0
         arr1, arr2 = version1.split('.'), version2.split('.')
         m, n = len(arr1), len(arr2)
