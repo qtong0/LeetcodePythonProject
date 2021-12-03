@@ -1,16 +1,5 @@
-'''
-Created on Mar 5, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def numWays(self, n, k):
-        """
-        :type n: int
-        :type k: int
-        :rtype: int
-        """
+    def numWays(self, n: int, k: int) -> int:
         if n == 1: return k
         if n == 2: return k*k
         prev1 = k*k
@@ -21,7 +10,8 @@ class Solution(object):
             prev2 = prev1
             prev1 = curr
         return curr
-    
+
+
     def test(self):
         testCases = [
             (4, 3),
@@ -34,6 +24,6 @@ class Solution(object):
             print('result: %s' % (result))
             print('-='*20+'-')
 
+
 if __name__ == '__main__':
     Solution().test()
-
