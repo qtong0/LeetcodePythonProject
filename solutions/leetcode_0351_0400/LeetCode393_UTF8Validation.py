@@ -1,11 +1,8 @@
-'''
-Created on Apr 3, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def validUtf8(self, data):
+    def validUtf8(self, data: List[int]) -> bool:
         count = 0
         for v in data:
             if count == 0:
@@ -25,4 +22,3 @@ class Solution(object):
                 else:
                     return False
         return count == 0
-
