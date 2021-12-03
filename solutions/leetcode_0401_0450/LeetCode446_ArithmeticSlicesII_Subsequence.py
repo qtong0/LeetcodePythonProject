@@ -1,7 +1,8 @@
+from typing import List
+
 
 class Solution(object):
-    def numberOfArithmeticSlices(self, A):
-        nums = A
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         n = len(nums)
         res = 0
         dp = [{} for _ in range(n)]
@@ -15,7 +16,8 @@ class Solution(object):
                 res += c2
                 dp[i][diff] = c1+c2+1
         return res
-    
+
+
     def test(self):
         testCases = [
             [2, 4, 6, 8, 10],
@@ -25,6 +27,7 @@ class Solution(object):
             result = self.numberOfArithmeticSlices(nums)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
