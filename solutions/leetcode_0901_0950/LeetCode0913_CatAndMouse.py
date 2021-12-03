@@ -1,11 +1,9 @@
 import collections
+from typing import List
+
 
 class Solution(object):
-    def catMouseGame(self, graph):
-        """
-        :type graph: List[List[int]]
-        :rtype: int
-        """
+    def catMouseGame(self, graph: List[List[int]]) -> int:
         N = len(graph)
 
         DRAW, MOUSE, CAT = 0, 1, 2
@@ -49,6 +47,7 @@ class Solution(object):
                 if c2:
                     res.append((m, c2, 3-t))
         return res
+
 
     def test(self):
         testCases = [
