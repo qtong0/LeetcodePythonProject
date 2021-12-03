@@ -1,10 +1,23 @@
-'''
-Created on Oct 21, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def nextClosestTime(self, time):
+    def nextClosestTime(self, time: str) -> str:
+        hour, minute = time.split(':')
+
+        nums = sorted(set(hour + minute))
+        two_digit_values = [a+b for a in nums for b in nums]
+
+        i = two_digit_values.index(minute)
+        if i + 1 < len(two_digit_values) and two_digit_values[i+1] < '60':
+            return hour + ':' + two_digit_values[i+1]
+
+        i = two_digit_values.index(hour)
+        if i + 1 < len(two_digit_values) and two_digit_values[i+1] < '24':
+            return two_digit_values[i+1] + ':' + two_digit_values[0]
+
+        return two_digit_values[0] + ':' + two_digit_values[0]
+
+
+    # My own solution, go through minute by minute to check
+    def nextClosestTime_own_slow(self, time):
         """
         :type time: str
         :rtype: str
@@ -38,7 +51,8 @@ class Solution(object):
             if c != ':' and c not in charSet:
                 return False, res
         return True, res
-    
+
+
     def test(self):
         testCases = [
             '19:34',
@@ -49,6 +63,7 @@ class Solution(object):
             result = self.nextClosestTime(time)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
