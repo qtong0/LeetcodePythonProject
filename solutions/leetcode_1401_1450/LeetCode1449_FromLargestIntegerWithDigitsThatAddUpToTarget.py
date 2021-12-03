@@ -9,7 +9,9 @@ class Solution:
                 hashmap[c] = i+1
         dp = ['']*(target + 1)
 
+        # first
         for i in range(1, target+1):
+            # second
             for c, d in hashmap.items():
                 if i - c == 0 or (i - c > 0 and dp[i - c]):
                     tmp = dp[i-c] + str(d)
