@@ -5,13 +5,15 @@ class Solution:
         n = len(s)
         dp = [0]*n
         j = 0
-        for i in range(1, n):
+        i = 1
+        while i < n:
             if s[i] == s[j]:
+                dp[i] = j + 1
                 j += 1
-                dp[i] = j
             elif j > 0:
                 j = dp[j-1]
                 i -= 1
+            i += 1
         return s[:j]
 
 
@@ -30,7 +32,8 @@ class Solution:
             'level',
             'ababab',
             'leetcodeleet',
-            'a'
+            'a',
+            'cbcbcba',
         ]
         for s in test_cases:
             res = self.longestPrefix(s)
