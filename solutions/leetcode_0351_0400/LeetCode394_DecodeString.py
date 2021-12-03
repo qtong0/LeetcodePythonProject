@@ -1,9 +1,3 @@
-'''
-Created on Apr 4, 2017
-
-@author: MT
-'''
-
 class Solution(object):
     def deconString(self, s):
         stack = [['', 1]]
@@ -20,7 +14,8 @@ class Solution(object):
             else:
                 stack[-1][0] += c
         return stack[0][0]
-    
+
+
     def decodeString_own(self, s):
         if '[' not in s:
             return s
