@@ -1,11 +1,8 @@
-'''
-Created on Mar 19, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def isSelfCrossing(self, x):
+    def isSelfCrossing(self, x: List[int]) -> bool:
         x = [0, 0, 0, 0]+x
         n = len(x)
         i = 4
@@ -22,7 +19,9 @@ class Solution(object):
         while i < n and x[i] < x[i-2]:
             i += 1
         return i != n
-    
+
+
+
     def isSelfCrossing_another(self, x):
         if not x or len(x) < 3: return False
         for i in range(3, len(x)):
