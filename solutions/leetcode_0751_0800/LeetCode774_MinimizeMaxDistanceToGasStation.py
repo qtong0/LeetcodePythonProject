@@ -35,6 +35,5 @@ class Solution(object):
             print('result: %s' % result)
             print('-='*30+'-')
 
-
 if __name__ == '__main__':
     Solution().test()
