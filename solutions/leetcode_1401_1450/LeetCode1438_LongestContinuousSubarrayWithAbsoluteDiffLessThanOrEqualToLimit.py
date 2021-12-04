@@ -62,6 +62,7 @@ class Solution:
             res = max(res, i-j+1)
         return res
 
+
     def test(self):
         test_cases = [
             [[8,2,4,7], 4],
