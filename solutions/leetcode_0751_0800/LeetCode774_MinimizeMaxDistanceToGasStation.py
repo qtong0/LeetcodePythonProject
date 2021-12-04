@@ -1,6 +1,7 @@
 from typing import List
 import math
 
+
 class Solution(object):
     def minmaxGasDist(self, stations: List[int], k: int) -> float:
         count, n = 0, len(stations)
