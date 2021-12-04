@@ -21,6 +21,7 @@ class Solution:
                     change += 1
         return change
 
+
     def test(self):
         test_cases = [
             [6, [[0,1],[1,3],[2,3],[4,0],[4,5]]],
