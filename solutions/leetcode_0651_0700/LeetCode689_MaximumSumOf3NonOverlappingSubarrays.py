@@ -35,7 +35,8 @@ class Solution(object):
                 maxSum = total
                 res = [l, i, r]
         return res
-    
+
+
     def test(self):
         testCases = [
             [
@@ -53,6 +54,7 @@ class Solution(object):
             result = self.maxSumOfThreeSubarrays(nums, k)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
