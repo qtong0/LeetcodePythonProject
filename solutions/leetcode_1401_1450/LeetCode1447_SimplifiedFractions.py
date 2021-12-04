@@ -18,6 +18,7 @@ class Solution:
             b = tmp
         return b
 
+
     def test(self):
         test_cases = [
             2,
