@@ -17,8 +17,7 @@ class Solution:
         memo[i][j] = res
         return res
 
-
-
+    # DP only
     def minInsertions_another(self, s: str) -> int:
         if not s or len(s) <= 1:
             return 0
@@ -31,6 +30,7 @@ class Solution:
                 else:
                     dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
         return n - dp[n][n]
+
 
     def test(self):
         test_cases = [
