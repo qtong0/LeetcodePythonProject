@@ -1,16 +1,5 @@
-'''
-Created on Feb 12, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def fractionToDecimal(self, numerator, denominator):
-        """
-        :type numerator: int
-        :type denominator: int
-        :rtype: str
-        """
+    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
         n, remainder = divmod(abs(numerator), abs(denominator))
         sign = '-' if numerator*denominator<0 else ''
         result = [sign+str(n), '.']
