@@ -1,15 +1,9 @@
-'''
-Created on Jun 10, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def sumOfDistancesInTree(self, N, edges):
-        """
-        :type N: int
-        :type edges: List[List[int]]
-        :rtype: List[int]
-        """
+    # O(N) + O(N)
+    def sumOfDistancesInTree(self, N: int, edges: List[List[int]]) -> List[int]:
         graph = {}
         for i in range(N):
             graph[i] = set()
@@ -21,7 +15,8 @@ class Solution(object):
         self.dfs(0, set(), graph, res, count)
         self.dfs2(0, set(), graph, res, count, N)
         return res
-    
+
+    # Post order
     def dfs(self, root, visited, graph, res, count):
         visited.add(root)
         for i in graph[root]:
@@ -30,14 +25,17 @@ class Solution(object):
                 count[root] += count[i]
                 res[root] += res[i]+count[i]
         count[root] += 1
-    
+
+    # Pre Order
     def dfs2(self, root, visited, graph, res, count, N):
         visited.add(root)
         for i in graph[root]:
             if i not in visited:
                 res[i] = res[root] - count[i] + N - count[i]
                 self.dfs2(i, visited, graph, res, count, N)
-    
+
+
+
     ##########################################################
     ######################## OWN TLE #########################
     ##########################################################
