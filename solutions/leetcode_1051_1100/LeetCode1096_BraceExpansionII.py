@@ -1,6 +1,5 @@
-from typing import List
-
 import itertools
+from typing import List
 
 
 class Solution:
@@ -24,6 +23,7 @@ class Solution:
         for group in groups:
             word_set = word_set | set(map(''.join, itertools.product(*group)))
         return sorted(word_set)
+
 
     def test(self):
         test_cases = [
