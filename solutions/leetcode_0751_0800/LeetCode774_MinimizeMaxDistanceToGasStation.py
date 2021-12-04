@@ -1,17 +1,8 @@
-'''
-Created on Apr 6, 2018
+from typing import List
+import math
 
-@author: tongq
-'''
 class Solution(object):
-    def minmaxGasDist(self, stations, K):
-        """
-        :type stations: List[int]
-        :type K: int
-        :rtype: float
-        """
-        import math
-        k = K
+    def minmaxGasDist(self, stations: List[int], k: int) -> float:
         count, n = 0, len(stations)
         left, right = 0, stations[-1]-stations[0]
         while left + 1e-6 < right:
@@ -24,7 +15,8 @@ class Solution(object):
             else:
                 right = mid
         return right
-    
+
+
     def test(self):
         testCases = [
             [
@@ -42,6 +34,7 @@ class Solution(object):
             result = self.minmaxGasDist(stations, k)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
