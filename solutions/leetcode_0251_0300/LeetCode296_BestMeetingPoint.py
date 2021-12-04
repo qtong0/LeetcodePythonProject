@@ -1,11 +1,8 @@
-'''
-Created on Mar 8, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def minTotalDistance(self, grid):
+    def minTotalDistance(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
         rows, cols = [], []
         for i in range(m):
@@ -20,7 +17,8 @@ class Solution(object):
         for col in cols:
             sumVal += abs(col - cols[len(cols)//2])
         return sumVal
-    
+
+
     def test(self):
         testCases = [
             [
@@ -35,6 +33,7 @@ class Solution(object):
             result = self.minTotalDistance(grid)
             print('result: %s' % (result))
             print('-='*20 + '-')
+
 
 if __name__ == '__main__':
     Solution().test()
