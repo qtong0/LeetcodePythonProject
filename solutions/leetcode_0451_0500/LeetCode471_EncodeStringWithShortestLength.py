@@ -33,7 +33,8 @@ class Solution(object):
                             if len(ss) < len(dp[i][j]):
                                 dp[i][j] = ss
         return dp[0][-1]
-    
+
+
     def test(self):
         testCases = [
             'aaa',
@@ -53,4 +54,3 @@ class Solution(object):
 
 if __name__ == '__main__':
     Solution().test()
-
