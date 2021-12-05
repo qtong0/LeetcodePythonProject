@@ -17,9 +17,15 @@ class Solution(object):
         while m <= n:
             a = n // m
             b = n % m
-            ones += (a + 8) // 10 * m
+            # in short:
+            # ones += (a + 8) // 10 * m
+            # ones += b+1
             if a % 10 == 1:
-                ones += b+1
+                ones += a // 10 * m + (b+1)
+            elif a % 10 == 0:
+                ones += a // 10 * m
+            else:
+                ones += a // 10 * m + m
             m *= 10
         return ones
 
