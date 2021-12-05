@@ -38,7 +38,8 @@ class Solution_another(object):
                 visited.remove(nextStr)
                 arr.pop()
         return False
-    
+
+
     def test(self):
         testCases = [
             [1, 2],
