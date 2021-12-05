@@ -1,10 +1,8 @@
-'''
-Created on Mar 18, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def countRangeSum(self, nums, lower, upper):
+    def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
         first = [0]
         for num in nums:
             first.append(first[-1]+num)
@@ -23,7 +21,8 @@ class Solution(object):
             count += j-i
         first[l:r] = sorted(first[l:r])
         return count
-    
+
+
     def test(self):
         testCases = [
             (
@@ -46,6 +45,7 @@ class Solution(object):
             result = self.countRangeSum(nums, lower, upper)
             print('result: %s' % (result))
             print('-='*20+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
