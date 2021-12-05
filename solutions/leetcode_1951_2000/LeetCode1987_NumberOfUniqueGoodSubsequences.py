@@ -26,6 +26,7 @@ class Solution:
                 has0 = 1
         return (ends0 + ends1 + has0) % MOD
 
+
     def test(self):
         test_cases = [
             '001',
