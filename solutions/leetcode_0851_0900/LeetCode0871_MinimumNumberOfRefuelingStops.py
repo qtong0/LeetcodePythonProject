@@ -1,17 +1,9 @@
-'''
-Created on Oct 3, 2019
+import heapq
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def minRefuelStops(self, target, startFuel, stations):
-        """
-        :type target: int
-        :type startFuel: int
-        :type stations: List[List[int]]
-        :rtype: int
-        """
-        import heapq
+    def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
         h = []
         res = i = 0
         cur = startFuel
