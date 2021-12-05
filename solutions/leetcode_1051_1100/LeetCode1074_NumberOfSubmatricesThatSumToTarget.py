@@ -18,6 +18,7 @@ class Solution:
                     hashmap[preSum] = hashmap.get(preSum, 0) + 1
         return res
 
+
     def test(self):
         testCases = [
             [
