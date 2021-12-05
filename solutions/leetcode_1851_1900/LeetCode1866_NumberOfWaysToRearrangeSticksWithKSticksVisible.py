@@ -23,6 +23,7 @@ class Solution:
             self.dp[n][k] = (self.rearrangeSticks(n-1, k-1) + self.rearrangeSticks(n-1, k) * (n-1)) % MOD
         return self.dp[n][k]
 
+
     def test(self):
         test_cases = [
             [3, 2],
