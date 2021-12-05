@@ -1,9 +1,3 @@
-'''
-Created on Apr 18, 2017
-
-@author: MT
-'''
-
 class Solution(object):
     def numberOfBoomerangs(self, points):
         n = len(points)
@@ -18,7 +12,8 @@ class Solution(object):
             for val in hashmap.values():
                 res += val*(val-1)
         return res
-    
+
+
     def test(self):
         testCases = [
             [[0,0],[1,0],[2,0]],
@@ -28,6 +23,7 @@ class Solution(object):
             result = self.numberOfBoomerangs(points)
             print('result: %s' % result)
             print('-='*30+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
