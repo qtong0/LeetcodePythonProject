@@ -1,12 +1,10 @@
+from typing import List
+
+
 class Solution(object):
-    def wordSubsets(self, A, B):
-        """
-        :type A: List[str]
-        :type B: List[str]
-        :rtype: List[str]
-        """
+    def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
         hashmap0 = {}
-        for s in B:
+        for s in words2:
             hashmap = {}
             for c in s:
                 hashmap[c] = hashmap.get(c, 0)+1
@@ -14,7 +12,7 @@ class Solution(object):
                 if hashmap0.get(c, 0) < count:
                     hashmap0[c] = count
         res = []
-        for s in A:
+        for s in words1:
             hashmap = {}
             for c in s:
                 hashmap[c] = hashmap.get(c, 0)+1
