@@ -13,8 +13,8 @@ class Solution:
             self.res += 1
         return self.res
 
-    # 0 - leaf
-    # 1 - parent of a leaf
+    # 0 - leaf / to_be_covered
+    # 1 - parent of a leaf / covering
     # 2 - covered, but without camera on this node
     def dfs(self, root):
         if not root:
