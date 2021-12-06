@@ -1,15 +1,9 @@
-'''
-Created on Sep 12, 2017
+from typing import List
+import heapq
 
-@author: MT
-'''
+
 class Solution(object):
-    def scheduleCourse(self, courses):
-        """
-        :type courses: List[List[int]]
-        :rtype: int
-        """
-        import heapq
+    def scheduleCourse(self, courses: List[List[int]]) -> int:
         heap = []
         courses.sort(key=lambda x: x[1])
         time = 0
@@ -19,7 +13,9 @@ class Solution(object):
             if time > course[1]:
                 time -= -heapq.heappop(heap)
         return len(heap)
-    
+
+
+
     def test(self):
         testCases = [
             [[1,2]],
@@ -32,6 +28,8 @@ class Solution(object):
             result = self.scheduleCourse(courses)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
