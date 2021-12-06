@@ -1,14 +1,8 @@
-'''
-Created on Apr 9, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def isBipartite(self, graph):
-        """
-        :type graph: List[List[int]]
-        :rtype: bool
-        """
+    def isBipartite(self, graph: List[List[int]]) -> bool:
         n = len(graph)
         colors = [-1]*n
         for i in range(n):
@@ -24,7 +18,9 @@ class Solution(object):
             if not self.validColor(graph, colors, 1-color, nextNode):
                 return False
         return True
-    
+
+
+
     def test(self):
         testCases = [
             [[1,3], [0,2], [1,3], [0,2]],
@@ -35,6 +31,8 @@ class Solution(object):
             result = self.isBipartite(graph)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
