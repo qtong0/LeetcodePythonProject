@@ -1,14 +1,5 @@
-'''
-Created on Sep 25, 2017
-
-@author: MT
-'''
 class Solution(object):
-    def numDecodings(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+    def numDecodings(self, s: str) -> int:
         MOD = 10**9+7
         e0, e1, e2 = 1, 0, 0
         for c in s:
@@ -22,7 +13,9 @@ class Solution(object):
                 f2 = e0*(c=='2')
             e0, e1, e2 = f0%MOD, f1, f2
         return e0
-    
+
+
+
     def test(self):
         testCases = [
             '*',
@@ -34,6 +27,8 @@ class Solution(object):
             result = self.numDecodings(s)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
