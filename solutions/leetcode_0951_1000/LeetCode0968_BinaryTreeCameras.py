@@ -8,18 +8,20 @@ class TreeNode:
 
 class Solution:
     def minCameraCover(self, root: TreeNode) -> int:
-        def solve(node):
-            # 0: strict; all nodes below this are covered, but not this one
-            # 1: normal; all nodes below and including this are covered - no camera
-            # 2: placed camera: all nodes below this are covered, plus camera here
-            if not node: return 0, 0, float('inf')
-            l = solve(node.left)
-            r = solve(node.right)
+        self.res = 0
+        if self.dfs(root) == 0:
+            self.res += 1
+        return self.res
 
-            dp0 = l[1] + r[1]
-            dp1 = min(l[2] + min(r[1:]), r[2] + min(l[1:]))
-            dp2 = 1 + min(l) + min(r)
-
-            return dp0, dp1, dp2
-
-        return min(solve(root)[1:])
+    # 0 - leaf
+    # 1 - parent of a leaf
+    # 2 - covered, but without camera on this node
+    def dfs(self, root):
+        if not root:
+            return 2
+        left = self.dfs(root.left)
+        right = self.dfs(root.right)
+        if left == 0 or right == 0:
+            self.res += 1
+            return 1
+        return 2 if left == 1 or right == 1 else 0
