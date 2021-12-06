@@ -13,7 +13,9 @@ class Solution(object):
             if 10 <= second <= 26:
                 dp[i] += dp[i-2]
         return dp[-1]
-    
+
+
+
     def numDecodings_orig(self, s):
         """
         :type s: str
@@ -41,11 +43,13 @@ class Solution(object):
             if s[i] != '0':
                 dp[i] += dp[i-1]
             val = int(s[i-1:i+1])
-            if val<=26 and val>=10:
+            if val <= 26 and val >= 10:
                 dp[i] += dp[i-2]
         
         return dp[-1]
-    
+
+
+
     def test(self):
         testCases = [
             '123',
@@ -55,6 +59,7 @@ class Solution(object):
             result = self.numDecodings(s)
             print('result: %s' % (result))
             print('-='*15+'-')
+
 
 if __name__ == '__main__':
     Solution().test()
