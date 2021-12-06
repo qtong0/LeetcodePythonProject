@@ -1,20 +1,13 @@
-'''
-Created on Feb 27, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def diffWaysToCompute(self, s):
-        """
-        :type s: str
-        :rtype: List[int]
-        """
+    def diffWaysToCompute(self, input: str) -> List[int]:
         res = []
         for i, c in enumerate(s):
             if c in ('+', '-', '*'):
-                res1 = self.diffWaysToCompute(s[:i])
-                res2 = self.diffWaysToCompute(s[i+1:])
+                res1 = self.diffWaysToCompute(input[:i])
+                res2 = self.diffWaysToCompute(input[i+1:])
                 for num1 in res1:
                     for num2 in res2:
                         if c == '+':
@@ -24,9 +17,11 @@ class Solution(object):
                         else:
                             res.append(num1*num2)
         if not res:
-            res = [int(s)]
+            res = [int(input)]
         return res
-    
+
+
+
     def test(self):
         testCases = [
             '2-1-1',
@@ -37,6 +32,8 @@ class Solution(object):
             result = self.diffWaysToCompute(s)
             print('result: %s' % result)
             print('-='*20+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
