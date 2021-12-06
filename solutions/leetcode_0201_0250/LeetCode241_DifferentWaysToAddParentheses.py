@@ -2,12 +2,12 @@ from typing import List
 
 
 class Solution(object):
-    def diffWaysToCompute(self, input: str) -> List[int]:
+    def diffWaysToCompute(self, expression: str) -> List[int]:
         res = []
-        for i, c in enumerate(s):
+        for i, c in enumerate(expression):
             if c in ('+', '-', '*'):
-                res1 = self.diffWaysToCompute(input[:i])
-                res2 = self.diffWaysToCompute(input[i+1:])
+                res1 = self.diffWaysToCompute(expression[:i])
+                res2 = self.diffWaysToCompute(expression[i+1:])
                 for num1 in res1:
                     for num2 in res2:
                         if c == '+':
@@ -17,7 +17,7 @@ class Solution(object):
                         else:
                             res.append(num1*num2)
         if not res:
-            res = [int(input)]
+            res = [int(expression)]
         return res
 
 
