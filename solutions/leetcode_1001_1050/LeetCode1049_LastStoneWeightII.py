@@ -13,7 +13,8 @@ class Solution:
     # If Ai > Bj, then put Ai-Bj into group A.
     # If Ai < Bj, then put Ai-Bj into group B.
     # If Ai = Bj, then nothing will be put into group A and B.
-    # We repeat the process until there is only one stone left. You will find the remaining stone is |sum(Group A) - sum(Group B)|.
+    # We repeat the process until there is only one stone left.
+    # You will find the remaining stone is |sum(Group A) - sum(Group B)|.
     #
     def lastStoneWeightII(self, stones: List[int]) -> int:
         sum_all = sum(stones)
@@ -28,6 +29,8 @@ class Solution:
                 return sum_all - i - i
         return 0
 
+
+
     def test(self):
         test_cases = [
             [2,7,4,1,8,1],
@@ -38,6 +41,7 @@ class Solution:
             res = self.lastStoneWeightII(stones)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 
 if __name__ == '__main__':
