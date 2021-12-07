@@ -1,6 +1,7 @@
 class Solution(object):
     def minCut(self, s: str) -> int:
-        if not s: return 0
+        if not s:
+            return 0
         n = len(s)
         dp = [[False]*n for _ in range(n)]
         cuts = list(range(n))
