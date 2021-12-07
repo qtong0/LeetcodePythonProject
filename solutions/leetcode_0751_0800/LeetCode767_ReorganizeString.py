@@ -1,16 +1,8 @@
-'''
-Created on Apr 3, 2018
+import heapq
 
-@author: tongq
-'''
+
 class Solution(object):
-    def reorganizeString(self, S):
-        """
-        :type S: str
-        :rtype: str
-        """
-        import heapq
-        s = S
+    def reorganizeString(self, s: str) -> str:
         hashmap = {}
         for c in s:
             hashmap[c] = hashmap.get(c, 0)+1
@@ -31,7 +23,9 @@ class Solution(object):
             if freq1+1 < 0:
                 heapq.heappush(heap, [freq1+1, c1])
         return ''.join(res)
-    
+
+
+
     def test(self):
         testCases = [
             "vvvlo",
@@ -43,6 +37,8 @@ class Solution(object):
             result = self.reorganizeString(s)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
