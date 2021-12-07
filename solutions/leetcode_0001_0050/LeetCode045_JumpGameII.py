@@ -1,14 +1,8 @@
-'''
-Created on Jun 5, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def jump(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+    def jump(self, nums: List[int]) -> int:
         maxReach = 0
         reach = 0
         steps = 0
