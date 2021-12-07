@@ -1,15 +1,5 @@
-'''
-Created on Feb 8, 2017
-
-@author: MT
-'''
-
 class Solution(object):
-    def minCut(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+    def minCut(self, s: str) -> int:
         if not s: return 0
         n = len(s)
         dp = [[False]*n for _ in range(n)]
@@ -23,7 +13,9 @@ class Solution(object):
                     else:
                         cuts[i] = 0
         return cuts[-1]
-    
+
+
+
     def test(self):
         testCases = [
             'abba',
@@ -35,6 +27,8 @@ class Solution(object):
             result = self.minCut(s)
             print('result: %s' % (result))
             print('-='*20+'-')
-    
+
+
+
 if __name__ == '__main__':
     Solution().test()
