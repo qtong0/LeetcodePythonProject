@@ -6,7 +6,6 @@ class Solution:
         costs.sort(key=lambda x: x[0]-x[1])
         res = 0
         n = len(costs) // 2
-        print('n: %s' % n)
         for i in range(n):
             res += costs[i][0] + costs[i+n][1]
         return res
@@ -26,6 +25,7 @@ class Solution:
             self.helper(costs, i+1, n1-1, n2, curr+costs[i][0]),
             self.helper(costs, i+1, n1, n2-1, curr+costs[i][1])
         )
+
 
     def test(self):
         test_cases = [
