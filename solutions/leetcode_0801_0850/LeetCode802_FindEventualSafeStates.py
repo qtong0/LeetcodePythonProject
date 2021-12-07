@@ -1,14 +1,8 @@
-'''
-Created on Apr 20, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def eventualSafeNodes(self, graph):
-        """
-        :type graph: List[List[int]]
-        :rtype: List[int]
-        """
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
         n = len(graph)
         outdegrees = [0]*n
         inlinks = [[] for i in range(n)]
@@ -31,7 +25,9 @@ class Solution(object):
                     queue.append(j)
         res.sort()
         return res
-    
+
+
+
     def eventualSafeNodes_own_TLE(self, graph):
         """
         :type graph: List[List[int]]
@@ -63,6 +59,8 @@ class Solution(object):
             result = self.eventualSafeNodes(graph)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
