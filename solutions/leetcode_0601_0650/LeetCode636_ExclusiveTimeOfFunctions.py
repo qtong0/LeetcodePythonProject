@@ -1,15 +1,8 @@
-'''
-Created on Sep 25, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def exclusiveTime(self, n, logs):
-        """
-        :type n: int
-        :type logs: List[str]
-        :rtype: List[int]
-        """
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
         stack = []
         res = [0]*n
         prevTime = 0
@@ -24,7 +17,9 @@ class Solution(object):
                 res[stack.pop()] += 1
                 prevTime += 1
         return res
-    
+
+
+
     def test(self):
         testCases = [
             [
@@ -43,6 +38,8 @@ class Solution(object):
             result = self.exclusiveTime(n, logs)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
