@@ -1,20 +1,23 @@
+from typing import List
+
+
 class Solution(object):
-    def sumSubarrayMins(self, A):
-        """
-        :type A: List[int]
-        :rtype: int
-        """
-        if not A: return 0
-        MOD = 10**9+7
-        stack = [[float('-inf'), -1, 0]] # value, index, accumulated_sum
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        MOD = 10**9 + 7
+        if not arr:
+            return 0
+        # value, index, accumulated_sum
+        stack = [[float('-inf'), -1, 0]]
         res = 0
-        for i, num in enumerate(A):
+        for i, num in enumerate(arr):
             while stack and stack[-1][0] > num:
                 stack.pop()
             total = (stack[-1][2] + (i-stack[-1][1]) * num) % MOD
             stack.append([num, i, total])
             res = (res + total) % MOD
         return int(res)
+
+
 
     def test(self):
         testCases = [
@@ -24,6 +27,7 @@ class Solution(object):
             res = self.sumSubarrayMins(arr)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 
 if __name__ == '__main__':
