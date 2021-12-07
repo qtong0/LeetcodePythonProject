@@ -1,17 +1,12 @@
 class Solution(object):
-    def knightDialer(self, N):
-        """
-        :type N: int
-        :rtype: int
-        """
-        res = [10]
+    def knightDialer(self, n: int) -> int:
         MOD = 10**9 + 7
-        dp = [[0]*12 for _ in range(N+1)]
+        dp = [[0]*12 for _ in range(n+1)]
         for i in range(10):
             dp[0][i] = 1
             dp[1][i] = 1
         dp[1][10] = dp[1][11] = 0
-        for i in range(2, N+1):
+        for i in range(2, n+1):
             dp[i][1] = (dp[i-1][8]+dp[i-1][6]) % MOD
             dp[i][2] = (dp[i-1][7]+dp[i-1][9]) % MOD
             dp[i][3] = (dp[i-1][4]+dp[i-1][8]) % MOD
@@ -26,8 +21,10 @@ class Solution(object):
             dp[i][11] = 0
         res = 0
         for i in range(10):
-            res = (res + dp[N][i]) % MOD
+            res = (res + dp[n][i]) % MOD
         return res
+
+
 
     def test(self):
         testCases = [
@@ -37,6 +34,7 @@ class Solution(object):
             res = self.knightDialer(n)
             print('res: %s' % res)
             print('-='*30+'-')
+
 
 
 if __name__ == '__main__':
