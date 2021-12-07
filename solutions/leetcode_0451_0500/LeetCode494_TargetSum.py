@@ -1,23 +1,36 @@
-'''
-Created on May 9, 2017
+from typing import List
 
-@author: MT
-'''
 
 class Solution(object):
-    def findTargetSumWays(self, nums, S):
-        """
-        :type nums: List[int]
-        :type S: int
-        :rtype: int
-        """
-        sumVal = sum(nums)
-        if sumVal < S or (sumVal+S)%2 != 0:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        idx = len(nums)-1
+        curr_sum = 0
+        self.memo = {}
+        return self.dp(nums, target, idx, curr_sum)
+
+    def dp(self, nums, target, idx, curr_sum):
+        if (idx, curr_sum) in self.memo:
+            return self.memo[(idx, curr_sum)]
+
+        if idx < 0 and curr_sum == target:
+            return 1
+        if idx < 0:
             return 0
-        target = (sumVal+S)//2
-        return self.helper(nums, target)
-    
-    def helper(self, nums, target):
+
+        positive = self.dp(nums, target, idx-1, curr_sum + nums[idx])
+        negative = self.dp(nums, target, idx-1, curr_sum - nums[idx])
+
+        self.memo[(idx, curr_sum)] = positive + negative
+        return self.memo[(idx, curr_sum)]
+
+
+
+    # doesn't work any more, target can be negative
+    def findTargetSumWays_orig(self, nums: List[int], target: int) -> int:
+        sumVal = sum(nums)
+        if sumVal < target or (sumVal+target) % 2 != 0:
+            return 0
+        target = (sumVal+target)//2
         dp = [0]*(target+1)
         dp[0] = 1
         for num in nums:
@@ -25,9 +38,15 @@ class Solution(object):
                 if i >= num:
                     dp[i] += dp[i-num]
         return dp[-1]
-    
+
+
+
     def test(self):
         testCases = [
+            [
+                [100],
+                -200,
+            ],
             [
                 [1, 1, 1, 1, 1],
                 3,
@@ -43,6 +62,8 @@ class Solution(object):
             result = self.findTargetSumWays(nums, S)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
