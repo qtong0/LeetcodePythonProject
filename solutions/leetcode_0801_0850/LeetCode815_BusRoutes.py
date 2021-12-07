@@ -1,18 +1,10 @@
-'''
-Created on Apr 30, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def numBusesToDestination(self, routes, S, T):
-        """
-        :type routes: List[List[int]]
-        :type S: int
-        :type T: int
-        :rtype: int
-        """
-        s, t = S, T
-        if s == t: return 0
+    def numBusesToDestination(self, routes: List[List[int]], source: int, target: int) -> int:
+        if source == target:
+            return 0
         hashmap = {}
         for i in range(len(routes)):
             for j in range(len(routes[i])):
@@ -22,7 +14,7 @@ class Solution(object):
         queue = []
         addedRoute = set()
         addedStop = set()
-        for r in hashmap[s]:
+        for r in hashmap[source]:
             if r in addedRoute: continue
             for i in range(len(routes[r])):
                 if routes[r][i] not in addedStop:
@@ -35,7 +27,8 @@ class Solution(object):
             count += 1
             for _ in range(size):
                 stop = queue.pop(0)
-                if stop == t: return count
+                if stop == target:
+                    return count
                 for r in hashmap[stop]:
                     if r in addedRoute: continue
                     for i in range(len(routes[r])):
@@ -43,7 +36,9 @@ class Solution(object):
                             queue.append(routes[r][i])
                     addedRoute.add(r)
         return -1
-    
+
+
+
     def test(self):
         testCases = [
             [
@@ -59,6 +54,8 @@ class Solution(object):
             result = self.numBusesToDestination(routes, s, t)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
