@@ -1,14 +1,8 @@
-'''
-Created on May 5, 2018
+from typing import List
 
-@author: tongq
-'''
+
 class Solution(object):
-    def largestIsland(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
+    def largestIsland(self, grid: List[List[int]]) -> int:
         n = len(grid)
         index = 3
         res = 0
