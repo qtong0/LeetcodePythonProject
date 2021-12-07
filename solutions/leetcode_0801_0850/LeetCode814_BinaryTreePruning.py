@@ -1,8 +1,3 @@
-'''
-Created on Apr 30, 2018
-
-@author: tongq
-'''
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x, left=None, right=None):
@@ -10,12 +5,9 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+
 class Solution(object):
-    def pruneTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: TreeNode
-        """
+    def pruneTree(self, root: TreeNode) -> TreeNode:
         if not root: return root
         left  = self.pruneTree(root.left)
         right = self.pruneTree(root.right)
@@ -25,13 +17,8 @@ class Solution(object):
             root.left = left
             root.right = right
             return root
-    
-    def test(self):
-        testCases = [
-            
-        ]
-        for root in testCases:
-            result = self.pruneTree(root)
+
+
 
 if __name__ == '__main__':
     Solution().test()
