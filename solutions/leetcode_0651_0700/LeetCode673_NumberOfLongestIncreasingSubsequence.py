@@ -1,15 +1,10 @@
-'''
-Created on Oct 15, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def findNumberOfLIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        if not nums: return 0
+    def findNumberOfLIS(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
         n = len(nums)
         res = 0
         maxLen = 0
@@ -30,7 +25,9 @@ class Solution(object):
                 maxLen = lengths[i]
                 res = counts[i]
         return res
-    
+
+
+
     def test(self):
         testCases = [
             [1, 3, 5, 4, 7],
@@ -42,6 +39,8 @@ class Solution(object):
             result = self.findNumberOfLIS(nums)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
