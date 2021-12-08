@@ -17,6 +17,8 @@ class Solution:
                 res = max(res, i-hashmap[sum_val-1])
         return res
 
+
+
     def test(self):
         test_cases = [
             [9,9,6,0,6,6,9],
@@ -29,6 +31,7 @@ class Solution:
             res = self.longestWPI(hours)
             print('res: %s' % res)
             print('-='*30 + '-')
+
 
 
 if __name__ == '__main__':
