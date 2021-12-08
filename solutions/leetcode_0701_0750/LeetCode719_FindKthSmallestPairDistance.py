@@ -1,15 +1,8 @@
-'''
-Created on Oct 30, 2017
+from typing import List
 
-@author: MT
-'''
+
 class Solution(object):
-    def smallestDistancePair(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
+    def smallestDistancePair(self, nums: List[int], k: int) -> int:
         n = len(nums)
         nums.sort()
         low = float('inf')
@@ -41,7 +34,9 @@ class Solution(object):
             else:
                 high = mid
         return low
-    
+
+
+
     def countPairs_slow(self, nums, mid):
         n = len(nums)
         res = 0
@@ -51,7 +46,9 @@ class Solution(object):
                 j += 1
             res += j-i-1
         return res
-    
+
+
+
     def test(self):
         testCases = [
             [
@@ -69,6 +66,8 @@ class Solution(object):
             result = self.smallestDistancePair(nums, k)
             print('result: %s' % result)
             print('-='*30+'-')
+
+
 
 if __name__ == '__main__':
     Solution().test()
