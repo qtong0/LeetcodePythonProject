@@ -1,14 +1,9 @@
-'''
-Created on Apr 1, 2017
-
-@author: MT
-'''
-
 class RandomizedCollection(object):
     def __init__(self):
         self.vals = []
         self.pos = {}
-    
+
+
     def insert(self, val):
         self.vals.append(val)
         if val in self.pos:
@@ -17,7 +12,8 @@ class RandomizedCollection(object):
         else:
             self.pos[val] = set([len(self.vals)-1])
             return True
-    
+
+
     def remove(self, val):
         if val in self.pos:
             lastVal = self.vals[-1]
@@ -32,7 +28,7 @@ class RandomizedCollection(object):
             return True
         return False
     
+
     def getRandom(self):
         import random
         return random.choice(self.vals)
-    
